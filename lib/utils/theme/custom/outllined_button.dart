@@ -3,19 +3,47 @@ import 'package:flutter/material.dart';
 class CustomOutlineButtonTheme {
   CustomOutlineButtonTheme._();
 
-  static final lightOutlinedButtonTheme = OutlinedButtonThemeData(
+  static final lightOutlinedButtonTheme  = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
+      elevation: 0,
+      foregroundColor: Colors.black,
       side: const BorderSide(
-          width: 1,
-          color: Colors.black)
+          color: Colors.grey
+      ),
+      textStyle: const TextStyle(
+          fontSize: 16,
+          color: Colors.black,
+          fontWeight: FontWeight.w600
+      ),
+      padding: const EdgeInsets.symmetric(
+          vertical: 18,
+          horizontal: 20
+      ),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)
+      ),
     ),
   );
 
-  static final darkOutlinedButtonTheme = OutlinedButtonThemeData(
+  static final darkOutlinedButtonTheme  = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-        side: const BorderSide(
-            width: 1,
-            color: Colors.white)
+      elevation: 0,
+      foregroundColor: Colors.white,
+      side: const BorderSide(
+          color: Colors.grey
+      ),
+      textStyle: const TextStyle(
+          fontSize: 16,
+          color: Colors.white,
+          fontWeight: FontWeight.w600
+      ),
+      padding: const EdgeInsets.symmetric(
+          vertical: 18,
+          horizontal: 20
+      ),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)
+      ),
     ),
   );
 }
