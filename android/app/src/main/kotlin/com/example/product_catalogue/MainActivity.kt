@@ -1,4 +1,4 @@
-package com.example.product_catalogue
+package com.ihdyo.catalogue
 
 import io.flutter.embedding.android.FlutterActivity
 

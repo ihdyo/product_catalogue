@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "689889265805",
+    "project_id": "productcatalogue-97896",
+    "storage_bucket": "productcatalogue-97896.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689889265805:android:f2e18cdee8467f9ff67ac4",
+        "android_client_info": {
+          "package_name": "com.ihdyo.catalogue"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689889265805-o5r4sakgj202fpioapkb77hhvdrp531g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0D2bIsxQJWBa4G8F6HjrCpYHPtSHj8m4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689889265805-o5r4sakgj202fpioapkb77hhvdrp531g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "689889265805-6497q41q42p5lpue6296obfmjbvldpus.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.productCatalogue"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
