@@ -3,7 +3,7 @@ import 'package:product_catalogue/utils/theme/custom/bottomsheet.dart';
 import 'package:product_catalogue/utils/theme/custom/chip.dart';
 import 'package:product_catalogue/utils/theme/custom/elevated_button.dart';
 import 'package:product_catalogue/utils/theme/custom/text.dart';
-import 'package:product_catalogue/utils/theme/custom/text_field.dart';
+import 'package:product_catalogue/utils/theme/custom/textField.dart';
 
 import 'custom/appbar.dart';
 import 'custom/checkbox.dart';

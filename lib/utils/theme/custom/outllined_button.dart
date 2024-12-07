@@ -13,7 +13,7 @@ class CustomOutlineButtonTheme {
       textStyle: const TextStyle(
           fontSize: 16,
           color: Colors.black,
-          fontWeight: FontWeight.w600
+          fontWeight: FontWeight.bold
       ),
       padding: const EdgeInsets.symmetric(
           vertical: 18,
@@ -35,7 +35,7 @@ class CustomOutlineButtonTheme {
       textStyle: const TextStyle(
           fontSize: 16,
           color: Colors.white,
-          fontWeight: FontWeight.w600
+          fontWeight: FontWeight.bold
       ),
       padding: const EdgeInsets.symmetric(
           vertical: 18,
