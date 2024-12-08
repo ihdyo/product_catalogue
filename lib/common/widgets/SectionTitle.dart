@@ -16,10 +16,10 @@ class SectionTitle extends StatelessWidget {
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.only(
-            top: CustomSize.spaceBetweenSections,
+            top: CustomSize.spaceBetweenItems * 1.5,
             left: CustomSize.defaultSpace,
             right: CustomSize.defaultSpace,
-            bottom: CustomSize.defaultSpace
+            bottom: CustomSize.spaceBetweenItems
         ),
         child: Text(
           title,

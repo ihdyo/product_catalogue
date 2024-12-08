@@ -21,6 +21,7 @@ class CustomSize {
 
   static const double appBarHeight = 56;
 
+  static const double imageGridSize = 196;
   static const double imageThumbSize = 80;
 
   static const double defaultSpace = 24;
