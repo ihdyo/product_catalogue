@@ -1,5 +1,5 @@
 enum OrderStatus {
-  Packing,
-  Shipping,
-  Delivered
+  packing,
+  shipping,
+  delivered
 }

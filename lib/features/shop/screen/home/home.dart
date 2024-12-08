@@ -1,3 +1,4 @@
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -21,26 +22,24 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: HomeAppBar(),
-      floatingActionButton: Visibility(
-        visible: true,
-        child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: dark ? Colors.blue[400] : Colors.blue[500],
-          child: Icon(
-            IconsaxPlusLinear.add_square,
-            color: dark ? Colors.black : Colors.white,
-          ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: dark ? Colors.blue[400] : Colors.blue[500],
+        child: Icon(
+          IconsaxPlusLinear.add_square,
+          color: dark ? Colors.black : Colors.white,
         ),
       ),
-      body: NestedScrollView(
+      body: DefaultTabController(
+        length: 5,
+        child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverToBoxAdapter(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomSearchBar(),
-                  const SizedBox(
-                      height: CustomSize.sm
-                  ),
+                  const SizedBox(height: CustomSize.sm),
                   CarouselSlider(
                     items: homeCarouselList,
                     options: CarouselOptions(
@@ -63,27 +62,78 @@ class HomePage extends StatelessWidget {
                   SectionTitle(
                       title: Strings.products
                   ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: CustomSize.defaultSpace - 4,
+                        ),
+                        child: ButtonsTabBar(
+                          backgroundColor: dark ? Colors.blue[400] : Colors.blue[500],
+                          unselectedBackgroundColor: dark ? Colors.black : Colors.white,
+                          radius: 12,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 8
+                          ),
+                          unselectedLabelStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                            color: dark ? Colors.blue[400] : Colors.blue[500],
+                          ),
+                          labelStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            color: dark ? Colors.black : Colors.white,
+                          ),
+                          tabs: const [
+                            Tab(icon: Icon(IconsaxPlusBold.menu)),
+                            Tab(text: Strings.placeholder),
+                            Tab(text: Strings.placeholder),
+                            Tab(text: Strings.placeholder),
+                            Tab(text: Strings.placeholder),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
           ],
-          body: GridView.builder(
-              padding: const EdgeInsets.only(
-                left: CustomSize.defaultSpace,
-                right: CustomSize.defaultSpace,
-                bottom: CustomSize.spaceBetweenSections,
+          body: Column(
+            children: [
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    GridView.builder(
+                      padding: const EdgeInsets.only(
+                          top: CustomSize.defaultSpace / 2,
+                          left: CustomSize.defaultSpace,
+                          right: CustomSize.defaultSpace,
+                          bottom: CustomSize.spaceBetweenSections
+                      ),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: CustomSize.spaceBetweenItems / 2,
+                        mainAxisSpacing: CustomSize.spaceBetweenItems / 2,
+                        childAspectRatio: 2 / 3,
+                      ),
+                      itemCount: 5,
+                      itemBuilder: (context, index) => ProductItem(),
+                    ),
+                    Center(
+                        child: Text(
+                            Strings.placeholder
+                        )
+                    ),
+                  ],
+                ),
               ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: CustomSize.spaceBetweenItems / 2,
-                mainAxisSpacing: CustomSize.spaceBetweenItems / 2,
-                childAspectRatio: 2 / 3,
-              ),
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return ProductItem();
-              }
-          )
+            ],
+          ),
+        ),
       ),
     );
   }

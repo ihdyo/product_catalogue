@@ -18,6 +18,29 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # of the product and file versions while build-number is used as the build suffix.
 version: 1.0.0+1
 
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/logo/cart.png
+
+  color_dark: "#000000"
+  image_dark: assets/logo/cart.png
+
+  branding: assets/logo/logo-black.png
+  branding_dark: assets/logo/logo-white.png
+  branding_mode: bottom
+
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#000000"
+    image: assets/logo/cart.png
+    image_dark: assets/logo/cart.png
+    branding: assets/logo/logo-black.png
+    branding_dark: assets/logo/logo-white.png
+
+  android: true
+  ios: true
+  web: false
+
 environment:
   sdk: ^3.5.4
 

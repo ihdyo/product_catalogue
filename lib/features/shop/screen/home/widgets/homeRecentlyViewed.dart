@@ -12,7 +12,7 @@ class RecentlyViewed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: CustomSize.imageCarouselHeight * 1.25,
+      height: CustomSize.imageCarouselHeight,
       width: double.infinity,
       child: ListView.builder(
         itemCount: 4,
@@ -27,20 +27,21 @@ class RecentlyViewed extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               horizontal: CustomSize.spaceBetweenItems / 4,
             ),
-            child: Container(
-              width: CustomSize.imageCarouselHeight * 1.25 * (4 / 5),
-              height: CustomSize.imageCarouselHeight * 1.25,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  ShadowStyle().shadowMedium()
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
-                  Images.placeholder,
-                  fit: BoxFit.cover,
+            child: AspectRatio(
+              aspectRatio: 4 / 5,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    ShadowStyle().shadowMedium()
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    Images.placeholder,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
