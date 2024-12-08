@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/constant/size.dart';
 import '../../../utils/constant/strings.dart';
+import '../../../utils/helper/helper.dart';
 import '../test/notImplemented.dart';
 
 class Agreements extends StatelessWidget {
@@ -12,6 +13,8 @@ class Agreements extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = Helper.isDarkMode(context);
+
     return Padding(
       padding: const EdgeInsets.all(CustomSize.defaultSpace),
       child: RichText(
@@ -25,17 +28,14 @@ class Agreements extends StatelessWidget {
             ),
             TextSpan(
               text: Strings.termsOfService,
-              style: const TextStyle(
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w500,
-                color: Colors.blue,
+                color: dark ? Colors.blue[400] : Colors.blue[500],
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   // TODO: Terms of Service
-                  NotImplementedAlert.show(
-                    context,
-                    message: Strings.notImplemented,
-                  );
+                  NotImplementedAlert.show(context);
                 },
             ),
             TextSpan(
@@ -43,17 +43,14 @@ class Agreements extends StatelessWidget {
             ),
             TextSpan(
               text: Strings.privacyPolicy,
-              style: const TextStyle(
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w500,
-                color: Colors.blue,
+                color: dark ? Colors.blue[400] : Colors.blue[500],
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   // TODO: Privacy Policy
-                  NotImplementedAlert.show(
-                    context,
-                    message: Strings.notImplemented,
-                  );
+                  NotImplementedAlert.show(context);
                 },
             ),
           ],

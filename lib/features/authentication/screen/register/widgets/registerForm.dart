@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
+import '../../../../../navigation/navigationMenu.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
+import '../../../../../utils/helper/helper.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({
@@ -11,6 +13,8 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = Helper.isDarkMode(context);
+
     return Form(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -70,14 +74,17 @@ class RegisterForm extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () {
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const HomePage()
-                      //   )
-                      // );
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => const NavigationMenu()
+                          )
+                      );
                     },
-                    child: const Text(
-                        Strings.registerButton
+                    child: Text(
+                        Strings.registerButton,
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: dark ? Colors.black : Colors.white
+                        )
                     )
                 ),
               )

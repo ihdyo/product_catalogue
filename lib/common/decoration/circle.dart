@@ -1,18 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../utils/helper/helper.dart';
 
 class CircularBackground extends StatelessWidget {
   const CircularBackground({
     super.key,
-    required this.dark,
     required this.darkOuterColor,
     required this.lightOuterColor,
     required this.darkInnerColor,
     required this.lightInnerColor,
   });
 
-  final bool dark;
   final Color darkOuterColor;
   final Color lightOuterColor;
   final Color darkInnerColor;
@@ -20,6 +18,8 @@ class CircularBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = Helper.isDarkMode(context);
+
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -40,7 +40,6 @@ class CircularBackground extends StatelessWidget {
           },
           child: Container(
             width: Helper.screenWidth(),
-            height: Helper.screenWidth(),
             decoration: BoxDecoration(
               color: dark ? darkOuterColor : lightOuterColor,
               shape: BoxShape.circle,
@@ -64,7 +63,6 @@ class CircularBackground extends StatelessWidget {
           },
           child: Container(
             width: Helper.screenWidth() * 0.7,
-            height: Helper.screenWidth() * 0.7,
             decoration: BoxDecoration(
               color: dark ? darkInnerColor : lightInnerColor,
               shape: BoxShape.circle,

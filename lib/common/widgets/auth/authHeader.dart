@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constant/size.dart';
+import '../../../utils/helper/helper.dart';
 
 class AuthHeader extends StatelessWidget {
   const AuthHeader({
@@ -17,6 +18,8 @@ class AuthHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = Helper.isDarkMode(context);
+
     return Column(
       children: [
         SizedBox(
@@ -37,9 +40,9 @@ class AuthHeader extends StatelessWidget {
             children: [
               TextSpan(
                 text: navigateTo,
-                style: const TextStyle(
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontWeight: FontWeight.w500,
-                  color: Colors.blue,
+                  color: dark ? Colors.blue[400] : Colors.blue[500],
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {

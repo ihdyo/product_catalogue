@@ -1,10 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/navigation/navigationMenu.dart';
 
 import '../../../../../common/widgets/test/notImplemented.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
+import '../../../../../utils/helper/helper.dart';
 import '../../register/register.dart';
 
 class LoginForm extends StatelessWidget {
@@ -14,6 +16,8 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = Helper.isDarkMode(context);
+
     return Form(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -56,10 +60,7 @@ class LoginForm extends StatelessWidget {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         // TODO: Forgot Password
-                        NotImplementedAlert.show(
-                          context,
-                          message: Strings.notImplemented,
-                        );
+                        NotImplementedAlert.show(context);
                       },
                   ),
                 ),
@@ -70,9 +71,18 @@ class LoginForm extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                        Strings.loginButton
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const NavigationMenu()
+                        )
+                      );
+                    },
+                    child: Text(
+                        Strings.loginButton,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: dark ? Colors.black : Colors.white
+                        )
                     )
                 ),
               ),
@@ -89,8 +99,11 @@ class LoginForm extends StatelessWidget {
                         )
                       );
                     },
-                    child: const Text(
-                        Strings.createAccountButton
+                    child: Text(
+                        Strings.createAccountButton,
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: dark ? Colors.grey[300] : Colors.grey[700]
+                        )
                     )
                 ),
               )

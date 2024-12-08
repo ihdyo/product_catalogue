@@ -21,8 +21,6 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = Helper.isDarkMode(context);
-
     return Padding(
       padding: const EdgeInsets.all(CustomSize.defaultSpace),
       child: Column(
@@ -32,7 +30,6 @@ class OnboardingPage extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               CircularBackground(
-                  dark: dark,
                   darkOuterColor: darkOuterColor,
                   lightOuterColor: lightOuterColor,
                   darkInnerColor: darkInnerColor,

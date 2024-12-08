@@ -1,4 +1,5 @@
 class CustomSize {
+  static const double xs2 = 2;
   static const double xs = 4;
   static const double sm = 8;
   static const double md = 16;
@@ -46,7 +47,7 @@ class CustomSize {
   static const double cardRadiusXs = 6;
   static const double cardElevation = 2;
 
-  static const double imageCarouselHeight = 200;
+  static const double imageCarouselHeight = 136;
 
   static const double loadingIndicatorSize = 36;
 

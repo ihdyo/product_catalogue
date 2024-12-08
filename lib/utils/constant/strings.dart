@@ -2,6 +2,7 @@ class Strings {
   static const String appName = 'Lorem Isum';
   static const String developer = 'ihd.yo';
   static const String notImplemented = 'Sorry, this feature is not implemented yet!';
+  static const String placeholder = 'Lorem Ipsum';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';
