@@ -41,6 +41,6 @@ class AppTheme {
     bottomSheetTheme: CustomBottomSheetTheme.darkBottomSheetTheme,
     elevatedButtonTheme: CustomElevatedButtonTheme.darkElevatedButtonTheme,
     outlinedButtonTheme: CustomOutlineButtonTheme.darkOutlinedButtonTheme,
-    inputDecorationTheme: CustomTextFieldTheme.darkInputDecorationTheme
+    inputDecorationTheme: CustomTextFieldTheme.darkInputDecorationTheme,
   );
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/features/shop/screen/home/home.dart';
 
+import '../common/styles/shadow.dart';
 import '../utils/constant/strings.dart';
 import '../utils/helper/helper.dart';
 
@@ -23,11 +24,7 @@ class NavigationMenu extends StatelessWidget {
                 () => Container(
               decoration: BoxDecoration(
                 boxShadow: [
-                  BoxShadow(
-                    color: dark ? Colors.transparent : Colors.black.withOpacity(0.05),
-                    offset: const Offset(0, -4),
-                    blurRadius: 24,
-                  ),
+                  ShadowStyle().shadowLarge()
                 ],
               ),
               child: NavigationBar(

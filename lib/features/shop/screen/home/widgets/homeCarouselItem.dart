@@ -29,7 +29,7 @@ class CarouselItem extends StatelessWidget {
           width: double.infinity,
           height: CustomSize.imageCarouselHeight,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(16),
             color: dark ? darkBackgroundColor : lightBackgroundColor,
           ),
           clipBehavior: Clip.hardEdge,

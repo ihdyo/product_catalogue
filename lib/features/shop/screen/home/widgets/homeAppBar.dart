@@ -3,6 +3,7 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
+import '../../../../../utils/helper/helper.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({super.key});
@@ -14,7 +15,11 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = Helper.isDarkMode(context);
+
     return AppBar(
+      backgroundColor: dark ? Colors.black : Colors.white,
+      elevation: 0,
       title: Padding(
         padding: const EdgeInsets.only(
             left: CustomSize.defaultSpace / 2
@@ -25,9 +30,6 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             Text(
               Strings.welcome,
               style: Theme.of(context).textTheme.labelLarge
-            ),
-            const SizedBox(
-                height: CustomSize.xs2
             ),
             Text(
               Strings.developer,
