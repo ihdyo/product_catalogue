@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/features/shop/screen/home/home.dart';
+import 'package:product_catalogue/features/shop/screen/wishlist/wishlist.dart';
 
 import '../common/styles/shadow.dart';
 import '../utils/constant/strings.dart';
@@ -91,9 +92,7 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomePage(),
-    Container(
-      color: Colors.green,
-    ),
+    const WishlistPage(),
     Container(
       color: Colors.blue,
     )
