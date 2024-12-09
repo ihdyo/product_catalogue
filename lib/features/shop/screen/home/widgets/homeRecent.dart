@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../common/styles/shadow.dart';
 import '../../../../../utils/constant/size.dart';
+import '../../product_detail/productDetail.dart';
 
 class RecentlyViewed extends StatelessWidget {
   const RecentlyViewed({
@@ -39,11 +40,22 @@ class RecentlyViewed extends StatelessWidget {
                   ShadowStyle().shadowMedium()
                 ],
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
-                  images.values.toList()[index],
-                  fit: BoxFit.cover,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => ProductDetailPage(
+                            productId: '0',
+                          )
+                      )
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    images.values.toList()[index],
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

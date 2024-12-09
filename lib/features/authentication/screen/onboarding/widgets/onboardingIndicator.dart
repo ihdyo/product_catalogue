@@ -35,6 +35,7 @@ class OnboardingIndicator extends StatelessWidget {
                   count: onboardingPageCount,
                   effect: ExpandingDotsEffect(
                       activeDotColor: dark ? Colors.blue[400]! : Colors.blue[500]!,
+                      dotWidth: 8,
                       dotHeight: 4
                   )
               ),

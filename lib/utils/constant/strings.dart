@@ -69,6 +69,7 @@ class Strings {
   static const String updatePhoneNumber = 'Update Phone Number';
   static const String changeAddress = 'Change Address';
   static const String logout = 'Logout';
+  static const String stock = 'Stock';
 
   static const String key = 'key';
   static const String value = 'value';

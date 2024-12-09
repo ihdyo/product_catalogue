@@ -14,7 +14,7 @@ class CustomSize {
   static const double fontSizeMd = 16;
   static const double fontSizeLg = 18;
 
-  static const double buttonHeight = 18;
+  static const double buttonHeight = 14;
   static const double buttonRadius = 12;
   static const double buttonWidth = 120;
   static const double buttonElevation = 4;
@@ -23,6 +23,7 @@ class CustomSize {
 
   static const double orderStatusHeight = 56;
 
+  static const double imageDetailSize = 560;
   static const double imageGridSize = 196;
   static const double imageThumbSize = 80;
   static const double imageCartSize = 80;

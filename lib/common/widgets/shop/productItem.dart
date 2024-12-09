@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
+import '../../../features/shop/screen/product_detail/productDetail.dart';
 import '../../../utils/constant/images.dart';
 import '../../../utils/constant/size.dart';
 import '../../../utils/formatter/formatter.dart';
@@ -32,20 +33,31 @@ class ProductItem extends StatelessWidget {
         Expanded(
           child: Stack(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    ShadowStyle().shadowMedium()
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Image.asset(
-                    Images.placeholder,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => ProductDetailPage(
+                            productId: '0',
+                          )
+                      )
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      ShadowStyle().shadowMedium()
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      Images.placeholder,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
                   ),
                 ),
               ),
@@ -112,31 +124,42 @@ class ProductItem extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: CustomSize.defaultSpace / 4,
-            left: CustomSize.defaultSpace / 4,
-            bottom: CustomSize.defaultSpace / 4,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: dark ? Colors.grey[300] : Colors.grey[700],
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (context) => ProductDetailPage(
+                      productId: '0',
+                    )
+                )
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(
+              top: CustomSize.defaultSpace / 4,
+              left: CustomSize.defaultSpace / 4,
+              bottom: CustomSize.defaultSpace / 4,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: dark ? Colors.grey[300] : Colors.grey[700],
+                  ),
                 ),
-              ),
-              Text(
-                Formatter.formatCurrency(price),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-            ],
+                Text(
+                  Formatter.formatCurrency(price),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ],
+            ),
           ),
         ),
       ],
