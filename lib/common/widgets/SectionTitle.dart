@@ -5,10 +5,13 @@ import '../../utils/constant/size.dart';
 class SectionTitle extends StatelessWidget {
   const SectionTitle({
     super.key,
-    required this.title
+    required this.title,
+    this.actionWidget = const SizedBox.shrink(),
+    this.prefixWidget = const SizedBox.shrink()
   });
 
   final String title;
+  final Widget actionWidget, prefixWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +24,22 @@ class SectionTitle extends StatelessWidget {
             right: CustomSize.defaultSpace,
             bottom: CustomSize.spaceBetweenItems
         ),
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.headlineMedium,
-          textAlign: TextAlign.left,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  prefixWidget,
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                    textAlign: TextAlign.left,
+                  ),
+                ]
+            ),
+            actionWidget
+          ],
         ),
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:product_catalogue/common/styles/spacing.dart';
 
 import '../../../../common/widgets/SectionTitle.dart';
 import '../../../../common/widgets/shop/productItem.dart';
@@ -36,7 +35,7 @@ class WishlistPage extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 SectionTitle(
-                    title: Strings.wishlist
+                    title: Strings.wishlist,
                 ),
               ]),
             ),

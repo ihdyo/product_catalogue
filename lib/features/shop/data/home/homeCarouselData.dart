@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeCarouselItem.dart';
 
-import '../../../../utils/constant/images.dart';
-import '../../../../utils/constant/strings.dart';
+import '../../../../../utils/constant/images.dart';
+import '../../../../../utils/constant/strings.dart';
 
 final List<CarouselItem> homeCarouselList = [
   CarouselItem(

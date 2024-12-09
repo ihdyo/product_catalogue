@@ -33,7 +33,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Text(
               Strings.developer,
-              style: Theme.of(context).textTheme.headlineSmall
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                color: dark ? Colors.blue[400] : Colors.blue[500]
+              )
             ),
           ],
         ),

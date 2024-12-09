@@ -9,7 +9,7 @@ class ShadowStyle {
   BoxShadow shadowLarge() {
     return BoxShadow(
       color: dark ? Colors.transparent : Colors.black.withOpacity(0.05),
-      offset: const Offset(0, 4),
+      offset: const Offset(0, -4),
       blurRadius: 24,
     );
   }
@@ -17,6 +17,14 @@ class ShadowStyle {
   BoxShadow shadowMedium() {
     return BoxShadow(
       color: dark ? Colors.transparent : Colors.black.withOpacity(0.025),
+      offset: const Offset(0, 8),
+      blurRadius: 12,
+    );
+  }
+
+  BoxShadow shadowSmall() {
+    return BoxShadow(
+      color: dark ? Colors.transparent : Colors.black.withOpacity(0.05),
       offset: const Offset(0, 4),
       blurRadius: 12,
     );

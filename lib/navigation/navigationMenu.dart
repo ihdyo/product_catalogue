@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:product_catalogue/features/shop/screen/home/home.dart';
-import 'package:product_catalogue/features/shop/screen/wishlist/wishlist.dart';
 
 import '../common/styles/shadow.dart';
 import '../utils/constant/strings.dart';
 import '../utils/helper/helper.dart';
+import 'controller/navigationController.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NavigationController());
+    final controller = Get.put(
+        NavigationController()
+    );
     final dark = Helper.isDarkMode(context);
 
     return Scaffold(
@@ -85,16 +86,4 @@ class NavigationMenu extends StatelessWidget {
         )
     );
   }
-}
-
-class NavigationController extends GetxController {
-  final Rx<int> currentIndex = 0.obs;
-
-  final screens = [
-    const HomePage(),
-    const WishlistPage(),
-    Container(
-      color: Colors.blue,
-    )
-  ];
 }

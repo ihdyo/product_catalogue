@@ -8,7 +8,11 @@ class Formatter {
   }
 
   static String formatCurrency(double amount) {
-    return NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(amount);
+    return NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp',
+      decimalDigits: 0,
+    ).format(amount).replaceAll(',', '.');
   }
 
 }

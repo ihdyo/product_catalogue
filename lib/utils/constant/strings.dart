@@ -46,9 +46,11 @@ class Strings {
   static const String search = 'Search';
   static const String recentlyViewed = 'Recently Viewed';
   static const String products = 'Products';
-  static const String ongoingTransaction = 'Ongoing Transaction';
-  static const String transactionHistory = 'Transaction History';
-  static const String transactionStatus = 'Transaction History';
+  static const String ongoingOrder = 'Ongoing Order';
+  static const String orderHistory = 'Order History';
+  static const String orderStatus = 'Order History';
+  static const String eta = 'Estimated';
+  static const String deliveredAt = 'Delivered at';
   static const String orderDetail = 'Order Detail';
   static const String payment = 'Payment';
   static const String paymentDetail = 'Payment Detail';
