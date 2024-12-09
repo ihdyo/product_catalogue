@@ -73,6 +73,7 @@ dependencies:
   readmore: ^3.0.0
   carousel_slider: ^5.0.0
   buttons_tabbar: ^1.3.14
+  dotted_dashed_line: ^0.0.3
   flutter_rating_bar: ^4.0.1
   capped_progress_indicator: ^0.0.2
 

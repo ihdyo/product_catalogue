@@ -2,13 +2,13 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/common/widgets/title.dart';
 import 'package:product_catalogue/features/shop/data/home/homeCarouselData.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeAppBar.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeCategory.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeRecentlyViewed.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeSearchBar.dart';
 
-import '../../../../common/widgets/SectionTitle.dart';
 import '../../../../common/widgets/shop/productItem.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
@@ -55,14 +55,14 @@ class HomePage extends StatelessWidget {
                     visible: true,
                     child: Column(
                       children: [
-                        SectionTitle(
+                        CustomTitle(
                             title: Strings.recentlyViewed
                         ),
                         RecentlyViewed(),
                       ],
                     ),
                   ),
-                  SectionTitle(
+                  CustomTitle(
                       title: Strings.products
                   ),
                   ProductCategory()

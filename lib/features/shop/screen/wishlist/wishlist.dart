@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/common/widgets/title.dart';
 
-import '../../../../common/widgets/SectionTitle.dart';
 import '../../../../common/widgets/shop/productItem.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
@@ -34,8 +34,9 @@ class WishlistPage extends StatelessWidget {
             ),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                SectionTitle(
+                CustomTitle(
                     title: Strings.wishlist,
+                    isSection: false,
                 ),
               ]),
             ),

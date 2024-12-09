@@ -42,18 +42,23 @@ class Strings {
   static const String cart = 'Cart';
   static const String settings = 'Settings';
 
+  static const String paid = 'Paid';
+  static const String packing = 'Packing';
+  static const String shipping = 'Shipping';
+  static const String delivered = 'Delivered';
+
   static const String welcome = 'Welcome,';
   static const String search = 'Search';
   static const String recentlyViewed = 'Recently Viewed';
   static const String products = 'Products';
   static const String ongoingOrder = 'Ongoing Order';
   static const String orderHistory = 'Order History';
-  static const String orderStatus = 'Order History';
+  static const String orderStatus = 'Order Status';
   static const String eta = 'Estimated';
   static const String deliveredAt = 'Delivered at';
   static const String orderDetail = 'Order Detail';
   static const String payment = 'Payment';
-  static const String paymentDetail = 'Payment Detail';
+  static const String invoiceDetail = 'Invoice Detail';
   static const String shipment = 'Shipment';
   static const String grandTotal = 'Grand Total';
   static const String checkoutButton = 'Checkout';
@@ -63,6 +68,9 @@ class Strings {
   static const String updatePhoneNumber = 'Update Phone Number';
   static const String changeAddress = 'Change Address';
   static const String logout = 'Logout';
+
+  static const String key = 'key';
+  static const String value = 'value';
 
   static String totalItem(int n) => 'Total ($n ${n == 1 ? 'item' : 'items'})';
 }

@@ -29,8 +29,8 @@ class SettingItem extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-            vertical: CustomSize.defaultSpace / 2,
-            horizontal: CustomSize.defaultSpace / 2
+            vertical: CustomSize.defaultSpace * 2 / 3,
+            horizontal: CustomSize.defaultSpace * 2 / 3
         ),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,6 +46,7 @@ class SettingItem extends StatelessWidget {
               if (!isDanger) Icon(
                   IconsaxPlusLinear.arrow_right_3,
                   color: dark ? Colors.grey[400] : Colors.grey[600],
+                  size: 16,
               ),
             ]
         ),

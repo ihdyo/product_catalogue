@@ -21,8 +21,12 @@ class CustomSize {
 
   static const double appBarHeight = 56;
 
+  static const double orderStatusHeight = 56;
+
   static const double imageGridSize = 196;
   static const double imageThumbSize = 80;
+  static const double imageCartSize = 80;
+  static const double imageOrderSize = 48;
 
   static const double defaultSpace = 24;
   static const double spaceBetweenItems = 16;

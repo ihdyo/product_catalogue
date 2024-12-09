@@ -5,12 +5,14 @@ import '../../../../utils/constant/strings.dart';
 
 final List<OrderHistoryItem> ongoingOrderList = [
   OrderHistoryItem(
+      orderId: Strings.counter,
       date: Strings.placeholder,
       status: OrderStatus.packing,
       itemCount: 3,
       totalPrice: 100000.0
   ),
   OrderHistoryItem(
+      orderId: Strings.counter,
       date: Strings.placeholder,
       status: OrderStatus.shipping,
       itemCount: 1,
