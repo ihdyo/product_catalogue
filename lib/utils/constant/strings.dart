@@ -39,8 +39,10 @@ class Strings {
   static const String home = 'Home';
   static const String wishlist = 'Wishlist';
   static const String profile = 'Profile';
-  static const String cart = 'Cart';
   static const String settings = 'Settings';
+  static const String cart = 'Cart';
+  static const String confirmOrder = 'Confirm Order';
+  static const String orderStatus = 'Order Status';
 
   static const String paid = 'Paid';
   static const String packing = 'Packing';
@@ -53,7 +55,6 @@ class Strings {
   static const String products = 'Products';
   static const String ongoingOrder = 'Ongoing Order';
   static const String orderHistory = 'Order History';
-  static const String orderStatus = 'Order Status';
   static const String eta = 'Estimated';
   static const String deliveredAt = 'Delivered at';
   static const String orderDetail = 'Order Detail';
@@ -73,4 +74,5 @@ class Strings {
   static const String value = 'value';
 
   static String totalItem(int n) => 'Total ($n ${n == 1 ? 'item' : 'items'})';
+  static String itemSelected(int n) => '$n ${n == 1 ? 'item' : 'items'} selected';
 }

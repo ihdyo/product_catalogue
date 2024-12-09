@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:product_catalogue/common/widgets/title.dart';
 import 'package:product_catalogue/features/shop/data/order_status/orderStatusInvoiceData.dart';
 import 'package:product_catalogue/features/shop/data/order_status/orderStatusProductData.dart';
-import 'package:product_catalogue/features/shop/screen/order_status/widgets/orderStatusIndicator.dart';
 
 import '../../../../common/widgets/shop/invoiceDetail.dart';
 import '../../../../common/widgets/shop/orderStatusProduct.dart';
@@ -10,17 +9,16 @@ import '../../../../common/widgets/shop/shippingAddress.dart';
 import '../../../../utils/constant/enum.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
+import '../../../../utils/helper/helper.dart';
 
-class OrderStatusPage extends StatelessWidget {
-  const OrderStatusPage({
+class ConfirmOrderPage extends StatelessWidget {
+  const ConfirmOrderPage({
     super.key,
-    required this.orderId,
   });
-
-  final String orderId;
 
   @override
   Widget build(BuildContext context) {
+    final dark = Helper.isDarkMode(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -32,15 +30,12 @@ class OrderStatusPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomTitle(
-                title: Strings.orderStatus,
+                title: Strings.confirmOrder,
                 hasBackButton: true,
                 isSection: false,
               ),
-              OrderStatusIndicator(
-                status: OrderStatus.shipping,
-              ),
               const SizedBox(
-                  height: CustomSize.defaultSpace
+                  height: CustomSize.defaultSpace / 2
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -51,7 +46,7 @@ class OrderStatusPage extends StatelessWidget {
                     address: Strings.placeholder,
                     date: Strings.placeholder,
                     status: OrderStatus.shipping,
-                    isEditable: false
+                    isEditable: true
                 ),
               ),
               Column(
@@ -86,8 +81,22 @@ class OrderStatusPage extends StatelessWidget {
               Column(
                 children: [
                   CustomTitle(
-                    title: Strings.invoiceDetail,
-                    indicator: Strings.paid,
+                      title: Strings.payment
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: CustomSize.defaultSpace
+                    ),
+                    child: Container(
+
+                    )
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  CustomTitle(
+                    title: Strings.invoiceDetail
                   ),
                   Padding(
                       padding: const EdgeInsets.symmetric(
@@ -100,6 +109,24 @@ class OrderStatusPage extends StatelessWidget {
                 ],
               ),
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(
+            vertical: CustomSize.defaultSpace / 2,
+            horizontal: CustomSize.defaultSpace
+        ),
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                  Strings.payButton,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: dark ? Colors.black : Colors.white
+                  )
+              )
           ),
         ),
       ),

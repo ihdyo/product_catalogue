@@ -1,4 +1,3 @@
-import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -6,13 +5,15 @@ import 'package:product_catalogue/common/widgets/title.dart';
 import 'package:product_catalogue/features/shop/data/home/homeCarouselData.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeAppBar.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeCategory.dart';
-import 'package:product_catalogue/features/shop/screen/home/widgets/homeRecentlyViewed.dart';
+import 'package:product_catalogue/features/shop/screen/home/widgets/homeRecent.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeSearchBar.dart';
 
 import '../../../../common/widgets/shop/productItem.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/helper.dart';
+import '../../data/home/homeProductData.dart';
+import '../../data/home/homeRecentData.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -58,7 +59,9 @@ class HomePage extends StatelessWidget {
                         CustomTitle(
                             title: Strings.recentlyViewed
                         ),
-                        RecentlyViewed(),
+                        RecentlyViewed(
+                          images: homeRecentList[0].images,
+                        ),
                       ],
                     ),
                   ),
@@ -88,8 +91,14 @@ class HomePage extends StatelessWidget {
                         mainAxisSpacing: CustomSize.spaceBetweenItems / 2,
                         childAspectRatio: 2 / 3,
                       ),
-                      itemCount: 5,
-                      itemBuilder: (context, index) => ProductItem(),
+                      itemCount: homeProductList.length,
+                      itemBuilder: (context, index) => ProductItem(
+                          image: homeProductList[index].image,
+                          name: homeProductList[index].name,
+                          price: homeProductList[index].price,
+                          quantity: homeProductList[index].quantity,
+                          isWishlist: homeProductList[index].isWishlist,
+                      ),
                     ),
                     Center(
                         child: Text(

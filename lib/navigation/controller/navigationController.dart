@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../features/personalization/screen/profile/profile.dart';
+import '../../features/shop/screen/profile/profile.dart';
 import '../../features/shop/screen/home/home.dart';
 import '../../features/shop/screen/wishlist/wishlist.dart';
 

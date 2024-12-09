@@ -1,5 +1,4 @@
-import 'package:product_catalogue/features/shop/screen/order_status/widgets/orderStatusProduct.dart';
-
+import '../../../../common/widgets/shop/orderStatusProduct.dart';
 import '../../../../utils/constant/images.dart';
 import '../../../../utils/constant/strings.dart';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/common/widgets/title.dart';
+import 'package:product_catalogue/features/shop/data/wishlist/wishlistProductData.dart';
 
 import '../../../../common/widgets/shop/productItem.dart';
 import '../../../../utils/constant/size.dart';
@@ -35,17 +36,17 @@ class WishlistPage extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 CustomTitle(
-                    title: Strings.wishlist,
-                    isSection: false,
+                  title: Strings.wishlist,
+                  isSection: false,
                 ),
               ]),
             ),
           ),
           SliverPadding(
             padding: const EdgeInsets.only(
-              left: CustomSize.defaultSpace,
-              right: CustomSize.defaultSpace,
-              bottom: CustomSize.spaceBetweenSections
+                left: CustomSize.defaultSpace,
+                right: CustomSize.defaultSpace,
+                bottom: CustomSize.spaceBetweenSections
             ),
             sliver: SliverGrid(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -55,8 +56,14 @@ class WishlistPage extends StatelessWidget {
                 childAspectRatio: 2 / 3,
               ),
               delegate: SliverChildBuilderDelegate(
-                    (context, index) => ProductItem(),
-                childCount: 5, // Replace with dynamic length
+                childCount: wishlistProductList.length,
+                    (context, index) => ProductItem(
+                  image: wishlistProductList[index].image,
+                  name: wishlistProductList[index].name,
+                  price: wishlistProductList[index].price,
+                  quantity: wishlistProductList[index].quantity,
+                  isWishlist: wishlistProductList[index].isWishlist,
+                ),
               ),
             ),
           ),

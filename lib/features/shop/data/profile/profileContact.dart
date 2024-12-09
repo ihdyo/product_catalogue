@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:product_catalogue/features/personalization/screen/profile/widgets/profileContactInfo.dart';
+import 'package:product_catalogue/features/shop/screen/profile/widgets/profileContactInfo.dart';
 
 import '../../../../utils/constant/strings.dart';
 

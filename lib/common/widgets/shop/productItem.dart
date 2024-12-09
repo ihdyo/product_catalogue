@@ -3,14 +3,24 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 
 import '../../../utils/constant/images.dart';
 import '../../../utils/constant/size.dart';
-import '../../../utils/constant/strings.dart';
+import '../../../utils/formatter/formatter.dart';
 import '../../../utils/helper/helper.dart';
 import '../../styles/shadow.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({
-    super.key
+    super.key,
+    required this.image,
+    required this.name,
+    required this.price,
+    this.quantity = 0,
+    this.isWishlist = false,
   });
+
+  final String image, name;
+  final double price;
+  final int quantity;
+  final bool isWishlist;
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +61,8 @@ class ProductItem extends StatelessWidget {
                     visualDensity: VisualDensity.compact,
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    icon: const Icon(
-                        IconsaxPlusLinear.heart
+                    icon: Icon(
+                        isWishlist ? IconsaxPlusBold.heart : IconsaxPlusLinear.heart
                     ),
                     color: dark ? Colors.red[400] : Colors.red[500],
                     onPressed: () {},
@@ -79,12 +89,12 @@ class ProductItem extends StatelessWidget {
                         visualDensity: VisualDensity.compact,
                         icon: Icon(
                           IconsaxPlusLinear.minus,
-                          color: dark ? Colors.grey[400] : Colors.grey[600],
+                          color: quantity <= 0 ? dark ? Colors.grey[600] : Colors.grey[400] : dark ? Colors.grey[400] : Colors.grey[600],
                         ),
-                        onPressed: () {},
+                        onPressed: quantity <= 0 ? null : () {},
                       ),
                       Text(
-                        Strings.counter,
+                        quantity.toString(),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       IconButton(
@@ -112,7 +122,7 @@ class ProductItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                Strings.placeholder,
+                name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -121,7 +131,7 @@ class ProductItem extends StatelessWidget {
                 ),
               ),
               Text(
-                Strings.developer,
+                Formatter.formatCurrency(price),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.headlineSmall,

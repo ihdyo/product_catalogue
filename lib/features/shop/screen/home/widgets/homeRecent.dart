@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../common/styles/shadow.dart';
-import '../../../../../utils/constant/images.dart';
 import '../../../../../utils/constant/size.dart';
 
 class RecentlyViewed extends StatelessWidget {
   const RecentlyViewed({
     super.key,
+    required this.images
   });
+
+  final Map<String, String> images;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class RecentlyViewed extends StatelessWidget {
       height: CustomSize.imageCarouselHeight,
       width: double.infinity,
       child: ListView.separated(
-        itemCount: 4,
+        itemCount: images.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(
@@ -40,7 +42,7 @@ class RecentlyViewed extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
-                  Images.placeholder,
+                  images.values.toList()[index],
                   fit: BoxFit.cover,
                 ),
               ),

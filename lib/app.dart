@@ -3,8 +3,6 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:product_catalogue/navigation/navigationMenu.dart';
 import 'package:product_catalogue/utils/theme/theme.dart';
 
-import 'features/authentication/screen/onboarding/onboarding.dart';
-
 class App extends StatelessWidget {
   const App({super.key});
 
