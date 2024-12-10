@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/navigation/navigationMenu.dart';
 
@@ -7,6 +8,8 @@ import '../../../../../common/widgets/test/notImplemented.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/helper/helper.dart';
+import '../../../../../utils/validator/validation.dart';
+import '../../../controller/login/loginController.dart';
 import '../../register/register.dart';
 
 class LoginForm extends StatelessWidget {
@@ -16,9 +19,11 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     final dark = Helper.isDarkMode(context);
 
     return Form(
+        key: controller.loginFormKey,
         child: Padding(
           padding: const EdgeInsets.symmetric(
               vertical: CustomSize.spaceBetweenSections
@@ -26,6 +31,9 @@ class LoginForm extends StatelessWidget {
           child: Column(
             children: [
               TextFormField(
+                controller: controller.email,
+                validator: (value) => Validator.validateEmail(value) ?? Validator.validateEmptyText(Strings.email, value),
+                keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(
                       IconsaxPlusLinear.sms
@@ -36,21 +44,31 @@ class LoginForm extends StatelessWidget {
               const SizedBox(
                   height: CustomSize.spaceBetweenItems
               ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                      IconsaxPlusLinear.password_check
-                  ),
-                  labelText: Strings.password,
-                  suffixIcon: Icon(
-                      IconsaxPlusBold.eye_slash
+
+              Obx(
+                () => TextFormField(
+                  controller: controller.password,
+                  validator: (value) => Validator.validatePassword(value),
+                  keyboardType: TextInputType.text,
+                  obscureText: controller.hidePassword.value,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(
+                        IconsaxPlusLinear.password_check
+                    ),
+                    labelText: Strings.password,
+                    suffixIcon: IconButton(
+                      onPressed: () => controller.hidePassword.value = !controller.hidePassword.value,
+                      icon: Icon(
+                          controller.hidePassword.value ? IconsaxPlusLinear.eye_slash : IconsaxPlusLinear.eye
+                      ),
+                    ),
                   ),
                 ),
-                obscureText: true,
               ),
               const SizedBox(
                   height: CustomSize.spaceBetweenItems
               ),
+
               Align(
                 alignment: Alignment.centerRight,
                 child: RichText(
@@ -68,15 +86,12 @@ class LoginForm extends StatelessWidget {
               const SizedBox(
                   height: CustomSize.spaceBetweenSections
               ),
+
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const NavigationMenu()
-                        )
-                      );
+                      controller.emailAndPasswordLogin();
                     },
                     child: Text(
                         Strings.loginButton,
@@ -89,14 +104,15 @@ class LoginForm extends StatelessWidget {
               const SizedBox(
                   height: CustomSize.spaceBetweenItems
               ),
+
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(
                     onPressed: () {
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const RegisterScreen()
-                        )
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterScreen()
+                          )
                       );
                     },
                     child: Text(

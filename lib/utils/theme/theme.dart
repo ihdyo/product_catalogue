@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:product_catalogue/utils/theme/custom/bottomsheet.dart';
 import 'package:product_catalogue/utils/theme/custom/chip.dart';
-import 'package:product_catalogue/utils/theme/custom/elevated_button.dart';
+import 'package:product_catalogue/utils/theme/custom/textButton.dart';
+import 'package:product_catalogue/utils/theme/custom/elevatedButton.dart';
 import 'package:product_catalogue/utils/theme/custom/text.dart';
 import 'package:product_catalogue/utils/theme/custom/textField.dart';
 
 import 'custom/appbar.dart';
 import 'custom/checkbox.dart';
-import 'custom/outllined_button.dart';
+import 'custom/outlinedButton.dart';
 
 class AppTheme {
   AppTheme._();
@@ -25,7 +26,8 @@ class AppTheme {
     bottomSheetTheme: CustomBottomSheetTheme.lightBottomSheetTheme,
     elevatedButtonTheme: CustomElevatedButtonTheme.lightElevatedButtonTheme,
     outlinedButtonTheme: CustomOutlineButtonTheme.lightOutlinedButtonTheme,
-    inputDecorationTheme: CustomTextFieldTheme.lightInputDecorationTheme
+    textButtonTheme: CustomTextButtonTheme.lightTextButtonTheme,
+    inputDecorationTheme: CustomTextFieldTheme.lightInputDecorationTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -41,6 +43,7 @@ class AppTheme {
     bottomSheetTheme: CustomBottomSheetTheme.darkBottomSheetTheme,
     elevatedButtonTheme: CustomElevatedButtonTheme.darkElevatedButtonTheme,
     outlinedButtonTheme: CustomOutlineButtonTheme.darkOutlinedButtonTheme,
+    textButtonTheme: CustomTextButtonTheme.darkTextButtonTheme,
     inputDecorationTheme: CustomTextFieldTheme.darkInputDecorationTheme,
   );
 }

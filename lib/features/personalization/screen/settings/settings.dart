@@ -39,6 +39,7 @@ class SettingsPage extends StatelessWidget {
                   return SettingItem(
                     title: settingsActionList[index].title,
                     isDanger: settingsActionList[index].isDanger,
+                    onTap: settingsActionList[index].onTap,
                   );
                 },
               ),

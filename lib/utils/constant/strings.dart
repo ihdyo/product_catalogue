@@ -2,14 +2,20 @@ class Strings {
   static const String appName = 'Lorem Ipsum';
   static const String developer = 'ihd.yo';
 
-  static const String loading = 'Loading...';
-  static const String error = 'Error!';
-  static const String success = 'Success!';
-  static const String accountCreated = 'Account Created';
   static const String notImplemented = 'This feature is not implemented yet!';
   static const String placeholder = 'Lorem Ipsum';
   static const String placeholderLong = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
   static const String counter = '0';
+
+  static const String loading = 'Loading...';
+  static const String error = 'Error!';
+  static const String success = 'Success!';
+  static const String ok = 'Ok';
+  static const String cancel = 'Cancel';
+  static const String accountCreated = 'Account Created';
+  static const String logoutPrompt = 'Are you sure you want to logout?';
+  static const String logoutMessage = 'You have been logged out successfully.';
+  static const String loginMessage = 'You have been logged in successfully.';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';
@@ -78,17 +84,17 @@ class Strings {
 
   static const String collectionUser = 'users';
 
-
   static const String fieldId = 'id';
   static const String fieldName = 'name';
   static const String fieldEmail = 'email';
   static const String fieldPhoneNumber = 'phoneNumber';
   static const String fieldAddress = 'address';
 
-  static const String isFirstTime = 'isFirstTime';
-  static const String isLogin = 'isLogin';
   static const String key = 'key';
   static const String value = 'value';
+  static const String uid = 'uid';
+  static const String isFirstTime = 'isFirstTime';
+  static const String isLogin = 'isLogin';
 
   static String totalItem(int n) => 'Total ($n ${n == 1 ? 'item' : 'items'})';
   static String itemSelected(int n) => '$n ${n == 1 ? 'item' : 'items'} selected';

@@ -137,7 +137,7 @@ class RegisterForm extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () => controller.register(),
+                    onPressed: () => controller.emailAndPasswordRegister(),
                     child: Text(
                         Strings.registerButton,
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
