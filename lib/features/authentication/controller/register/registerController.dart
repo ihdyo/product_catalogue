@@ -8,6 +8,7 @@ import '../../../../data/repository/user/userRepository.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/networkManager.dart';
 import '../../../../utils/popup/loading.dart';
+import '../../../personalization/controller/user/userController.dart';
 
 class RegisterController extends GetxController {
   static RegisterController get instance => Get.find();
@@ -24,7 +25,7 @@ class RegisterController extends GetxController {
 
   void emailAndPasswordRegister() async {
     try {
-      FullScreenLoading.openLoadingDialog(Strings.loading);
+      FullScreenLoading.openLoadingDialog();
 
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
@@ -57,6 +58,8 @@ class RegisterController extends GetxController {
           title: Strings.success,
           message: Strings.accountCreated
       );
+
+      Get.put(UserController());
 
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {

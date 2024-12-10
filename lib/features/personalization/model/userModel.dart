@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   final String id;
-  final String name;
-  final String email;
+  String name;
+  String email;
   String phoneNumber;
   String address;
 
@@ -21,7 +21,8 @@ class UserModel {
           name: '',
           email: '',
           phoneNumber: '',
-          address: '');
+          address: ''
+      );
 
   Map<String, dynamic> toJson() {
     return {

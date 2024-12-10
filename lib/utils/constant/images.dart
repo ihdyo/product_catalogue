@@ -11,4 +11,7 @@ class Images {
   static const String placeholderCarousel3 = 'assets/images/smartphone.webp';
 
   static const String placeholderPage1 = 'assets/images/laptop.webp';
+  static const String placeholderPage2 = 'assets/images/badge.webp';
+  static const String placeholderPage3 = 'assets/images/megaphone.webp';
+  static const String placeholderPage4 = 'assets/images/cart-world.webp';
 }

@@ -7,6 +7,14 @@ class Strings {
   static const String placeholderLong = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
   static const String counter = '0';
 
+  static const String bannerTitle1 = 'Unbox';
+  static const String bannerBody1 = 'Exclusive Deals';
+  static const String bannerTitle2 = 'Swipe';
+  static const String bannerBody2 = 'Shop Easy';
+  static const String bannerTitle3 = 'Deliver';
+  static const String bannerBody3 = 'Your Style';
+
+  static const String notSet = '(not set)';
   static const String loading = 'Loading...';
   static const String error = 'Error!';
   static const String success = 'Success!';
@@ -21,6 +29,15 @@ class Strings {
   static const String sendVerification = 'Send Verification';
   static const String verificationSent = 'Verification link has been sent to your email.';
   static const String emailSendingError = 'Failed to send email. Please try again.';
+  static const String changeName = 'Change Name';
+  static const String changeNamePrompt = 'Enter your new name to update.';
+  static const String changeNameMessages = 'Your name has been updated.';
+  static const String updatePhoneNumber = 'Update Phone Number';
+  static const String updatePhoneNumberPrompt = 'Enter your new phone number to update.';
+  static const String updatePhoneNumberMessages = 'Your phone number has been updated.';
+  static const String changeAddress = 'Change Address';
+  static const String changeAddressPrompt = 'Enter your new address to update.';
+  static const String changeAddressMessages = 'Your address has been updated.';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';
@@ -81,9 +98,6 @@ class Strings {
   static const String checkoutButton = 'Checkout';
   static const String buyButton = 'Buy';
   static const String payButton = 'Pay';
-  static const String changeName = 'Change Name';
-  static const String updatePhoneNumber = 'Update Phone Number';
-  static const String changeAddress = 'Change Address';
   static const String logout = 'Logout';
   static const String stock = 'Stock';
 

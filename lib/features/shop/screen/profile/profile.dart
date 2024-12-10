@@ -3,22 +3,18 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/common/widgets/title.dart';
 import 'package:product_catalogue/features/shop/data/profile/profileOngoingOrder.dart';
 import 'package:product_catalogue/features/shop/data/profile/profileOrderHistory.dart';
-import 'package:product_catalogue/features/shop/screen/profile/widgets/profileContactInfo.dart';
 import 'package:product_catalogue/features/personalization/screen/settings/settings.dart';
+import 'package:product_catalogue/features/shop/screen/profile/widgets/profileContactInfoList.dart';
 
 import '../../../../common/widgets/personalization/orderHistoryItem.dart';
-import '../../../../utils/constant/images.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
-import '../../../../utils/helper/helper.dart';
-import '../../data/profile/profileContact.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -47,38 +43,10 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: CustomSize.defaultSpace
+                      horizontal: CustomSize.defaultSpace,
                     ),
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(0),
-                      physics: const NeverScrollableScrollPhysics(),
-                      separatorBuilder: (_, __) => SizedBox(
-                          height: CustomSize.spaceBetweenItems
-                      ),
-                      itemCount: contactInfoList.length,
-                      itemBuilder: (context, index) {
-                        return ContactInfoItem(
-                          icon: contactInfoList[index].icon,
-                          title: contactInfoList[index].title,
-                          body: contactInfoList[index].body,
-                          iconColorDark: contactInfoList[index].iconColorDark,
-                          iconColorLight: contactInfoList[index].iconColorLight,
-                          backgroundColorDark: contactInfoList[index].backgroundColorDark,
-                          backgroundColorLight: contactInfoList[index].backgroundColorLight,
-                        );
-                      },
-                    ),
+                    child: ContactInfo(),
                   ),
-                  Positioned(
-                    right: -36,
-                    child: Image(
-                        width: Helper.screenWidth() * 0.5,
-                        image: AssetImage(
-                          Images.placeholderUser
-                        ),
-                    ),
-                  )
                 ]
               ),
               Visibility(

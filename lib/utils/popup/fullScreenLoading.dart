@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../helper/helper.dart';
-import '../loading/animationLoading.dart';
-
 class FullScreenLoading {
-  static void openLoadingDialog(String text) {
+  static void openLoadingDialog() {
     showDialog(
       context: Get.overlayContext!,
       barrierDismissible: false,

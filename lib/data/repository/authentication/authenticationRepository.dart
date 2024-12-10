@@ -7,6 +7,8 @@ import 'package:product_catalogue/features/authentication/screen/login/login.dar
 import 'package:product_catalogue/features/authentication/screen/onboarding/onboarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../features/personalization/controller/user/userController.dart';
+import '../../../features/personalization/model/userModel.dart';
 import '../../../navigation/navigationMenu.dart';
 import '../../../utils/constant/strings.dart';
 import '../../../utils/popup/loading.dart';
@@ -16,6 +18,7 @@ class AuthenticationRepository extends GetxController {
 
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
+  User? get authUser => _auth.currentUser;
 
   @override
   void onReady() {
@@ -118,8 +121,10 @@ class AuthenticationRepository extends GetxController {
       await _auth.signOut();
       Get.offAll(() => const LoginScreen());
     } catch (e) {
-      throw Exception(Strings.error);
+      // Handle exceptions gracefully
+      Get.snackbar(Strings.error, e.toString());
     }
   }
+
 
 }

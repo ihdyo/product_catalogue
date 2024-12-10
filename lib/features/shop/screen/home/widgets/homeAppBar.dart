@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/common/styles/shimmer.dart';
 
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/helper/helper.dart';
+import '../../../../personalization/controller/user/userController.dart';
 import '../../cart/cart.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -16,6 +19,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     final dark = Helper.isDarkMode(context);
 
     return AppBar(
@@ -29,22 +33,32 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              Strings.welcome,
-              style: Theme.of(context).textTheme.labelLarge
+                Strings.welcome,
+                style: Theme.of(context).textTheme.labelLarge
             ),
-            Text(
-              Strings.developer,
-              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                color: dark ? Colors.blue[400] : Colors.blue[500]
-              )
-            ),
+            Obx(() {
+              if (controller.profileLoading.value) {
+                return const CustomShimmer(
+                  width: CustomSize.defaultSpace * 6,
+                  height: CustomSize.defaultSpace,
+                  radius: 4,
+                );
+              } else {
+                return Text(
+                    controller.user.value.name.split(' ').first,
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        color: dark ? Colors.blue[400] : Colors.blue[500]
+                    )
+                );
+              }
+            })
           ],
         ),
       ),
       actions: [
         Padding(
           padding: const EdgeInsets.only(
-            right: CustomSize.defaultSpace / 2
+              right: CustomSize.defaultSpace / 2
           ),
           child: IconButton(
             onPressed: () {

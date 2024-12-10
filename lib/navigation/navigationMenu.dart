@@ -12,15 +12,14 @@ class NavigationMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(
-        NavigationController()
-    );
+    final controller = Get.put(NavigationController());
     final dark = Helper.isDarkMode(context);
+    final int selectedIndex = Get.arguments ?? 0;
+
+    controller.currentIndex.value = selectedIndex;
 
     return Scaffold(
-        body: Obx(
-                () => controller.screens[controller.currentIndex.value]
-        ),
+        body: Obx(() => controller.screens[controller.currentIndex.value]),
         bottomNavigationBar: Obx(() => Container(
           decoration: BoxDecoration(
             boxShadow: [

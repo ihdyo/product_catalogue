@@ -11,11 +11,12 @@ import '../../screen/login/login.dart';
 class ForgotPasswordController extends GetxController {
 
   final email = TextEditingController();
+  final authRepository = AuthenticationRepository.instance;
   GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
 
   sendVerification() async {
     try {
-      FullScreenLoading.openLoadingDialog(Strings.loading);
+      FullScreenLoading.openLoadingDialog();
 
       final isConnected = await NetworkManager.instance.isConnected();
 
@@ -29,7 +30,7 @@ class ForgotPasswordController extends GetxController {
         return;
       }
 
-      await AuthenticationRepository.instance.forgotPassword(email.text.trim());
+      await authRepository.forgotPassword(email.text.trim());
 
       Get.offAll(() => const LoginScreen());
     } catch (e) {

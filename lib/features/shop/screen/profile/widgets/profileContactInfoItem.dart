@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../utils/constant/size.dart';
+import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/helper/helper.dart';
 
 class ContactInfoItem extends StatelessWidget {
@@ -53,7 +54,12 @@ class ContactInfoItem extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium
             ),
             Text(
-                body
+              body.isEmpty ? Strings.notSet : body,
+              style: body.isEmpty
+                  ? Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontStyle: FontStyle.italic
+              )
+                  : null,
             ),
           ],
         )

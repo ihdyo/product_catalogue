@@ -6,11 +6,18 @@ import 'package:product_catalogue/data/repository/authentication/authenticationR
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/popup/loading.dart';
+import '../../screen/change_name/changeName.dart';
 
 final List<SettingItem> settingsActionList = [
   SettingItem(
     title: Strings.changeName,
-    onTap: (){},
+    onTap: (){
+      Navigator.of(Get.context!).push(
+        MaterialPageRoute(
+          builder: (context) => ChangeName(),
+        ),
+      );
+    },
   ),
   SettingItem(
     title: Strings.updatePhoneNumber,
