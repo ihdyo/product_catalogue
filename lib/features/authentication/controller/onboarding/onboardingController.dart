@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:product_catalogue/features/authentication/data/onboarding/onboardingPageData.dart';
 import 'package:product_catalogue/features/authentication/screen/login/login.dart';
+
+import '../../../../utils/constant/strings.dart';
 
 class OnboardingController extends GetxController {
   static OnboardingController get instance => Get.find();
@@ -28,12 +31,13 @@ class OnboardingController extends GetxController {
         curve: Curves.easeInOut,
       );
     } else {
-      Get.offAll(const LoginScreen());
+      skipPage();
     }
   }
 
-
   void skipPage() {
+    final storage = GetStorage();
+    storage.write(Strings.isFirstTime, false);
     Get.offAll(const LoginScreen());
   }
 }

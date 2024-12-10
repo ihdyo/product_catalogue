@@ -25,17 +25,11 @@ flutter_native_splash:
   color_dark: "#000000"
   image_dark: assets/logo/cart.png
 
-  branding: assets/logo/logo-black.png
-  branding_dark: assets/logo/logo-white.png
-  branding_mode: bottom
-
   android_12:
     color: "#FFFFFF"
     color_dark: "#000000"
     image: assets/logo/cart.png
     image_dark: assets/logo/cart.png
-    branding: assets/logo/logo-black.png
-    branding_dark: assets/logo/logo-white.png
 
   android: true
   ios: true

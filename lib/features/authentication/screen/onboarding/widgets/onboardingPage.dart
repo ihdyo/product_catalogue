@@ -22,7 +22,9 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(CustomSize.defaultSpace),
+      padding: const EdgeInsets.all(
+          CustomSize.defaultSpace
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -5,6 +5,7 @@ import 'package:product_catalogue/features/authentication/data/onboarding/onboar
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../../utils/constant/size.dart';
+import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/device/device.dart';
 import '../../../../../utils/helper/helper.dart';
 import '../../../controller/onboarding/onboardingController.dart';
@@ -18,6 +19,7 @@ class OnboardingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(OnboardingController());
     final dark = Helper.isDarkMode(context);
+    final lastIndex = onboardingPageCount - 1;
 
     return Positioned(
       bottom: Device.getBottomNavBarHeight(),
@@ -29,6 +31,27 @@ class OnboardingIndicator extends StatelessWidget {
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Obx(() {
+                return Opacity(
+                  opacity: controller.currentPageIndex.value != lastIndex ? 1 : 0,
+                  child: SizedBox(
+                    width: 60,
+                    child: TextButton(
+                      onPressed: controller.currentPageIndex.value != lastIndex ? controller.skipPage : null,
+                      style: ButtonStyle(
+                        overlayColor: WidgetStateProperty.all(Colors.transparent),
+                      ),
+                      child: Text(
+                        Strings.skip,
+                        style: TextStyle(
+                          color: dark ? Colors.grey[300]! : Colors.grey[700]!,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }),
               SmoothPageIndicator(
                   controller: controller.pageController,
                   onDotClicked: controller.indicatorClick,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:product_catalogue/features/authentication/screen/onboarding/widgets/onboardingIndicator.dart';
-import 'package:product_catalogue/features/authentication/screen/onboarding/widgets/onboardingSkip.dart';
 
 import '../../controller/onboarding/onboardingController.dart';
 import '../../data/onboarding/onboardingPageData.dart';
@@ -21,7 +20,6 @@ class OnboardingScreen extends StatelessWidget {
                 onPageChanged: controller.updatePageIndicator,
                 children: onboardingPageList
             ),
-            const OnboardingSkip(),
             const OnboardingIndicator(),
           ]
       ),

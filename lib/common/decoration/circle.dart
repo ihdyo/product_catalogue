@@ -40,6 +40,7 @@ class CircularBackground extends StatelessWidget {
           },
           child: Container(
             width: Helper.screenWidth(),
+            height: Helper.screenWidth(),
             decoration: BoxDecoration(
               color: dark ? darkOuterColor : lightOuterColor,
               shape: BoxShape.circle,
@@ -63,6 +64,7 @@ class CircularBackground extends StatelessWidget {
           },
           child: Container(
             width: Helper.screenWidth() * 0.7,
+            height: Helper.screenWidth() * 0.7,
             decoration: BoxDecoration(
               color: dark ? darkInnerColor : lightInnerColor,
               shape: BoxShape.circle,

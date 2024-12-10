@@ -1,8 +1,12 @@
 class Strings {
-  static const String appName = 'Lorem Isum';
+  static const String appName = 'Lorem Ipsum';
   static const String developer = 'ihd.yo';
 
-  static const String notImplemented = 'Sorry, this feature is not implemented yet!';
+  static const String loading = 'Loading...';
+  static const String error = 'Error!';
+  static const String success = 'Success!';
+  static const String accountCreated = 'Account Created';
+  static const String notImplemented = 'This feature is not implemented yet!';
   static const String placeholder = 'Lorem Ipsum';
   static const String placeholderLong = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
   static const String counter = '0';
@@ -32,6 +36,7 @@ class Strings {
 
   static const String email = 'Email';
   static const String password = 'Password';
+  static const String confirmPassword = 'Confirm Password';
   static const String name = 'Name';
   static const String address = 'Address';
   static const String phoneNumber = 'Phone Number';
@@ -71,6 +76,17 @@ class Strings {
   static const String logout = 'Logout';
   static const String stock = 'Stock';
 
+  static const String collectionUser = 'users';
+
+
+  static const String fieldId = 'id';
+  static const String fieldName = 'name';
+  static const String fieldEmail = 'email';
+  static const String fieldPhoneNumber = 'phoneNumber';
+  static const String fieldAddress = 'address';
+
+  static const String isFirstTime = 'isFirstTime';
+  static const String isLogin = 'isLogin';
   static const String key = 'key';
   static const String value = 'value';
 
