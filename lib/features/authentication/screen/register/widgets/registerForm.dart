@@ -56,36 +56,6 @@ class RegisterForm extends StatelessWidget {
                   height: CustomSize.spaceBetweenItems
               ),
 
-              TextFormField(
-                controller: controller.phoneNumber,
-                validator: (value) => Validator.validatePhoneNumber(value),
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                      IconsaxPlusLinear.call
-                  ),
-                  labelText: Strings.phoneNumber,
-                ),
-              ),
-              const SizedBox(
-                  height: CustomSize.spaceBetweenItems
-              ),
-
-              TextFormField(
-                controller: controller.address,
-                validator: (value) => Validator.validateEmptyText(Strings.address, value),
-                keyboardType: TextInputType.streetAddress,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                      IconsaxPlusLinear.location
-                  ),
-                  labelText: Strings.address,
-                ),
-              ),
-              const SizedBox(
-                  height: CustomSize.spaceBetweenItems
-              ),
-
               Obx(
                 () => TextFormField(
                   controller: controller.password,

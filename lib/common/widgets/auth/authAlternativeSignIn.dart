@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:product_catalogue/features/authentication/controller/login/loginController.dart';
 import 'package:product_catalogue/utils/constant/icons.dart';
 
 import '../../../utils/constant/size.dart';
@@ -12,6 +14,7 @@ class AlternativeSignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     final dark = Helper.isDarkMode(context);
 
     return Row(
@@ -26,7 +29,7 @@ class AlternativeSignIn extends StatelessWidget {
           ),
           child: IconButton(
               onPressed: () {
-                // TODO: Navigate to login screen with google
+                controller.googleSignIn();
               },
               icon: SvgPicture.asset(
                 CustomIcon.logoGoogle,

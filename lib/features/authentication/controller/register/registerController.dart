@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:product_catalogue/data/repository/authentication/authenticationRepository.dart';
@@ -47,8 +46,8 @@ class RegisterController extends GetxController {
           id: userCredential.user!.uid,
           name: name.text.trim(),
           email: email.text.trim(),
-          phoneNumber: phoneNumber.text.trim(),
-          address: address.text.trim()
+          phoneNumber: '',
+          address: ''
       );
 
       final userRepository = Get.put(UserRepository());

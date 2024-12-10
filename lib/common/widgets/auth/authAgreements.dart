@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/constant/size.dart';
 import '../../../utils/constant/strings.dart';
@@ -33,9 +34,13 @@ class Agreements extends StatelessWidget {
                 color: dark ? Colors.blue[400] : Colors.blue[500],
               ),
               recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  // TODO: Terms of Service
-                  NotImplementedAlert.show(context);
+                ..onTap = () async {
+                  final url = 'https://www.linkedin.com/in/yodhi-anugrah/';
+                  if (await canLaunchUrl(Uri.parse(url))) {
+                    await launchUrl(Uri.parse(url));
+                  } else {
+                    throw 'Could not launch $url';
+                  }
                 },
             ),
             TextSpan(
@@ -48,9 +53,13 @@ class Agreements extends StatelessWidget {
                 color: dark ? Colors.blue[400] : Colors.blue[500],
               ),
               recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  // TODO: Privacy Policy
-                  NotImplementedAlert.show(context);
+                ..onTap = () async {
+                  final url = 'https://www.linkedin.com/in/yodhi-anugrah/';
+                  if (await canLaunchUrl(Uri.parse(url))) {
+                    await launchUrl(Uri.parse(url));
+                  } else {
+                    throw 'Could not launch $url';
+                  }
                 },
             ),
           ],

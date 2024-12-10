@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/features/authentication/screen/forgot_password/forgotPassword.dart';
 import 'package:product_catalogue/navigation/navigationMenu.dart';
 
 import '../../../../../common/widgets/test/notImplemented.dart';
@@ -77,8 +78,11 @@ class LoginForm extends StatelessWidget {
                     style: Theme.of(context).textTheme.labelMedium,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        // TODO: Forgot Password
-                        NotImplementedAlert.show(context);
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => const ForgotPassword()
+                            )
+                        );
                       },
                   ),
                 ),

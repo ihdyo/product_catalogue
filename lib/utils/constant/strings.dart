@@ -14,8 +14,13 @@ class Strings {
   static const String cancel = 'Cancel';
   static const String accountCreated = 'Account Created';
   static const String logoutPrompt = 'Are you sure you want to logout?';
-  static const String logoutMessage = 'You have been logged out successfully.';
-  static const String loginMessage = 'You have been logged in successfully.';
+  static const String logoutMessage = 'You have been logged out.';
+  static const String loginMessage = 'You have been logged in.';
+  static const String googleSignInError = 'Google sign-in failed.';
+  static const String forgotPasswordPrompt = 'Enter your email address to reset your password.';
+  static const String sendVerification = 'Send Verification';
+  static const String verificationSent = 'Verification link has been sent to your email.';
+  static const String emailSendingError = 'Failed to send email. Please try again.';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';
