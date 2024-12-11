@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:product_catalogue/features/personalization/controller/user/userController.dart';
+import 'package:product_catalogue/features/personalization/screen/settings/settings.dart';
 import 'package:product_catalogue/utils/constant/strings.dart';
 import 'package:product_catalogue/utils/popup/fullScreenLoading.dart';
 
@@ -42,7 +43,7 @@ class ChangeNameController extends GetxController {
         return;
       }
 
-      Map<String, dynamic> data = {Strings.name: name.text.trim()};
+      Map<String, dynamic> data = {Strings.fieldName: name.text.trim()};
       await userRepository.updateSingleField(data);
 
       userController.user.value.name = name.text.trim();
@@ -51,8 +52,6 @@ class ChangeNameController extends GetxController {
           title: Strings.success,
           message: Strings.changeNameMessages
       );
-
-      FullScreenLoading.stopLoading();
 
       Get.offAll(() => const NavigationMenu(), arguments: 2);
     } catch(e) {

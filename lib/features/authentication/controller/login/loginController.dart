@@ -21,6 +21,7 @@ class LoginController extends GetxController {
   final password = TextEditingController();
   final authRepository = AuthenticationRepository.instance;
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final userController = Get.put(UserController());
 
   Future<void> emailAndPasswordLogin() async {
     try {
@@ -45,12 +46,12 @@ class LoginController extends GetxController {
 
       await localStorage.write(Strings.uid, userCredential.user!.uid);
 
+      await userController.saveUserRecord(userCredential);
+
       Loading.successSnackBar(
           title: Strings.success,
           message: Strings.loginMessage
       );
-
-      Get.put(UserController());
 
       authRepository.screenRedirect();
     } catch (e) {
@@ -84,27 +85,16 @@ class LoginController extends GetxController {
           accessToken: googleAuth.accessToken,
         );
 
-        final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+        final userCredential = await authRepository.signInWithGoogle();
 
         await localStorage.write(Strings.uid, userCredential.user!.uid);
 
-        final newUser = UserModel(
-            id: userCredential.user!.uid,
-            name: googleUser.displayName!,
-            email: googleUser.email,
-            phoneNumber: '',
-            address: ''
-        );
-
-        final userRepository = Get.put(UserRepository());
-        await userRepository.saveUserRecord(newUser);
+        await userController.saveUserRecord(userCredential);
 
         Loading.successSnackBar(
             title: Strings.success,
             message: Strings.loginMessage
         );
-
-        Get.put(UserController());
 
         authRepository.screenRedirect();
       } else {

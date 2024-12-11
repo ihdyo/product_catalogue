@@ -30,21 +30,25 @@ class UserController extends GetxController {
     }
   }
 
-  // Future<void> saveUserRecord(UserCredential? userCredential) async {
-  //   try {
-  //     if (userCredential != null) {
-  //       final user = UserModel(
-  //         id: userCredential.user!.uid,
-  //         name: userCredential.user!.displayName ?? '',
-  //         email: userCredential.user!.email ?? '',
-  //         phoneNumber: userCredential.user!.phoneNumber ?? '',
-  //         address: userCredential.user!.address ?? '',
-  //       );
-  //
-  //       await userRepository.saveUserRecord(user);
-  //     }
-  //   } catch (e) {
-  //     throw Exception(e.toString());
-  //   }
-  // }
+  Future<void> saveUserRecord(UserCredential? userCredential) async {
+    try {
+      if (userCredential != null) {
+        final userDoc = await userRepository.fetchUserById();
+
+        if (userDoc.id.isEmpty) {
+          final user = UserModel(
+            id: userCredential.user!.uid,
+            name: userCredential.user!.displayName ?? '',
+            email: userCredential.user!.email ?? '',
+            phoneNumber: userCredential.user!.phoneNumber ?? '',
+            address: '',
+          );
+
+          await userRepository.saveUserRecord(user);
+        }
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

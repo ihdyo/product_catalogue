@@ -71,7 +71,6 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-
   Future<UserCredential> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -118,7 +117,10 @@ class AuthenticationRepository extends GetxController {
 
   Future<void> logout() async {
     try {
+      await GoogleSignIn().signOut();
       await _auth.signOut();
+
+      Get.delete<UserController>();
       Get.offAll(() => const LoginScreen());
     } catch (e) {
       // Handle exceptions gracefully

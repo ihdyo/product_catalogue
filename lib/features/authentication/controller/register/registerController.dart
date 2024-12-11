@@ -23,6 +23,7 @@ class RegisterController extends GetxController {
   final confirmPassword = TextEditingController();
   GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
 
+
   void emailAndPasswordRegister() async {
     try {
       FullScreenLoading.openLoadingDialog();
@@ -54,12 +55,13 @@ class RegisterController extends GetxController {
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newUser);
 
+      final userController = Get.put(UserController());
+      await userController.fetchUser();
+
       Loading.successSnackBar(
           title: Strings.success,
           message: Strings.accountCreated
       );
-
-      Get.put(UserController());
 
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
