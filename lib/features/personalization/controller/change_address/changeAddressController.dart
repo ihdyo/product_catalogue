@@ -9,25 +9,25 @@ import '../../../../navigation/navigationMenu.dart';
 import '../../../../utils/helper/networkManager.dart';
 import '../../../../utils/popup/loading.dart';
 
-class ChangeNameController extends GetxController {
-  static ChangeNameController get instance => Get.find();
+class ChangeAddressController extends GetxController {
+  static ChangeAddressController get instance => Get.find();
 
-  final name = TextEditingController();
+  final address = TextEditingController();
   final userController = UserController.instance;
   final userRepository = Get.put(UserRepository());
-  GlobalKey<FormState> changeNameFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> changeAddressFormKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
     super.onInit();
-    fetchName();
+    fetchAddress();
   }
 
-  Future<void> fetchName() async {
-    name.text = userController.user.value.name;
+  Future<void> fetchAddress() async {
+    address.text = userController.user.value.address;
   }
 
-  Future<void> changeName() async {
+  Future<void> changeAddress() async {
     try {
       FullScreenLoading.openLoadingDialog();
       final isConnected = await NetworkManager.instance.isConnected();
@@ -37,19 +37,19 @@ class ChangeNameController extends GetxController {
         return;
       }
 
-      if(!changeNameFormKey.currentState!.validate()) {
+      if(!changeAddressFormKey.currentState!.validate()) {
         FullScreenLoading.stopLoading();
         return;
       }
 
-      Map<String, dynamic> data = {Strings.fieldName: name.text.trim()};
+      Map<String, dynamic> data = {Strings.fieldAddress: address.text.trim()};
       await userRepository.updateSingleField(data);
 
-      userController.user.value.name = name.text.trim();
+      userController.user.value.address = address.text.trim();
 
       Loading.successSnackBar(
           title: Strings.success,
-          message: Strings.changeNameMessages
+          message: Strings.changeAddressMessages
       );
 
       Get.offAll(() => const NavigationMenu(), arguments: 2);

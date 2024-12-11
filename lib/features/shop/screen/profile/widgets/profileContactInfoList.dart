@@ -14,7 +14,7 @@ class ContactInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = UserController.instance;
+    final controller = Get.put(UserController());
 
     return Obx(
       () => Column(
@@ -27,6 +27,7 @@ class ContactInfo extends StatelessWidget {
             iconColorLight: Colors.lightBlue[500]!,
             backgroundColorDark: Colors.lightBlue[900]!.withOpacity(0.5),
             backgroundColorLight: Colors.lightBlue[50]!,
+            isLoading: controller.profileLoading.value,
           ),
           const SizedBox(height: CustomSize.defaultSpace),
           ContactInfoItem(
@@ -37,6 +38,7 @@ class ContactInfo extends StatelessWidget {
             iconColorLight: Colors.orange[500]!,
             backgroundColorDark: Colors.orange[900]!.withOpacity(0.5),
             backgroundColorLight: Colors.orange[50]!,
+            isLoading: controller.profileLoading.value,
           ),
           const SizedBox(height: CustomSize.defaultSpace),
           ContactInfoItem(
@@ -47,6 +49,7 @@ class ContactInfo extends StatelessWidget {
             iconColorLight: Colors.green[500]!,
             backgroundColorDark: Colors.green[900]!.withOpacity(0.5),
             backgroundColorLight: Colors.green[50]!,
+            isLoading: controller.profileLoading.value,
           ),
           const SizedBox(height: CustomSize.defaultSpace),
           ContactInfoItem(
@@ -57,6 +60,7 @@ class ContactInfo extends StatelessWidget {
             iconColorLight: Colors.red[500]!,
             backgroundColorDark: Colors.red[900]!.withOpacity(0.5),
             backgroundColorLight: Colors.red[50]!,
+            isLoading: controller.profileLoading.value,
           ),
         ],
       ),

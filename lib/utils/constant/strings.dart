@@ -32,9 +32,9 @@ class Strings {
   static const String changeName = 'Change Name';
   static const String changeNamePrompt = 'Enter your new name to update.';
   static const String changeNameMessages = 'Your name has been updated.';
-  static const String updatePhoneNumber = 'Update Phone Number';
-  static const String updatePhoneNumberPrompt = 'Enter your new phone number to update.';
-  static const String updatePhoneNumberMessages = 'Your phone number has been updated.';
+  static const String changePhone = 'Update Phone Number';
+  static const String changePhonePrompt = 'Enter your new phone number to update.';
+  static const String changePhoneMessages = 'Your phone number has been updated.';
   static const String changeAddress = 'Change Address';
   static const String changeAddressPrompt = 'Enter your new address to update.';
   static const String changeAddressMessages = 'Your address has been updated.';

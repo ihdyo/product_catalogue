@@ -9,25 +9,25 @@ import '../../../../navigation/navigationMenu.dart';
 import '../../../../utils/helper/networkManager.dart';
 import '../../../../utils/popup/loading.dart';
 
-class ChangeNameController extends GetxController {
-  static ChangeNameController get instance => Get.find();
+class ChangePhoneController extends GetxController {
+  static ChangePhoneController get instance => Get.find();
 
-  final name = TextEditingController();
+  final phone = TextEditingController();
   final userController = UserController.instance;
   final userRepository = Get.put(UserRepository());
-  GlobalKey<FormState> changeNameFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> changePhoneFormKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
     super.onInit();
-    fetchName();
+    fetchPhone();
   }
 
-  Future<void> fetchName() async {
-    name.text = userController.user.value.name;
+  Future<void> fetchPhone() async {
+    phone.text = userController.user.value.phoneNumber;
   }
 
-  Future<void> changeName() async {
+  Future<void> changePhone() async {
     try {
       FullScreenLoading.openLoadingDialog();
       final isConnected = await NetworkManager.instance.isConnected();
@@ -37,19 +37,19 @@ class ChangeNameController extends GetxController {
         return;
       }
 
-      if(!changeNameFormKey.currentState!.validate()) {
+      if(!changePhoneFormKey.currentState!.validate()) {
         FullScreenLoading.stopLoading();
         return;
       }
 
-      Map<String, dynamic> data = {Strings.fieldName: name.text.trim()};
+      Map<String, dynamic> data = {Strings.fieldPhoneNumber: phone.text.trim()};
       await userRepository.updateSingleField(data);
 
-      userController.user.value.name = name.text.trim();
+      userController.user.value.phoneNumber = phone.text.trim();
 
       Loading.successSnackBar(
           title: Strings.success,
-          message: Strings.changeNameMessages
+          message: Strings.changePhoneMessages
       );
 
       Get.offAll(() => const NavigationMenu(), arguments: 2);
