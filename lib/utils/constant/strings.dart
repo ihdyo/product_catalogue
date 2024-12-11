@@ -84,7 +84,7 @@ class Strings {
 
   static const String welcome = 'Welcome,';
   static const String search = 'Search';
-  static const String recentlyViewed = 'Recently Viewed';
+  static const String recent = 'Recent';
   static const String products = 'Products';
   static const String ongoingOrder = 'Ongoing Order';
   static const String orderHistory = 'Order History';
@@ -100,18 +100,27 @@ class Strings {
   static const String payButton = 'Pay';
   static const String logout = 'Logout';
   static const String stock = 'Stock';
+  static const String reviews = 'Reviews';
 
-  static const String collectionUser = 'users';
-  static const String collectionProduct = 'products';
+  static const String collectionUsers = 'users';
+  static const String collectionProducts = 'products';
   static const String collectionCategories = 'categories';
 
   static const String fieldId = 'id';
+  static const String fieldCategoryId = 'categoryId';
   static const String fieldName = 'name';
+  static const String fieldDescription = 'description';
   static const String fieldPhrase = 'phrase';
   static const String fieldEmail = 'email';
   static const String fieldPhoneNumber = 'phoneNumber';
   static const String fieldAddress = 'address';
+  static const String fieldImages = 'images';
   static const String fieldColor = 'color';
+  static const String fieldPrice = 'price';
+  static const String fieldStock = 'stock';
+  static const String fieldRating = 'rating';
+  static const String fieldStar = 'star';
+  static const String fieldReviewer = 'reviewer';
 
   static const String key = 'key';
   static const String value = 'value';

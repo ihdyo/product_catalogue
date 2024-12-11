@@ -58,6 +58,7 @@ class WishlistPage extends StatelessWidget {
               delegate: SliverChildBuilderDelegate(
                 childCount: wishlistProductList.length,
                     (context, index) => ProductItem(
+                  index: index,
                   image: wishlistProductList[index].image,
                   name: wishlistProductList[index].name,
                   price: wishlistProductList[index].price,

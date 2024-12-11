@@ -22,4 +22,20 @@ class CategoryRepository extends GetxController {
       throw Exception(Strings.error);
     }
   }
+
+  Future<CategoryModel> fetchCategoryById(String id) async {
+    try {
+      final snapshot = await _firestore.collection(Strings.collectionCategories)
+          .doc(id)
+          .get();
+      if (snapshot.exists) {
+        return CategoryModel.fromSnapshot(snapshot);
+      }
+      return CategoryModel.empty();
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: e.plugin);
+    } catch (e) {
+      throw Exception(Strings.error);
+    }
+  }
 }

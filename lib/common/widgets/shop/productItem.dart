@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/features/shop/controller/home/productController.dart';
 
+import '../../../features/shop/controller/home/recentController.dart';
 import '../../../features/shop/screen/product_detail/productDetail.dart';
 import '../../../utils/constant/images.dart';
 import '../../../utils/constant/size.dart';
@@ -11,6 +14,7 @@ import '../../styles/shadow.dart';
 class ProductItem extends StatelessWidget {
   const ProductItem({
     super.key,
+    required this.index,
     required this.image,
     required this.name,
     required this.price,
@@ -20,11 +24,13 @@ class ProductItem extends StatelessWidget {
 
   final String image, name;
   final double price;
-  final int quantity;
+  final int index, quantity;
   final bool isWishlist;
 
   @override
   Widget build(BuildContext context) {
+    final recentController = Get.find<RecentController>();
+    final productController = ProductController.instance;
     final dark = Helper.isDarkMode(context);
 
     return Column(
@@ -35,10 +41,13 @@ class ProductItem extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
+                  final getIdByIndex = productController.products[index].id;
+                  recentController.addItem(getIdByIndex);
+
                   Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (context) => ProductDetailPage(
-                            productId: '0',
+                            index: index,
                           )
                       )
                   );
@@ -52,11 +61,19 @@ class ProductItem extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
-                      Images.placeholder,
+                    child: Image.network(
+                      image,
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: double.infinity,
+                      errorBuilder: (_, __, ___) {
+                        return Image.asset(
+                          Images.placeholder,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -101,7 +118,7 @@ class ProductItem extends StatelessWidget {
                         visualDensity: VisualDensity.compact,
                         icon: Icon(
                           IconsaxPlusLinear.minus,
-                          color: quantity <= 0 ? dark ? Colors.grey[600] : Colors.grey[400] : dark ? Colors.grey[400] : Colors.grey[600],
+                          color: dark ? Colors.grey[400] : Colors.grey[600]!.withOpacity(quantity <= 0 ? 0 : 1),
                         ),
                         onPressed: quantity <= 0 ? null : () {},
                       ),
@@ -129,7 +146,7 @@ class ProductItem extends StatelessWidget {
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) => ProductDetailPage(
-                      productId: '0',
+                      index: 0,
                     )
                 )
             );
@@ -143,6 +160,7 @@ class ProductItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: CustomSize.defaultSpace / 8),
                 Text(
                   name,
                   maxLines: 1,
@@ -152,6 +170,7 @@ class ProductItem extends StatelessWidget {
                     color: dark ? Colors.grey[300] : Colors.grey[700],
                   ),
                 ),
+                const SizedBox(height: CustomSize.defaultSpace / 8),
                 Text(
                   Formatter.formatCurrency(price),
                   maxLines: 1,

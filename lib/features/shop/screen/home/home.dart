@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/common/widgets/shop/productCategory.dart';
+import 'package:product_catalogue/common/widgets/shop/productItem.dart';
 import 'package:product_catalogue/common/widgets/title.dart';
 import 'package:product_catalogue/features/shop/controller/home/categoryController.dart';
 import 'package:product_catalogue/features/shop/data/home/homeCarouselData.dart';
@@ -14,7 +15,8 @@ import 'package:product_catalogue/features/shop/screen/home/widgets/homeSearchBa
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/helper.dart';
-import '../../data/home/homeRecentData.dart';
+import '../../controller/home/productController.dart';
+import '../../controller/home/recentController.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,16 +24,25 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categoryController = Get.put(CategoryController());
+    final productController = Get.put(ProductController());
+    final recentController = Get.put(RecentController());
     final dark = Helper.isDarkMode(context);
+
+    if (productController.recentProducts.isEmpty) {
+      productController.fetchProductsByIds(recentController.recentItems);
+    }
 
     return Scaffold(
       appBar: HomeAppBar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: dark ? Colors.blue[400] : Colors.blue[500],
-        child: Icon(
-          IconsaxPlusLinear.add_square,
-          color: dark ? Colors.black : Colors.white,
+      floatingActionButton: Visibility(
+        visible: true,
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: dark ? Colors.blue[400] : Colors.blue[500],
+          child: Icon(
+            IconsaxPlusLinear.coin_1,
+            color: dark ? Colors.black : Colors.white,
+          ),
         ),
       ),
       body: NestedScrollView(
@@ -52,17 +63,19 @@ class HomePage extends StatelessWidget {
                     autoPlay: true,
                   ),
                 ),
-                Visibility(
-                  visible: true,
-                  child: Column(
-                    children: [
-                      CustomTitle(
-                          title: Strings.recentlyViewed
-                      ),
-                      RecentlyViewed(
-                        images: homeRecentList[0].images,
-                      ),
-                    ],
+                Obx(
+                  () => Visibility(
+                    visible: recentController.recentItems.isNotEmpty,
+                    child: Column(
+                      children: [
+                        CustomTitle(
+                            title: Strings.recent
+                        ),
+                        RecentlyViewed(
+                          ids: recentController.recentItems,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 CustomTitle(
@@ -107,9 +120,33 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-        ], body: Container(
-
+        ], body: Obx(
+            () => GridView.builder(
+          padding: const EdgeInsets.only(
+              top: CustomSize.defaultSpace,
+              right: CustomSize.defaultSpace,
+              left: CustomSize.defaultSpace,
+              bottom: CustomSize.spaceBetweenSections
+          ),
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: CustomSize.spaceBetweenItems,
+              mainAxisSpacing: CustomSize.spaceBetweenItems,
+              childAspectRatio: 3 / 5
+          ),
+          itemCount: productController.products.length,
+          itemBuilder: (context, index) {
+            return ProductItem(
+              index: index,
+              image: productController.products[index].images.first,
+              name: productController.products[index].name,
+              price: productController.products[index].price,
+            );
+          },
         ),
+      ),
       ),
     );
   }

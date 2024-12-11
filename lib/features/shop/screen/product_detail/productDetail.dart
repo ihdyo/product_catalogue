@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/features/shop/controller/product_detail/productDetailController.dart';
+import 'package:product_catalogue/features/shop/screen/cart/cart.dart';
 import 'package:product_catalogue/features/shop/screen/product_detail/widgets/productDetailDetail.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../common/styles/InverseRound.dart';
 import '../../../../common/styles/shadow.dart';
-import '../../../../utils/constant/images.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/helper.dart';
+import '../../controller/home/productController.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({
     super.key,
-    required this.productId
+    required this.index
   });
 
-  final String productId;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
+    final productController = ProductController.instance;
+    final imageController = Get.put(ProductDetailController());
     final dark = Helper.isDarkMode(context);
 
     return Scaffold(
@@ -33,11 +38,18 @@ class ProductDetailPage extends StatelessWidget {
                       ClipPath(
                         clipper: InverseCurvedEdge(),
                         child: AspectRatio(
-                          aspectRatio: 4 / 5, // Maintain the card's ratio
-                          child: Image.asset(
-                            Images.placeholder,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
+                          aspectRatio: 4 / 5,
+                          child: PageView(
+                            controller: imageController.pageController,
+                            onPageChanged: imageController.updatePageIndicator,
+                            children: [
+                              for (var image in productController.products[index].images)
+                                Image.network(
+                                  image,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                            ],
                           ),
                         ),
                       ),
@@ -47,8 +59,9 @@ class ProductDetailPage extends StatelessWidget {
                         right: CustomSize.defaultSpace,
                         child: Center(
                           child: SmoothPageIndicator(
-                              controller: PageController(initialPage: 0),
-                              count: 3,
+                              controller: imageController.pageController,
+                              count: productController.products[index].images.length,
+                              onDotClicked: imageController.indicatorClick,
                               effect: ExpandingDotsEffect(
                                   activeDotColor: dark ? Colors.white : Colors.black,
                                   dotWidth: 4,
@@ -59,7 +72,9 @@ class ProductDetailPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  ProductDetail(),
+                  ProductDetail(
+                    index: index,
+                  ),
                 ],
               ),
             ),
@@ -105,7 +120,7 @@ class ProductDetailPage extends StatelessWidget {
                       ),
                       child:
                       GestureDetector(
-                        onTap: () => Navigator.pop(context),
+                        onTap: () {},
                         child: Icon(
                             IconsaxPlusLinear.heart,
                             color: dark ? Colors.red[400] : Colors.red[500]
@@ -139,7 +154,13 @@ class ProductDetailPage extends StatelessWidget {
                 width: CustomSize.defaultSpace / 2
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(Get.context!).push(
+                  MaterialPageRoute(
+                    builder: (context) => CartPage(),
+                  ),
+                );
+              },
               style: ElevatedButton.styleFrom(
                   backgroundColor: dark ? Colors.blue[900]!.withOpacity(0.5) : Colors.blue[50],
                   elevation: 0,
@@ -147,7 +168,7 @@ class ProductDetailPage extends StatelessWidget {
                   shadowColor: Colors.transparent
               ),
               child: Icon(
-                  IconsaxPlusLinear.add_square,
+                  IconsaxPlusLinear.shopping_cart,
                   color: dark ? Colors.blue[400] : Colors.blue[500]
               ),
             )

@@ -13,7 +13,7 @@ class UserRepository extends GetxController {
 
   Future<void> saveUserRecord(UserModel user) async {
     try {
-      await _firestore.collection(Strings.collectionUser)
+      await _firestore.collection(Strings.collectionUsers)
           .doc(user.id)
           .set(user.toJson());
     } on FirebaseException catch (e) {
@@ -27,7 +27,7 @@ class UserRepository extends GetxController {
 
   Future<UserModel> fetchUserById() async {
     try {
-      final snapshot = await _firestore.collection(Strings.collectionUser)
+      final snapshot = await _firestore.collection(Strings.collectionUsers)
           .doc(authRepository.authUser?.uid)
           .get();
       if (snapshot.exists) {
@@ -45,7 +45,7 @@ class UserRepository extends GetxController {
 
   Future<void> updateUser(UserModel user) async {
     try {
-      await _firestore.collection(Strings.collectionUser)
+      await _firestore.collection(Strings.collectionUsers)
           .doc(user.id)
           .update(user.toJson());
     } on FirebaseException catch (e) {
@@ -59,7 +59,7 @@ class UserRepository extends GetxController {
 
   Future<void> updateSingleField(Map<String, dynamic> data) async {
     try {
-      await _firestore.collection(Strings.collectionUser)
+      await _firestore.collection(Strings.collectionUsers)
           .doc(authRepository.authUser?.uid)
           .update(data);
     } on FirebaseException catch (e) {

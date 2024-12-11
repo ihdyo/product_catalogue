@@ -8,6 +8,7 @@ class CategoryController extends GetxController {
 
   final isLoading = false.obs;
   RxList<CategoryModel> categories = <CategoryModel>[].obs;
+  Rx<CategoryModel> categoryById = CategoryModel.empty().obs;
   final categoryRepository = Get.put(CategoryRepository());
 
   @override
@@ -23,6 +24,18 @@ class CategoryController extends GetxController {
       categories.assignAll(fetchedCategories);
     } catch (e) {
       categories.assignAll([CategoryModel.empty()]);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> fetchCategoryById(String id) async {
+    try {
+      isLoading.value = true;
+      final fetchedCategory = await categoryRepository.fetchCategoryById(id);
+      categoryById.value = fetchedCategory;
+    } catch (e) {
+      categoryById.value = CategoryModel.empty();
     } finally {
       isLoading.value = false;
     }

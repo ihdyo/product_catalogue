@@ -23,7 +23,7 @@ class CategoryItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: onClick,
-      child: IntrinsicWidth( // Wrap width to the child's width
+      child: IntrinsicWidth(
         child: Container(
           decoration: BoxDecoration(
             color: dark ? color[900]!.withOpacity(0.5) : color[50],
@@ -32,7 +32,7 @@ class CategoryItem extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(CustomSize.sm),
             child: Row(
-              mainAxisSize: MainAxisSize.min, // Row doesn't expand unnecessarily
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
                   icon,

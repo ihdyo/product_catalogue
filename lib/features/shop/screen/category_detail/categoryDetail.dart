@@ -66,6 +66,7 @@ class CategoryDetail extends StatelessWidget {
               delegate: SliverChildBuilderDelegate(
                     (context, index) {
                   return ProductItem(
+                    index: index,
                     image: wishlistProductList[index].image,
                     name: wishlistProductList[index].name,
                     price: wishlistProductList[index].price,

@@ -126,7 +126,6 @@ class AuthenticationRepository extends GetxController {
 
       Get.offAll(() => const LoginScreen());
     } catch (e) {
-      // Handle exceptions gracefully
       Get.snackbar(Strings.error, e.toString());
     }
   }
