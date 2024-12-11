@@ -22,6 +22,7 @@ class RegisterController extends GetxController {
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
   GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
+  final userController = Get.put(UserController());
 
 
   void emailAndPasswordRegister() async {
@@ -55,7 +56,6 @@ class RegisterController extends GetxController {
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newUser);
 
-      final userController = Get.put(UserController());
       await userController.fetchUser();
 
       Loading.successSnackBar(

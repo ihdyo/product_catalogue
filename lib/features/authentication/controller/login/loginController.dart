@@ -47,6 +47,7 @@ class LoginController extends GetxController {
       await localStorage.write(Strings.uid, userCredential.user!.uid);
 
       await userController.saveUserRecord(userCredential);
+      await userController.fetchUser();
 
       Loading.successSnackBar(
           title: Strings.success,
@@ -80,16 +81,13 @@ class LoginController extends GetxController {
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
-        final credential = GoogleAuthProvider.credential(
-          idToken: googleAuth.idToken,
-          accessToken: googleAuth.accessToken,
-        );
-
         final userCredential = await authRepository.signInWithGoogle();
 
         await localStorage.write(Strings.uid, userCredential.user!.uid);
 
         await userController.saveUserRecord(userCredential);
+
+        await userController.fetchUser();
 
         Loading.successSnackBar(
             title: Strings.success,

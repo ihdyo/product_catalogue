@@ -117,10 +117,13 @@ class AuthenticationRepository extends GetxController {
 
   Future<void> logout() async {
     try {
+      final userController = UserController.instance;
+
       await GoogleSignIn().signOut();
       await _auth.signOut();
 
-      Get.delete<UserController>();
+      userController.user.value = UserModel.empty();
+
       Get.offAll(() => const LoginScreen());
     } catch (e) {
       // Handle exceptions gracefully
