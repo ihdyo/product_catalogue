@@ -1,18 +1,19 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/common/widgets/shop/productCategory.dart';
 import 'package:product_catalogue/common/widgets/title.dart';
+import 'package:product_catalogue/features/shop/controller/home/categoryController.dart';
 import 'package:product_catalogue/features/shop/data/home/homeCarouselData.dart';
+import 'package:product_catalogue/features/shop/screen/category_detail/categoryDetail.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeAppBar.dart';
-import 'package:product_catalogue/features/shop/screen/home/widgets/homeCategory.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeRecent.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeSearchBar.dart';
 
-import '../../../../common/widgets/shop/productItem.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/helper.dart';
-import '../../data/home/homeProductData.dart';
 import '../../data/home/homeRecentData.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,6 +21,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categoryController = Get.put(CategoryController());
     final dark = Helper.isDarkMode(context);
 
     return Scaffold(
@@ -32,84 +34,81 @@ class HomePage extends StatelessWidget {
           color: dark ? Colors.black : Colors.white,
         ),
       ),
-      body: DefaultTabController(
-        length: 5,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomSearchBar(),
-                  const SizedBox(
-                      height: CustomSize.sm
-                  ),
-                  CarouselSlider(
-                    items: homeCarouselList,
-                    options: CarouselOptions(
-                      height: CustomSize.imageCarouselHeight * 1.25,
-                      enlargeCenterPage: true,
-                      autoPlay: true,
-                    ),
-                  ),
-                  Visibility(
-                    visible: true,
-                    child: Column(
-                      children: [
-                        CustomTitle(
-                            title: Strings.recentlyViewed
-                        ),
-                        RecentlyViewed(
-                          images: homeRecentList[0].images,
-                        ),
-                      ],
-                    ),
-                  ),
-                  CustomTitle(
-                      title: Strings.products
-                  ),
-                  ProductCategory()
-                ],
-              ),
-            ),
-          ],
-          body: Column(
-            children: [
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    GridView.builder(
-                      padding: const EdgeInsets.only(
-                          top: CustomSize.defaultSpace / 2,
-                          left: CustomSize.defaultSpace,
-                          right: CustomSize.defaultSpace,
-                          bottom: CustomSize.spaceBetweenSections
-                      ),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: CustomSize.spaceBetweenItems / 2,
-                        mainAxisSpacing: CustomSize.spaceBetweenItems / 2,
-                        childAspectRatio: 2 / 3,
-                      ),
-                      itemCount: homeProductList.length,
-                      itemBuilder: (context, index) => ProductItem(
-                          image: homeProductList[index].image,
-                          name: homeProductList[index].name,
-                          price: homeProductList[index].price,
-                          quantity: homeProductList[index].quantity,
-                          isWishlist: homeProductList[index].isWishlist,
-                      ),
-                    ),
-                    Center(
-                        child: Text(
-                            Strings.placeholder
-                        )
-                    ),
-                  ],
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomSearchBar(),
+                const SizedBox(
+                    height: CustomSize.sm
                 ),
-              ),
-            ],
+                CarouselSlider(
+                  items: homeCarouselList,
+                  options: CarouselOptions(
+                    height: CustomSize.imageCarouselHeight * 1.25,
+                    enlargeCenterPage: true,
+                    autoPlay: true,
+                  ),
+                ),
+                Visibility(
+                  visible: true,
+                  child: Column(
+                    children: [
+                      CustomTitle(
+                          title: Strings.recentlyViewed
+                      ),
+                      RecentlyViewed(
+                        images: homeRecentList[0].images,
+                      ),
+                    ],
+                  ),
+                ),
+                CustomTitle(
+                    title: Strings.products
+                ),
+                Obx(() => NotificationListener<ScrollNotification>(
+                  onNotification: (scrollNotification) {
+                    return true;
+                  },
+                  child: SizedBox(
+                    height: CustomSize.categoryHeight,
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: CustomSize.defaultSpace
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: categoryController.categories.length,
+                      separatorBuilder: (_, __) => SizedBox(width: CustomSize.spaceBetweenItems / 4),
+                      itemBuilder: (context, index) {
+                        return CategoryItem(
+                          name: categoryController.categories[index].name,
+                          icon: categoryController.categories[index].icon,
+                          color: categoryController.categories[index].color,
+                          onClick: () {
+                            Navigator.of(Get.context!).push(
+                              MaterialPageRoute(
+                                builder: (context) => CategoryDetail(
+                                  categoryId: categoryController.categories[index].id,
+                                  name: categoryController.categories[index].name,
+                                  phrase: categoryController.categories[index].phrase,
+                                  color: categoryController.categories[index].color,
+                                  image: categoryController.categories[index].image,
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                )),
+              ],
+            ),
           ),
+        ], body: Container(
+
         ),
       ),
     );

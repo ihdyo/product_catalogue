@@ -4,8 +4,8 @@ import 'package:product_catalogue/common/decoration/circleStacked.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/helper/helper.dart';
 
-class CarouselItem extends StatelessWidget {
-  const CarouselItem({
+class CategoryHeader extends StatelessWidget {
+  const CategoryHeader({
     super.key,
     required this.title,
     required this.body,
@@ -43,7 +43,7 @@ class CarouselItem extends StatelessWidget {
                     Text(
                       title,
                       style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                        color: dark ? Colors.black : Colors.white
+                          color: dark ? Colors.black : Colors.white
                       ),
                     ),
                     Text(

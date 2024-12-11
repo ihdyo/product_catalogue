@@ -29,6 +29,8 @@ class CustomSize {
   static const double imageCartSize = 80;
   static const double imageOrderSize = 48;
 
+  static const double categoryHeight = 36;
+
   static const double defaultSpace = 24;
   static const double spaceBetweenItems = 16;
   static const double spaceBetweenSections = 32;

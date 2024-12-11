@@ -102,12 +102,16 @@ class Strings {
   static const String stock = 'Stock';
 
   static const String collectionUser = 'users';
+  static const String collectionProduct = 'products';
+  static const String collectionCategories = 'categories';
 
   static const String fieldId = 'id';
   static const String fieldName = 'name';
+  static const String fieldPhrase = 'phrase';
   static const String fieldEmail = 'email';
   static const String fieldPhoneNumber = 'phoneNumber';
   static const String fieldAddress = 'address';
+  static const String fieldColor = 'color';
 
   static const String key = 'key';
   static const String value = 'value';

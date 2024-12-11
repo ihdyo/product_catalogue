@@ -7,7 +7,7 @@ import '../../../../data/repository/user/userRepository.dart';
 class UserController extends GetxController {
   static UserController get instance => Get.find();
 
-  final profileLoading = false.obs;
+  final isLoading = false.obs;
   Rx<UserModel> user = UserModel.empty().obs;
   final userRepository = Get.put(UserRepository());
 
@@ -19,14 +19,14 @@ class UserController extends GetxController {
 
   Future<void> fetchUser() async {
     try {
-      profileLoading.value = true;
+      isLoading.value = true;
       final user = await userRepository.fetchUserById();
       this.user(user);
-      profileLoading.value = false;
+      isLoading.value = false;
     } catch (e) {
       user(UserModel.empty());
     } finally {
-      profileLoading.value = false;
+      isLoading.value = false;
     }
   }
 

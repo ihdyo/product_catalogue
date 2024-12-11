@@ -9,7 +9,7 @@ final List<RecentlyViewed> homeRecentList = [
         Strings.developer: Images.placeholder,
         Strings.counter: Images.placeholder,
         Strings.placeholder: Images.placeholder,
-        Strings.appName: Images.placeholder
+        Strings.fieldPhrase: Images.placeholder
       }
   )
 ];

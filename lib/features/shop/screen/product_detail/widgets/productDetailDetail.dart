@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
+import '../../../../../common/widgets/shop/productCategory.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/helper/helper.dart';
@@ -62,24 +63,10 @@ class ProductDetail extends StatelessWidget {
           const SizedBox(
             height: CustomSize.defaultSpace,
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: dark ? Colors.blue[900]!.withOpacity(0.5) : Colors.blue[50],
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: CustomSize.xs,
-                horizontal: CustomSize.sm,
-              ),
-              child: Text(
-                Strings.placeholder,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: dark ? Colors.blue[400] : Colors.blue[500],
-                    fontWeight: FontWeight.w500
-                ),
-              ),
-            ),
+          CategoryItem(
+            name: Strings.placeholder,
+            icon: IconsaxPlusBold.star,
+            color: Colors.yellow
           ),
           const SizedBox(
             height: CustomSize.defaultSpace,

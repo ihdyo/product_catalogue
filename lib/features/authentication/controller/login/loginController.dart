@@ -1,17 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:product_catalogue/features/personalization/controller/user/userController.dart';
+import 'package:product_catalogue/features/personalization/controller/profile/userController.dart';
 import 'package:product_catalogue/utils/popup/fullScreenLoading.dart';
 
 import '../../../../data/repository/authentication/authenticationRepository.dart';
-import '../../../../data/repository/user/userRepository.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/networkManager.dart';
 import '../../../../utils/popup/loading.dart';
-import '../../../personalization/model/userModel.dart';
 
 class LoginController extends GetxController {
 
@@ -79,8 +76,6 @@ class LoginController extends GetxController {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       if (googleUser != null) {
-        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-
         final userCredential = await authRepository.signInWithGoogle();
 
         await localStorage.write(Strings.uid, userCredential.user!.uid);

@@ -17,7 +17,8 @@ class UserModel {
   });
 
   static UserModel empty() =>
-      UserModel(id: '',
+      UserModel(
+          id: '',
           name: '',
           email: '',
           phoneNumber: '',

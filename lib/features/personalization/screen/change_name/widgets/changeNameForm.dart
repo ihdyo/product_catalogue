@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:product_catalogue/features/personalization/controller/change_name/changeNameController.dart';
+import 'package:product_catalogue/features/personalization/controller/profile/changeNameController.dart';
 
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';

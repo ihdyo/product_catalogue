@@ -8,7 +8,7 @@ import '../../../../data/repository/user/userRepository.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/networkManager.dart';
 import '../../../../utils/popup/loading.dart';
-import '../../../personalization/controller/user/userController.dart';
+import '../../../personalization/controller/profile/userController.dart';
 
 class RegisterController extends GetxController {
   static RegisterController get instance => Get.find();

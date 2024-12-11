@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/validator/validation.dart';
-import '../../../controller/change_phone/changePhoneController.dart';
+import '../../../controller/profile/changePhoneController.dart';
 
 class ChangePhoneForm extends StatelessWidget {
   const ChangePhoneForm({

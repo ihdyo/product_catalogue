@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:product_catalogue/features/personalization/controller/user/userController.dart';
+import 'package:product_catalogue/features/personalization/controller/profile/userController.dart';
 import 'package:product_catalogue/utils/constant/strings.dart';
 import 'package:product_catalogue/utils/popup/fullScreenLoading.dart';
 

@@ -6,7 +6,7 @@ import 'package:product_catalogue/common/styles/shimmer.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/helper/helper.dart';
-import '../../../../personalization/controller/user/userController.dart';
+import '../../../../personalization/controller/profile/userController.dart';
 import '../../cart/cart.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -37,7 +37,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 style: Theme.of(context).textTheme.labelLarge
             ),
             Obx(() {
-              if (controller.profileLoading.value) {
+              if (controller.isLoading.value) {
                 return const CustomShimmer(
                   width: CustomSize.defaultSpace * 6,
                   height: CustomSize.defaultSpace,

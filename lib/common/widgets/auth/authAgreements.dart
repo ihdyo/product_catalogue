@@ -5,7 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/constant/size.dart';
 import '../../../utils/constant/strings.dart';
 import '../../../utils/helper/helper.dart';
-import '../test/notImplemented.dart';
 
 class Agreements extends StatelessWidget {
   const Agreements({

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/validator/validation.dart';
-import '../../../controller/change_address/changeAddressController.dart';
+import '../../../controller/profile/changeAddressController.dart';
 
 class ChangeAddressForm extends StatelessWidget {
   const ChangeAddressForm({

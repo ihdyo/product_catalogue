@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:product_catalogue/features/shop/screen/profile/widgets/profileContactInfoItem.dart';
+import 'package:product_catalogue/features/personalization/screen/profile/widgets/profileContactInfoItem.dart';
 
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
-import '../../../../personalization/controller/user/userController.dart';
+import '../../../controller/profile/userController.dart';
 
 class ContactInfo extends StatelessWidget {
   const ContactInfo({
@@ -27,7 +27,7 @@ class ContactInfo extends StatelessWidget {
             iconColorLight: Colors.lightBlue[500]!,
             backgroundColorDark: Colors.lightBlue[900]!.withOpacity(0.5),
             backgroundColorLight: Colors.lightBlue[50]!,
-            isLoading: controller.profileLoading.value,
+            isLoading: controller.isLoading.value,
           ),
           const SizedBox(height: CustomSize.defaultSpace),
           ContactInfoItem(
@@ -38,7 +38,7 @@ class ContactInfo extends StatelessWidget {
             iconColorLight: Colors.orange[500]!,
             backgroundColorDark: Colors.orange[900]!.withOpacity(0.5),
             backgroundColorLight: Colors.orange[50]!,
-            isLoading: controller.profileLoading.value,
+            isLoading: controller.isLoading.value,
           ),
           const SizedBox(height: CustomSize.defaultSpace),
           ContactInfoItem(
@@ -49,7 +49,7 @@ class ContactInfo extends StatelessWidget {
             iconColorLight: Colors.green[500]!,
             backgroundColorDark: Colors.green[900]!.withOpacity(0.5),
             backgroundColorLight: Colors.green[50]!,
-            isLoading: controller.profileLoading.value,
+            isLoading: controller.isLoading.value,
           ),
           const SizedBox(height: CustomSize.defaultSpace),
           ContactInfoItem(
@@ -60,7 +60,7 @@ class ContactInfo extends StatelessWidget {
             iconColorLight: Colors.red[500]!,
             backgroundColorDark: Colors.red[900]!.withOpacity(0.5),
             backgroundColorLight: Colors.red[50]!,
-            isLoading: controller.profileLoading.value,
+            isLoading: controller.isLoading.value,
           ),
         ],
       ),

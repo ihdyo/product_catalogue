@@ -7,7 +7,7 @@ import 'package:product_catalogue/features/authentication/screen/login/login.dar
 import 'package:product_catalogue/features/authentication/screen/onboarding/onboarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../features/personalization/controller/user/userController.dart';
+import '../../../features/personalization/controller/profile/userController.dart';
 import '../../../features/personalization/model/userModel.dart';
 import '../../../navigation/navigationMenu.dart';
 import '../../../utils/constant/strings.dart';
@@ -46,7 +46,7 @@ class AuthenticationRepository extends GetxController {
       throw FirebaseAuthException(code: e.code, message: e.message);
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, message: e.message, plugin: '');
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw FormatException();
     } on PlatformException catch (e) {
       throw PlatformException(code: e.code, message: e.message);
@@ -62,7 +62,7 @@ class AuthenticationRepository extends GetxController {
       throw FirebaseAuthException(code: e.code, message: e.message);
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, message: e.message, plugin: '');
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw FormatException();
     } on PlatformException catch (e) {
       throw PlatformException(code: e.code, message: e.message);
@@ -86,7 +86,7 @@ class AuthenticationRepository extends GetxController {
       throw FirebaseAuthException(code: e.code, message: e.message);
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, message: e.message, plugin: '');
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw FormatException();
     } on PlatformException catch (e) {
       throw PlatformException(code: e.code, message: e.message);
@@ -106,7 +106,7 @@ class AuthenticationRepository extends GetxController {
       throw FirebaseAuthException(code: e.code, message: e.message);
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, message: e.message, plugin: '');
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw FormatException();
     } on PlatformException catch (e) {
       throw PlatformException(code: e.code, message: e.message);

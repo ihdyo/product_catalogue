@@ -10,14 +10,11 @@ class OnboardingPage extends StatelessWidget {
     required this.image,
     required this.title,
     required this.body,
-    required this.lightInnerColor,
-    required this.lightOuterColor,
-    required this.darkInnerColor,
-    required this.darkOuterColor
+    required this.color
   });
 
   final String image, title, body;
-  final Color lightInnerColor, lightOuterColor, darkInnerColor, darkOuterColor;
+  final MaterialColor color;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +29,7 @@ class OnboardingPage extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               CircularBackground(
-                  darkOuterColor: darkOuterColor,
-                  lightOuterColor: lightOuterColor,
-                  darkInnerColor: darkInnerColor,
-                  lightInnerColor: lightInnerColor
+                  color: color
               ),
               Image(
                 image: AssetImage(image),

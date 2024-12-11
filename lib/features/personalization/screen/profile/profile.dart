@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/common/widgets/title.dart';
+import 'package:product_catalogue/features/personalization/screen/profile/widgets/profileContactInfoList.dart';
 import 'package:product_catalogue/features/shop/data/profile/profileOngoingOrder.dart';
 import 'package:product_catalogue/features/shop/data/profile/profileOrderHistory.dart';
 import 'package:product_catalogue/features/personalization/screen/settings/settings.dart';
-import 'package:product_catalogue/features/shop/screen/profile/widgets/profileContactInfoList.dart';
 
 import '../../../../common/widgets/personalization/orderHistoryItem.dart';
 import '../../../../utils/constant/size.dart';

@@ -18,7 +18,7 @@ class UserRepository extends GetxController {
           .set(user.toJson());
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, message: e.message, plugin: '');
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw FormatException();
     } catch (e) {
       throw Exception(Strings.error);
@@ -27,16 +27,16 @@ class UserRepository extends GetxController {
 
   Future<UserModel> fetchUserById() async {
     try {
-      final doc = await _firestore.collection(Strings.collectionUser)
+      final snapshot = await _firestore.collection(Strings.collectionUser)
           .doc(authRepository.authUser?.uid)
           .get();
-      if (doc.exists) {
-        return UserModel.fromSnapshot(doc);
+      if (snapshot.exists) {
+        return UserModel.fromSnapshot(snapshot);
       }
       return UserModel.empty();
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, message: e.message, plugin: '');
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw FormatException();
     } catch (e) {
       throw Exception(Strings.error);
@@ -50,7 +50,7 @@ class UserRepository extends GetxController {
           .update(user.toJson());
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, message: e.message, plugin: '');
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw FormatException();
     } catch (e) {
       throw Exception(Strings.error);
@@ -64,7 +64,7 @@ class UserRepository extends GetxController {
           .update(data);
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, message: e.message, plugin: '');
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw FormatException();
     } catch (e) {
       throw Exception(Strings.error);
