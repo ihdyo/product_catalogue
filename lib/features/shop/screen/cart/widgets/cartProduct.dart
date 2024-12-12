@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
 import '../../../../../common/styles/shadow.dart';
+import '../../../../../utils/constant/images.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/formatter/formatter.dart';
 import '../../../../../utils/helper/helper.dart';
@@ -58,9 +59,15 @@ class CartProductItem extends StatelessWidget {
                         height: CustomSize.imageCartSize,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
+                          child: Image.network(
                             image,
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                Images.placeholder,
+                                fit: BoxFit.cover,
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -121,7 +128,6 @@ class CartProductItem extends StatelessWidget {
                                             color: dark
                                                 ? Colors.grey[400]
                                                 : Colors.grey[600],
-                                            size: quantity <= 1 ? 20 : 24,
                                           ),
                                         ),
                                         const SizedBox(

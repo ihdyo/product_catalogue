@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:product_catalogue/data/repository/wishlist/wishlistRepository.dart';
 
 import '../../../../data/repository/product/productRepository.dart';
-import '../../../personalization/controller/user/userController.dart';
 import '../../model/productModel.dart';
 
 class WishlistController extends GetxController {
@@ -12,12 +11,11 @@ class WishlistController extends GetxController {
   RxList<ProductModel> wishlist = <ProductModel>[].obs;
   final wishlistRepository = Get.put(WishlistRepository());
   final productRepository = Get.put(ProductRepository());
-  final userController = UserController.instance;
 
   @override
   void onInit() {
-    fetchWishlist();
     super.onInit();
+    fetchWishlist();
   }
 
   Future<void> fetchWishlist() async {
@@ -36,4 +34,5 @@ class WishlistController extends GetxController {
       isLoading.value = false;
     }
   }
+
 }

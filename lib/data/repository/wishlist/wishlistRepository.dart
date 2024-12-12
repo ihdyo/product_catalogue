@@ -13,7 +13,7 @@ class WishlistRepository extends GetxController {
 
   Future<List<String>> fetchWishlists() async {
     try {
-      final wishlistProducts = <String>[];
+      final wishlistProductIds = <String>[];
 
       final snapshot = await _firestore.collection(Strings.collectionUsers)
           .doc(authRepository.authUser?.uid)
@@ -21,10 +21,10 @@ class WishlistRepository extends GetxController {
           .get();
       if (snapshot.docs.isNotEmpty) {
         for (var doc in snapshot.docs) {
-          wishlistProducts.add(doc.id);
+          wishlistProductIds.add(doc.id);
         }
       }
-      return wishlistProducts;
+      return wishlistProductIds;
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, message: e.message, plugin: '');
     } catch (e) {

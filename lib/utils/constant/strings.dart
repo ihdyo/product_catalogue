@@ -94,6 +94,7 @@ class Strings {
   static const String payment = 'Payment';
   static const String invoiceDetail = 'Invoice Detail';
   static const String shipment = 'Shipment';
+  static const String total = 'Total';
   static const String grandTotal = 'Grand Total';
   static const String checkoutButton = 'Checkout';
   static const String buyButton = 'Buy';
@@ -111,20 +112,33 @@ class Strings {
 
   static const String fieldId = 'id';
   static const String fieldCategoryId = 'categoryId';
+  static const String fieldProductId = 'productId';
   static const String fieldName = 'name';
   static const String fieldDescription = 'description';
   static const String fieldPhrase = 'phrase';
   static const String fieldEmail = 'email';
   static const String fieldPhoneNumber = 'phoneNumber';
   static const String fieldAddress = 'address';
+  static const String fieldDate = 'date';
+  static const String fieldRecipient = 'recipient';
+  static const String fieldPhone = 'phone';
+  static const String fieldTotalPrice = 'totalPrice';
+  static const String fieldStatus = 'status';
+  static const String fieldPaymentMethod = 'paymentMethod';
+  static const String fieldPaymentStatus = 'paymentStatus';
+  static const String fieldPaymentId = 'paymentId';
+  static const String fieldNote = 'note';
+  static const String fieldTrackingNumber = 'trackingNumber';
   static const String fieldWishlist = 'wishlist';
   static const String fieldImages = 'images';
   static const String fieldColor = 'color';
   static const String fieldPrice = 'price';
   static const String fieldStock = 'stock';
+  static const String fieldQuantity = 'quantity';
   static const String fieldRating = 'rating';
   static const String fieldStar = 'star';
   static const String fieldReviewer = 'reviewer';
+  static const String fieldIsSelected = 'isSelected';
 
   static const String key = 'key';
   static const String value = 'value';
