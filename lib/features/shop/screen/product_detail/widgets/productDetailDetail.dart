@@ -164,25 +164,45 @@ class ProductDetail extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        IconsaxPlusBold.star_1,
-                        color: dark ? Colors.yellow[400] : Colors.yellow[500],
-                        size: 20,
-                      ),
-                      const SizedBox(width: CustomSize.xs),
-                      Text(
-                        productController.productById.value.star.toString(),
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ],
-                  ),
+                  Obx(() {
+                    if (productController.isLoading.value) {
+                      return CustomShimmer(
+                        width: CustomSize.defaultSpace * 2,
+                        height: CustomSize.defaultSpace * 0.75,
+                        radius: 4,
+                      );
+                    } else {
+                      return Row(
+                        children: [
+                          Icon(
+                            IconsaxPlusBold.star_1,
+                            color: dark ? Colors.yellow[400] : Colors.yellow[500],
+                            size: 20,
+                          ),
+                          const SizedBox(width: CustomSize.xs),
+                          Text(
+                            productController.productById.value.star.toString(),
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ],
+                      );
+                    }
+                  }),
                   const SizedBox(height: CustomSize.xs),
-                  Text(
-                    '(${productController.productById.value.reviewer} ${Strings.reviews})',
-                    style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w400),
-                  ),
+                  Obx(() {
+                    if (productController.isLoading.value) {
+                      return CustomShimmer(
+                        width: CustomSize.defaultSpace * 3,
+                        height: CustomSize.defaultSpace * 0.5,
+                        radius: 4,
+                      );
+                    } else {
+                      return Text(
+                        '(${productController.productById.value.reviewer} ${Strings.reviews})',
+                        style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w400),
+                      );
+                    }
+                  }),
                 ],
               ),
               Container(
@@ -223,7 +243,30 @@ class ProductDetail extends StatelessWidget {
             ],
           ),
           const SizedBox(height: CustomSize.defaultSpace),
-          Text(productController.productById.value.description),
+          Obx(() {
+            if (productController.isLoading.value) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomShimmer(
+                    width: double.infinity,
+                    height: CustomSize.defaultSpace,
+                    radius: 4,
+                  ),
+                  const SizedBox(height: CustomSize.defaultSpace / 4),
+                  const CustomShimmer(
+                    width: CustomSize.defaultSpace * 10,
+                    height: CustomSize.defaultSpace,
+                    radius: 4,
+                  ),
+                ],
+              );
+            } else {
+              return Text(
+                  productController.productById.value.description
+              );
+            }
+          }),
         ],
       ),
     );

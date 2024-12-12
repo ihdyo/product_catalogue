@@ -29,7 +29,9 @@ class ProductDetailPage extends StatelessWidget {
     final imageController = Get.put(ProductDetailController());
     final dark = Helper.isDarkMode(context);
 
-    productController.fetchProductById(id);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      productController.fetchProductById(id);
+    });
 
     return PopScope(
       canPop: true,

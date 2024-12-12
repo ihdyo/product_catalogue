@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:product_catalogue/data/repository/product/productRepository.dart';
 
@@ -11,6 +10,7 @@ class ProductController extends GetxController {
   RxList<ProductModel> products = <ProductModel>[].obs;
   RxList<ProductModel> recentProducts = <ProductModel>[].obs;
   Rx<ProductModel> productById = ProductModel.empty().obs;
+  final RxList<ProductModel> productsByCategory = <ProductModel>[].obs;
   final productRepository = Get.put(ProductRepository());
 
   @override
@@ -63,9 +63,17 @@ class ProductController extends GetxController {
     }
   }
 
-void clearProductById() {
-  productById.value = ProductModel.empty();
-}
+  Future<void> fetchProductsByCategory(String categoryId) async {
+    try {
+      isLoading.value = true;
+      final fetchedProducts = await productRepository.fetchProductsByCategory(categoryId);
+      productsByCategory.value = fetchedProducts;
+    } catch (e) {
+      productsByCategory.value = [ProductModel.empty()];
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   Future<void> updateProduct(ProductModel product) async {
     try {
@@ -73,5 +81,13 @@ void clearProductById() {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  void clearProductById() {
+    productById.value = ProductModel.empty();
+  }
+
+  void clearProductsByCategory() {
+    productsByCategory.value = [];
   }
 }

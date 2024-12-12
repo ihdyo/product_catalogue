@@ -12,6 +12,8 @@ import 'package:product_catalogue/features/shop/screen/home/widgets/homeAppBar.d
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeRecent.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeSearchBar.dart';
 
+import '../../../../common/shimmer/gridProductShimmer.dart';
+import '../../../../common/styles/shimmer.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/helper.dart';
@@ -123,31 +125,33 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ], body: Obx(
-            () => GridView.builder(
-          padding: const EdgeInsets.only(
-              top: CustomSize.defaultSpace,
-              right: CustomSize.defaultSpace,
-              left: CustomSize.defaultSpace,
-              bottom: CustomSize.spaceBetweenSections
-          ),
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: CustomSize.spaceBetweenItems,
-              mainAxisSpacing: CustomSize.spaceBetweenItems,
-              childAspectRatio: 3 / 5
-          ),
-          itemCount: productController.products.length,
-          itemBuilder: (context, index) {
-            return ProductItem(
-              id: productController.products[index].id,
-              image: productController.products[index].images.first,
-              name: productController.products[index].name,
-              price: productController.products[index].price,
-            );
-          },
-        ),
+            () => productController.isLoading.value
+                ? GridProductShimmer()
+                : GridView.builder(
+                    padding: const EdgeInsets.only(
+                      top: CustomSize.defaultSpace,
+                      right: CustomSize.defaultSpace,
+                      left: CustomSize.defaultSpace,
+                      bottom: CustomSize.spaceBetweenSections,
+                    ),
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: CustomSize.spaceBetweenItems,
+                      mainAxisSpacing: CustomSize.spaceBetweenItems,
+                      childAspectRatio: 3 / 5,
+                    ),
+                    itemCount: productController.products.length,
+                    itemBuilder: (context, index) {
+                      return ProductItem(
+                        id: productController.products[index].id,
+                        image: productController.products[index].images.first,
+                        name: productController.products[index].name,
+                        price: productController.products[index].price,
+                      );
+                    },
+                  ),
       ),
       ),
     );

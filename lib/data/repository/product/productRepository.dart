@@ -39,6 +39,24 @@ class ProductRepository extends GetxController {
     }
   }
 
+  Future<List<ProductModel>> fetchProductsByCategory(String categoryId) async {
+    try {
+      final snapshot = await _firestore
+          .collection(Strings.collectionProducts)
+          .where(Strings.fieldCategoryId, isEqualTo: categoryId)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        return snapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+      }
+      return List.empty();
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: e.plugin);
+    } catch (e) {
+      throw Exception(Strings.error);
+    }
+  }
+
   Future<void> updateProduct(ProductModel product) async {
     try {
       await _firestore.collection(Strings.collectionProducts)
