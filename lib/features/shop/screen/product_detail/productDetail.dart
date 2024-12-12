@@ -14,6 +14,7 @@ import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/helper.dart';
 import '../../controller/home/productController.dart';
+import '../../controller/home/recentController.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({
@@ -21,16 +22,18 @@ class ProductDetailPage extends StatelessWidget {
     required this.id
   });
 
-  final String id ;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
+    final recentController = Get.find<RecentController>();
     final productController = ProductController.instance;
     final imageController = Get.put(ProductDetailController());
     final dark = Helper.isDarkMode(context);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       productController.fetchProductById(id);
+      recentController.addItem(id);
     });
 
     return PopScope(
@@ -38,6 +41,7 @@ class ProductDetailPage extends StatelessWidget {
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) {
           productController.clearProductById();
+          productController.fetchProductsByIds(recentController.recentItems);
         }
       },
       child: Scaffold(

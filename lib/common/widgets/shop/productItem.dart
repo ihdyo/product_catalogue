@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-import '../../../features/shop/controller/home/productController.dart';
-import '../../../features/shop/controller/home/recentController.dart';
 import '../../../features/shop/screen/product_detail/productDetail.dart';
 import '../../../utils/constant/images.dart';
 import '../../../utils/constant/size.dart';
@@ -29,8 +26,6 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final recentController = Get.find<RecentController>();
-    final productController = Get.find<ProductController>();
     final dark = Helper.isDarkMode(context);
 
     return Column(
@@ -41,17 +36,13 @@ class ProductItem extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  recentController.addItem(id);
-
                   Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (context) => ProductDetailPage(
                             id: id,
                           )
                       )
-                  ).then((_) {
-                    productController.fetchProductsByIds(recentController.recentItems);
-                  });
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(

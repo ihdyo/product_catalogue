@@ -85,7 +85,6 @@ class CategoryDetail extends StatelessWidget {
                         image: controller.productsByCategory[index].images.first,
                         name: controller.productsByCategory[index].name,
                         price: controller.productsByCategory[index].price,
-                        quantity: controller.productsByCategory[index].stock,
                       );
                     },
                     childCount: controller.productsByCategory.length,

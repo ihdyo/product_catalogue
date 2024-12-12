@@ -30,7 +30,7 @@ class ConfirmOrderPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomTitle(
-                title: Strings.confirmOrder,
+                title: Strings.orderStatus,
                 hasBackButton: true,
                 isSection: false,
               ),
@@ -44,7 +44,7 @@ class ConfirmOrderPage extends StatelessWidget {
                 child: ShippingAddress(
                     recipient: Strings.developer,
                     address: Strings.placeholder,
-                    date: Strings.placeholder,
+                    date: DateTime.now(),
                     status: OrderStatus.shipping,
                     isEditable: true
                 ),
@@ -68,6 +68,7 @@ class ConfirmOrderPage extends StatelessWidget {
                       itemCount: orderStatusProductList.length,
                       itemBuilder: (context, index) {
                         return OrderedProduct(
+                          productId: 'orderStatusProductList[index]',
                           image: orderStatusProductList[index].image,
                           name: orderStatusProductList[index].name,
                           price: orderStatusProductList[index].price,

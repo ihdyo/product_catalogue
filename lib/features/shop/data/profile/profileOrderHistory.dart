@@ -8,35 +8,30 @@ final List<OrderHistoryItem> orderHistoryList = [
       orderId: Strings.counter,
       date: Strings.placeholder,
       status: OrderStatus.delivered,
-      itemCount: 1,
       totalPrice: 25000.0
   ),
   OrderHistoryItem(
       orderId: Strings.counter,
       date: Strings.placeholder,
       status: OrderStatus.delivered,
-      itemCount: 1,
       totalPrice: 25000.0
   ),
   OrderHistoryItem(
       orderId: Strings.counter,
       date: Strings.placeholder,
       status: OrderStatus.delivered,
-      itemCount: 5,
       totalPrice: 550000.0
   ),
   OrderHistoryItem(
       orderId: Strings.counter,
       date: Strings.placeholder,
       status: OrderStatus.delivered,
-      itemCount: 1,
       totalPrice: 25000.0
   ),
   OrderHistoryItem(
       orderId: Strings.counter,
       date: Strings.placeholder,
       status: OrderStatus.delivered,
-      itemCount: 5,
       totalPrice: 550000.0
   ),
 ];

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/common/widgets/personalization/settingItem.dart';
 import 'package:product_catalogue/data/repository/authentication/authenticationRepository.dart';
 
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
+import '../../../../utils/helper/helper.dart';
 import '../../../../utils/popup/loading.dart';
 import '../../screen/change_address/changeAddress.dart';
 import '../../screen/change_name/changeName.dart';
 import '../../screen/change_phone/changePhone.dart';
+
+final dark = Helper.isDarkMode(Get.context!);
 
 final List<SettingItem> settingsActionList = [
   SettingItem(
@@ -54,10 +58,19 @@ final List<SettingItem> settingsActionList = [
           contentPadding: EdgeInsets.all(
               CustomSize.defaultSpace
           ),
-          actionsPadding: EdgeInsets.all(
-              CustomSize.defaultSpace
+          title: Row(
+            children: [
+              Icon(
+                IconsaxPlusLinear.logout
+              ),
+              SizedBox(
+                  width: CustomSize.defaultSpace / 2
+              ),
+              Text(
+                  Strings.logout
+              ),
+            ],
           ),
-          title: Text(Strings.logout),
           content: Text(Strings.logoutPrompt),
           actions: [
             TextButton(
@@ -66,7 +79,7 @@ final List<SettingItem> settingsActionList = [
                   Strings.cancel,
                   style: Theme.of(Get.context!).textTheme.titleMedium!.copyWith(
                     fontWeight: FontWeight.w400,
-                    color: Colors.grey
+                    color: dark ? Colors.grey[400] : Colors.grey[600],
                   )
               ),
             ),
@@ -77,7 +90,7 @@ final List<SettingItem> settingsActionList = [
                 vertical: 0
               ),
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: dark ? Colors.red[400] : Colors.red[500],
                 borderRadius: BorderRadius.circular(
                     CustomSize.defaultSpace
                 ),
@@ -92,7 +105,9 @@ final List<SettingItem> settingsActionList = [
                 },
                 child: Text(
                     Strings.logout,
-                    style: Theme.of(Get.context!).textTheme.titleMedium
+                    style: Theme.of(Get.context!).textTheme.titleMedium!.copyWith(
+                      color: dark ? Colors.black : Colors.white,
+                    )
                 ),
               ),
             ),

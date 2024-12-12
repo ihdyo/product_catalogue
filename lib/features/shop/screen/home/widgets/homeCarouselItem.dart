@@ -34,6 +34,7 @@ class CarouselItem extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Stack(
             children: [
+              CircularStacked(),
               Padding(
                 padding: const EdgeInsets.all(CustomSize.defaultSpace),
                 child: Column(
@@ -55,7 +56,6 @@ class CarouselItem extends StatelessWidget {
                   ],
                 ),
               ),
-              CircularStacked()
             ],
           ),
         ),

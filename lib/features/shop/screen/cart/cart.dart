@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:product_catalogue/common/styles/shimmer.dart';
 import 'package:product_catalogue/common/widgets/title.dart';
 import 'package:product_catalogue/features/shop/screen/cart/widgets/cartProduct.dart';
 import 'package:product_catalogue/features/shop/screen/confirm_order/confirmOrder.dart';
 import 'package:product_catalogue/utils/helper/calculator.dart';
 
+import '../../../../common/shimmer/commonListShimmer.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/formatter/formatter.dart';
@@ -54,7 +56,9 @@ class CartPage extends StatelessWidget {
                 );
               }),
               Obx(
-                () => ListView.separated(
+                () => controller.isLoading.value
+                    ? CommonListShimmer()
+                    : ListView.separated(
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(0),
                   physics: const NeverScrollableScrollPhysics(),
@@ -71,11 +75,11 @@ class CartPage extends StatelessWidget {
                     }
 
                     return CartProductItem(
-                      image: product.images.first,
-                      name: product.name,
-                      price: product.price,
-                      quantity: cartItem.quantity,
-                      isChecked: cartItem.isSelected
+                        image: product.images.first,
+                        name: product.name,
+                        price: product.price,
+                        quantity: cartItem.quantity,
+                        isChecked: cartItem.isSelected
                     );
                   },
                 ),
@@ -93,27 +97,39 @@ class CartPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                    Strings.total,
-                    style: Theme.of(context).textTheme.bodyLarge
-                ),
-                Obx(
-                      () {
-                    final total = Calculator.totalPrice(
-                      controller.cartProducts.values.toList(),
-                      controller.cart,
-                    );
+            Obx(
+              () => Visibility(
+                visible: controller.cart.isNotEmpty,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                        Strings.total,
+                        style: Theme.of(context).textTheme.bodyLarge
+                    ),
+                    Obx(() {
+                      if (controller.isLoading.value) {
+                        return CustomShimmer(
+                          width: CustomSize.defaultSpace * 6,
+                          height: CustomSize.defaultSpace,
+                          radius: 8,
+                        );
+                      } else {
+                        final total = Calculator.selectedWishlistPrice(
+                          controller.cartProducts.values.toList(),
+                          controller.cart,
+                        );
 
-                    return Text(
-                      Formatter.formatCurrency(total),
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    );
-                  },
+                        return Text(
+                          Formatter.formatCurrency(total),
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        );
+                      }
+                    },
+                    )
+                  ],
                 ),
-              ],
+              ),
             ),
             const SizedBox(
               height: CustomSize.defaultSpace / 2,

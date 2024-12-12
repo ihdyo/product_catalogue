@@ -18,6 +18,8 @@ class Strings {
   static const String loading = 'Loading...';
   static const String error = 'Error!';
   static const String success = 'Success!';
+  static const String proceed = 'Proceed';
+  static const String back = 'Back';
   static const String ok = 'Ok';
   static const String cancel = 'Cancel';
   static const String accountCreated = 'Account Created';
@@ -38,6 +40,9 @@ class Strings {
   static const String changeAddress = 'Change Address';
   static const String changeAddressPrompt = 'Enter your new address to update.';
   static const String changeAddressMessages = 'Your address has been updated.';
+  static const String cancelOrder = 'Cancel Order';
+  static const String cancelOrderPrompt = 'Are you sure you want to cancel this order?';
+  static const String cancelOrderMessages = 'Your order has been cancelled.';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';
@@ -74,20 +79,19 @@ class Strings {
   static const String profile = 'Profile';
   static const String settings = 'Settings';
   static const String cart = 'Cart';
-  static const String confirmOrder = 'Confirm Order';
   static const String orderStatus = 'Order Status';
 
-  static const String paid = 'Paid';
-  static const String packing = 'Packing';
-  static const String shipping = 'Shipping';
-  static const String delivered = 'Delivered';
+  static const String paid = 'paid';
+  static const String packing = 'packing';
+  static const String shipping = 'shipping';
+  static const String delivered = 'delivered';
+  static const String processing = 'processing';
 
   static const String welcome = 'Welcome,';
   static const String search = 'Search';
   static const String recent = 'Recent';
   static const String products = 'Products';
-  static const String ongoingOrder = 'Ongoing Order';
-  static const String orderHistory = 'Order History';
+  static const String completeOrder = 'Complete Order';
   static const String eta = 'Estimated';
   static const String deliveredAt = 'Delivered at';
   static const String orderDetail = 'Order Detail';
@@ -122,6 +126,7 @@ class Strings {
   static const String fieldDate = 'date';
   static const String fieldRecipient = 'recipient';
   static const String fieldPhone = 'phone';
+  static const String fieldShippingPrice = 'shippingPrice';
   static const String fieldTotalPrice = 'totalPrice';
   static const String fieldStatus = 'status';
   static const String fieldPaymentMethod = 'paymentMethod';

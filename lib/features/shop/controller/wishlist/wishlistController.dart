@@ -15,10 +15,10 @@ class WishlistController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchWishlist();
+    fetchWishlists();
   }
 
-  Future<void> fetchWishlist() async {
+  Future<void> fetchWishlists() async {
     try {
       isLoading.value = true;
       final wishlistIds = await wishlistRepository.fetchWishlists();

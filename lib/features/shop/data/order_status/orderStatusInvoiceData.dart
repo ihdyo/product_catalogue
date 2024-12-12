@@ -1,16 +1,32 @@
-import '../../../../utils/constant/strings.dart';
+import 'package:product_catalogue/utils/formatter/formatter.dart';
 
-final invoiceData = [
-  {
-    Strings.key : Strings.totalItem(2),
-    Strings.value: Strings.placeholder,
-  },
-  {
-    Strings.key: Strings.shipment,
-    Strings.value: Strings.placeholder,
-  },
-  {
-    Strings.key: Strings.grandTotal,
-    Strings.value: Strings.placeholder,
-  },
-];
+import '../../../../utils/constant/strings.dart';
+import '../../../../utils/helper/calculator.dart';
+import '../../controller/order/orderController.dart';
+
+final controller = OrderController.instance;
+
+List<Map<String, String>> get invoiceData {
+  final int totalItems = controller.productsByOrder.length;
+  final double totalPrice = Calculator.totalItemPrice(
+    controller.productsByOrder,
+    controller.orders,
+  );
+  final double shippingPrice = controller.orderById.value.shippingPrice;
+  final double grandTotal = totalPrice + shippingPrice;
+
+  return [
+    {
+      Strings.key: Strings.totalItem(totalItems),
+      Strings.value: Formatter.formatCurrency(totalPrice),
+    },
+    {
+      Strings.key: Strings.shipment,
+      Strings.value: Formatter.formatCurrency(shippingPrice),
+    },
+    {
+      Strings.key: Strings.grandTotal,
+      Strings.value: Formatter.formatCurrency(grandTotal),
+    },
+  ];
+}

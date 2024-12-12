@@ -15,14 +15,12 @@ class OrderHistoryItem extends StatelessWidget {
     required this.orderId,
     required this.date,
     required this.status,
-    required this.itemCount,
-    required this.totalPrice
+    required this.totalPrice,
   });
 
   final String orderId, date;
-  final OrderStatus status;
   final double totalPrice;
-  final int itemCount;
+  final OrderStatus status;
 
   @override
   Widget build(BuildContext context) {
@@ -52,48 +50,51 @@ class OrderHistoryItem extends StatelessWidget {
               horizontal: CustomSize.defaultSpace / 2
           ),
           child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    Strings.total,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text(
+                    Formatter.formatCurrency(totalPrice),
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: dark ? Colors.blue[400] : Colors.blue[500],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        Strings.totalItem(itemCount)
+                        status == OrderStatus.delivered
+                            ? Strings.deliveredAt
+                            : Strings.eta,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       Text(
-                        Formatter.formatCurrency(totalPrice),
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            color: dark ? Colors.blue[400] : Colors.blue[500]
+                        date,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.w500,
                         ),
-                      )
-                    ]
-                ),
-                Row(
-                  children: [
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                              status != OrderStatus.delivered ? Strings.eta : Strings.deliveredAt,
-                              style: Theme.of(context).textTheme.bodySmall
-                          ),
-                          Text(
-                              date,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  fontWeight: FontWeight.w500
-                              )
-                          )
-                        ]
-                    ),
-                    const SizedBox(
-                        width: CustomSize.sm
-                    ),
-                    OrderStatusItem(
-                        status: status
-                    )
-                  ],
-                )
-              ]
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: CustomSize.sm,
+                  ),
+                  OrderStatusItem(
+                    status: status,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

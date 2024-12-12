@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/utils/formatter/formatter.dart';
 
 import '../../../utils/constant/enum.dart';
 import '../../../utils/constant/size.dart';
@@ -17,9 +18,10 @@ class ShippingAddress extends StatelessWidget {
     required this.isEditable
   });
 
-  final String recipient, address, date;
+  final String recipient, address;
   final OrderStatus status;
   final bool isEditable;
+  final DateTime date;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,7 @@ class ShippingAddress extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleLarge
                         ),
                         Text(
-                            date,
+                            address,
                             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 color: dark ? Colors.grey[400] : Colors.grey[600]
                             )
@@ -89,7 +91,7 @@ class ShippingAddress extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodySmall
                         ),
                         Text(
-                            date,
+                            Formatter.formatDate(date),
                             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 fontWeight: FontWeight.w500
                             )

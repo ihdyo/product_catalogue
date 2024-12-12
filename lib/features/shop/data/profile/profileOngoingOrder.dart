@@ -8,14 +8,12 @@ final List<OrderHistoryItem> ongoingOrderList = [
       orderId: Strings.counter,
       date: Strings.placeholder,
       status: OrderStatus.packing,
-      itemCount: 3,
       totalPrice: 100000.0
   ),
   OrderHistoryItem(
       orderId: Strings.counter,
       date: Strings.placeholder,
       status: OrderStatus.shipping,
-      itemCount: 1,
       totalPrice: 25000.0
   ),
 ];

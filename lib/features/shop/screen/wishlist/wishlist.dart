@@ -19,7 +19,7 @@ class WishlistPage extends StatelessWidget {
     final dark = Helper.isDarkMode(context);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      wishlistController.fetchWishlist();
+      wishlistController.fetchWishlists();
     });
 
     return Scaffold(
