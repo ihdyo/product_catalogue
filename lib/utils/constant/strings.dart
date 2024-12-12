@@ -70,7 +70,7 @@ class Strings {
   static const String phoneNumber = 'Phone Number';
 
   static const String home = 'Home';
-  static const String wishlist = 'Wishlist';
+  static const String wishlist = 'Favorite';
   static const String profile = 'Profile';
   static const String settings = 'Settings';
   static const String cart = 'Cart';
@@ -105,6 +105,9 @@ class Strings {
   static const String collectionUsers = 'users';
   static const String collectionProducts = 'products';
   static const String collectionCategories = 'categories';
+  static const String collectionWishlist = 'wishlist';
+  static const String collectionCart = 'cart';
+  static const String collectionOrder = 'order';
 
   static const String fieldId = 'id';
   static const String fieldCategoryId = 'categoryId';
@@ -114,6 +117,7 @@ class Strings {
   static const String fieldEmail = 'email';
   static const String fieldPhoneNumber = 'phoneNumber';
   static const String fieldAddress = 'address';
+  static const String fieldWishlist = 'wishlist';
   static const String fieldImages = 'images';
   static const String fieldColor = 'color';
   static const String fieldPrice = 'price';

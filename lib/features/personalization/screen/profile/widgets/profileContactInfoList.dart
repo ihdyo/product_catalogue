@@ -5,7 +5,7 @@ import 'package:product_catalogue/features/personalization/screen/profile/widget
 
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
-import '../../../controller/profile/userController.dart';
+import '../../../controller/user/userController.dart';
 
 class ContactInfo extends StatelessWidget {
   const ContactInfo({

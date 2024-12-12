@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:product_catalogue/features/personalization/model/userModel.dart';
 
-import '../../../../data/repository/user/userRepository.dart';
+import '../../../../../data/repository/user/userRepository.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
@@ -41,7 +41,7 @@ class UserController extends GetxController {
             name: userCredential.user!.displayName ?? '',
             email: userCredential.user!.email ?? '',
             phoneNumber: userCredential.user!.phoneNumber ?? '',
-            address: '',
+            address: ''
           );
 
           await userRepository.saveUserRecord(user);

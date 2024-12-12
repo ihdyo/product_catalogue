@@ -6,7 +6,7 @@ import 'package:product_catalogue/common/styles/shimmer.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/helper/helper.dart';
-import '../../../../personalization/controller/profile/userController.dart';
+import '../../../../personalization/controller/user/userController.dart';
 import '../../cart/cart.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {

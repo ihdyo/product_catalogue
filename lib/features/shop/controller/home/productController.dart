@@ -50,7 +50,6 @@ class ProductController extends GetxController {
     }
   }
 
-
   Future<void> fetchProductById(String id) async {
     try {
       isLoading.value = true;

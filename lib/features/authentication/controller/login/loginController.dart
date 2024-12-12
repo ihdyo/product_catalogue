@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:product_catalogue/features/personalization/controller/profile/userController.dart';
 import 'package:product_catalogue/utils/popup/fullScreenLoading.dart';
 
 import '../../../../data/repository/authentication/authenticationRepository.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/networkManager.dart';
 import '../../../../utils/popup/loading.dart';
+import '../../../personalization/controller/user/userController.dart';
 
 class LoginController extends GetxController {
 

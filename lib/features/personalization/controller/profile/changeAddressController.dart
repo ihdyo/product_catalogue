@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:product_catalogue/features/personalization/controller/profile/userController.dart';
 import 'package:product_catalogue/utils/constant/strings.dart';
 import 'package:product_catalogue/utils/popup/fullScreenLoading.dart';
 
@@ -8,6 +7,7 @@ import '../../../../data/repository/user/userRepository.dart';
 import '../../../../navigation/navigationMenu.dart';
 import '../../../../utils/helper/networkManager.dart';
 import '../../../../utils/popup/loading.dart';
+import '../user/userController.dart';
 
 class ChangeAddressController extends GetxController {
   static ChangeAddressController get instance => Get.find();

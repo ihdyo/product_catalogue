@@ -7,7 +7,7 @@ import 'package:product_catalogue/features/authentication/screen/login/login.dar
 import 'package:product_catalogue/features/authentication/screen/onboarding/onboarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../features/personalization/controller/profile/userController.dart';
+import '../../../features/personalization/controller/user/userController.dart';
 import '../../../features/personalization/model/userModel.dart';
 import '../../../navigation/navigationMenu.dart';
 import '../../../utils/constant/strings.dart';
