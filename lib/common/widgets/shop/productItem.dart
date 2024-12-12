@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:product_catalogue/features/shop/controller/home/productController.dart';
 
+import '../../../features/shop/controller/home/productController.dart';
 import '../../../features/shop/controller/home/recentController.dart';
 import '../../../features/shop/screen/product_detail/productDetail.dart';
 import '../../../utils/constant/images.dart';
@@ -14,7 +14,7 @@ import '../../styles/shadow.dart';
 class ProductItem extends StatelessWidget {
   const ProductItem({
     super.key,
-    required this.index,
+    required this.id,
     required this.image,
     required this.name,
     required this.price,
@@ -22,15 +22,15 @@ class ProductItem extends StatelessWidget {
     this.isWishlist = false,
   });
 
-  final String image, name;
+  final String id, image, name;
   final double price;
-  final int index, quantity;
+  final int quantity;
   final bool isWishlist;
 
   @override
   Widget build(BuildContext context) {
     final recentController = Get.find<RecentController>();
-    final productController = ProductController.instance;
+    final productController = Get.find<ProductController>();
     final dark = Helper.isDarkMode(context);
 
     return Column(
@@ -41,16 +41,17 @@ class ProductItem extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  final getIdByIndex = productController.products[index].id;
-                  recentController.addItem(getIdByIndex);
+                  recentController.addItem(id);
 
                   Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (context) => ProductDetailPage(
-                            index: index,
+                            id: id,
                           )
                       )
-                  );
+                  ).then((_) {
+                    productController.fetchProductsByIds(recentController.recentItems);
+                  });
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -146,7 +147,7 @@ class ProductItem extends StatelessWidget {
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) => ProductDetailPage(
-                      index: 0,
+                      id: id,
                     )
                 )
             );

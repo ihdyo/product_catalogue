@@ -28,9 +28,11 @@ class HomePage extends StatelessWidget {
     final recentController = Get.put(RecentController());
     final dark = Helper.isDarkMode(context);
 
-    if (productController.recentProducts.isEmpty) {
-      productController.fetchProductsByIds(recentController.recentItems);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (recentController.recentItems.isNotEmpty) {
+        productController.fetchProductsByIds(recentController.recentItems);
+      }
+    });
 
     return Scaffold(
       appBar: HomeAppBar(),
@@ -139,7 +141,7 @@ class HomePage extends StatelessWidget {
           itemCount: productController.products.length,
           itemBuilder: (context, index) {
             return ProductItem(
-              index: index,
+              id: productController.products[index].id,
               image: productController.products[index].images.first,
               name: productController.products[index].name,
               price: productController.products[index].price,

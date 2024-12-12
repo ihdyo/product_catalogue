@@ -35,12 +35,13 @@ class ProductController extends GetxController {
     try {
       isLoading.value = true;
       List<ProductModel> fetchedProducts = [];
+      ids = ids.where((id) => id.isNotEmpty).toList();
+
       for (String id in ids) {
         final product = await productRepository.fetchProductById(id);
-        if (product != null) {
-          fetchedProducts.add(product);
-        }
+        fetchedProducts.add(product);
       }
+
       recentProducts.assignAll(fetchedProducts);
     } catch (e) {
       recentProducts.assignAll([ProductModel.empty()]);
@@ -48,6 +49,7 @@ class ProductController extends GetxController {
       isLoading.value = false;
     }
   }
+
 
   Future<void> fetchProductById(String id) async {
     try {
@@ -60,6 +62,10 @@ class ProductController extends GetxController {
       isLoading.value = false;
     }
   }
+
+void clearProductById() {
+  productById.value = ProductModel.empty();
+}
 
   Future<void> updateProduct(ProductModel product) async {
     try {

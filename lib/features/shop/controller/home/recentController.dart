@@ -18,7 +18,6 @@ class RecentController extends GetxController {
 
   void addItem(String itemId) {
     recentItems.remove(itemId);
-
     recentItems.insert(0, itemId);
 
     if (recentItems.length > 5) {
@@ -27,4 +26,5 @@ class RecentController extends GetxController {
 
     _storage.write(Strings.recent, recentItems.reversed.toList());
   }
+
 }

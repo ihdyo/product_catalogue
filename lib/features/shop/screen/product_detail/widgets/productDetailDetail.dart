@@ -15,10 +15,10 @@ import '../../category_detail/categoryDetail.dart';
 class ProductDetail extends StatelessWidget {
   const ProductDetail({
     super.key,
-    required this.index,
+    required this.id,
   });
 
-  final int index;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ProductDetail extends StatelessWidget {
     final categoryController = Get.put(CategoryController());
     final dark = Helper.isDarkMode(context);
 
-    categoryController.fetchCategoryById(productController.products[index].categoryId);
+    categoryController.fetchCategoryById(productController.productById.value.categoryId);
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -44,29 +44,79 @@ class ProductDetail extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    productController.products[index].name,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  Text(
-                    Formatter.formatCurrency(productController.products[index].price),
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        color: dark ? Colors.blue[400] : Colors.blue[500],
-                        fontWeight: FontWeight.w500),
-                  ),
+                  Obx(() {
+                    if (productController.isLoading.value) {
+                      return const CustomShimmer(
+                        width: CustomSize.defaultSpace * 8,
+                        height: CustomSize.defaultSpace,
+                        radius: 4,
+                      );
+                    } else {
+                      return Text(
+                        productController.productById.value.name,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      );
+                    }
+                  }),
+                  Obx(() {
+                    if (productController.isLoading.value) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            top: CustomSize.defaultSpace / 4
+                        ),
+                        child: const CustomShimmer(
+                          width: CustomSize.defaultSpace * 6,
+                          height: CustomSize.defaultSpace,
+                          radius: 4,
+                        ),
+                      );
+                    } else {
+                      return Text(
+                        Formatter.formatCurrency(productController.productById.value.price),
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                            color: dark ? Colors.blue[400] : Colors.blue[500],
+                            fontWeight: FontWeight.w500),
+                      );
+                    }
+                  }),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    Strings.stock,
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
-                  Text(
-                    productController.products[index].stock.toString(),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  Obx(() {
+                    if (productController.isLoading.value) {
+                      return CustomShimmer(
+                        width: CustomSize.defaultSpace * 2,
+                        height: CustomSize.defaultSpace / 2,
+                        radius: 4,
+                      );
+                    } else {
+                      return Text(
+                        Strings.stock,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      );
+                    }
+                  }),
+                  Obx(() {
+                    if (productController.isLoading.value) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            top: CustomSize.defaultSpace /  8
+                        ),
+                        child: const CustomShimmer(
+                          width: CustomSize.defaultSpace,
+                          height: CustomSize.defaultSpace / 2,
+                          radius: 4,
+                        ),
+                      );
+                    } else {
+                      return Text(
+                        productController.productById.value.stock.toString(),
+                        style: Theme.of(context).textTheme.titleMedium,
+                      );
+                    }
+                  }),
                 ],
               ),
             ],
@@ -123,14 +173,14 @@ class ProductDetail extends StatelessWidget {
                       ),
                       const SizedBox(width: CustomSize.xs),
                       Text(
-                        productController.products[index].star.toString(),
+                        productController.productById.value.star.toString(),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ],
                   ),
                   const SizedBox(height: CustomSize.xs),
                   Text(
-                    '(${productController.products[index].reviewer} ${Strings.reviews})',
+                    '(${productController.productById.value.reviewer} ${Strings.reviews})',
                     style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w400),
                   ),
                 ],
@@ -173,7 +223,7 @@ class ProductDetail extends StatelessWidget {
             ],
           ),
           const SizedBox(height: CustomSize.defaultSpace),
-          Text(productController.products[index].description),
+          Text(productController.productById.value.description),
         ],
       ),
     );

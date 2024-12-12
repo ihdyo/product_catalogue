@@ -5,7 +5,7 @@ import '../../../../../utils/constant/strings.dart';
 
 final List<ProductItem> wishlistProductList = [
   ProductItem(
-    index: 0,
+    id: '0',
     image: Images.placeholder,
     name: Strings.placeholder,
     price: 10000,
@@ -13,7 +13,7 @@ final List<ProductItem> wishlistProductList = [
     isWishlist: true,
   ),
   ProductItem(
-    index: 1,
+    id: '1',
     image: Images.placeholder,
     name: Strings.placeholder,
     price: 50000,
