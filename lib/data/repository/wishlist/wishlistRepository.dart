@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:product_catalogue/utils/constant/strings.dart';
 
-import '../../../features/personalization/model/userModel.dart';
 import '../authentication/authenticationRepository.dart';
 
 class WishlistRepository extends GetxController {

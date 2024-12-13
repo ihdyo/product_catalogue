@@ -110,11 +110,11 @@ class CartController extends GetxController {
     }
   }
 
-  Future<void> removeFromCart(String productId) async {
+  Future<void> removeFromCart(String productId, {bool silent = false}) async {
     try {
       await cartRepository.removeFromCart(productId);
 
-      Loading.warningSnackBar(title:Strings.productRemoved, message: Strings.removeFromCartMessage);
+      if (!silent) Loading.warningSnackBar(title:Strings.success, message: Strings.removeFromCartMessage);
       fetchCarts();
     } catch (e) {
       throw Exception(e.toString());

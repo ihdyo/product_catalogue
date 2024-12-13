@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:product_catalogue/data/repository/order/orderRepository.dart';
 import 'package:product_catalogue/data/repository/product/productRepository.dart';
 import 'package:product_catalogue/features/shop/model/orderedProductModel.dart';
 import '../../../../utils/constant/enum.dart';
+import '../../../../utils/constant/strings.dart';
 import '../../model/orderModel.dart';
 import '../../model/productModel.dart';
 
@@ -10,6 +12,7 @@ class OrderController extends GetxController {
   static OrderController get instance => Get.find();
 
   final isLoading = false.obs;
+  final note = TextEditingController();
   RxList<OrderModel> orders = <OrderModel>[].obs;
   RxList<OrderModel> ongoingOrder = <OrderModel>[].obs;
   RxList<OrderModel> completedOrder = <OrderModel>[].obs;
@@ -30,7 +33,13 @@ class OrderController extends GetxController {
     try {
       isLoading.value = true;
       final fetchedOrders = await orderRepository.fetchOrders();
-      orders.assignAll(fetchedOrders);
+
+      if (fetchedOrders.isNotEmpty) {
+        orders.assignAll(fetchedOrders);
+      } else {
+        orders.assignAll([]);
+      }
+
       fetchOngoingOrders();
       fetchCompleteOrders();
     } catch (e) {
@@ -39,11 +48,13 @@ class OrderController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   Future<void> fetchOngoingOrders() async {
     try {
       isLoading.value = true;
-      final ordersNotDelivered = orders.where((element) => element.status != OrderStatus.delivered).toList();
+      final ordersNotDelivered = orders
+          .where((element) => element.status != OrderStatus.delivered && element.id.isNotEmpty)
+          .toList();
       ongoingOrder.assignAll(ordersNotDelivered);
     } catch (e) {
       ongoingOrder.assignAll([]);
@@ -51,11 +62,13 @@ class OrderController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   Future<void> fetchCompleteOrders() async {
     try {
       isLoading.value = true;
-      final ordersDelivered = orders.where((element) => element.status == OrderStatus.delivered).toList();
+      final ordersDelivered = orders
+          .where((element) => element.status == OrderStatus.delivered && element.id.isNotEmpty)
+          .toList();
       completedOrder.assignAll(ordersDelivered);
     } catch (e) {
       completedOrder.assignAll([]);
@@ -63,6 +76,7 @@ class OrderController extends GetxController {
       isLoading.value = false;
     }
   }
+
 
   Future<void> fetchOrderById(String orderId) async {
     try {
@@ -99,9 +113,31 @@ class OrderController extends GetxController {
     }
   }
 
+  Future<void> createOrder(OrderModel order) async {
+    try {
+      await orderRepository.createOrder(order);
+
+      final fetchedOrder = await orderRepository.fetchOrderById(order.id);
+      orderById.value = fetchedOrder;
+
+      fetchOrderById(order.id);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<void> updateOrder(OrderModel order) async {
     try {
       await orderRepository.updateOrder(order);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<void> updateNote(String orderId, String note) async {
+    try {
+      final data = {Strings.fieldNote: note};
+      await orderRepository.updateSingleField(orderId, data);
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -112,6 +148,29 @@ class OrderController extends GetxController {
       await orderRepository.removeOrder(orderId);
     } catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  Future<void> createProductByOrder(String orderId, List<OrderedProductModel> product) async {
+    try {
+      isLoading.value = true;
+      for (var orderedProduct in product) {
+        await orderRepository.addProductToOrder(orderId, orderedProduct);
+      }
+
+      final fetchedProducts = await orderRepository.fetchProductsByOrderId(orderId);
+      productsByOrder.assignAll(fetchedProducts);
+
+      final ids = productsByOrder.map((element) => element.productId).toList();
+      final fetchedProductsById = await Future.wait(
+        ids.map((id) => productRepository.fetchProductById(id))
+      );
+
+      productsByProductId.assignAll(fetchedProductsById);
+    } catch (e) {
+      throw Exception(e.toString());
+    } finally {
+      isLoading.value = false;
     }
   }
 

@@ -73,36 +73,39 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Column(
-                children: [
-                  CustomTitle(
-                      title: Strings.completeOrder
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: CustomSize.defaultSpace
+              Visibility(
+                visible: orderController.completedOrder.isNotEmpty,
+                child: Column(
+                  children: [
+                    CustomTitle(
+                        title: Strings.completeOrder
                     ),
-                    child: Obx(
-                          () => ListView.separated(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(0),
-                        physics: const NeverScrollableScrollPhysics(),
-                        separatorBuilder: (_, __) => SizedBox(
-                            height: CustomSize.spaceBetweenItems / 2
-                        ),
-                        itemCount: orderController.completedOrder.length,
-                        itemBuilder: (context, index) {
-                          return OrderHistoryItem(
-                              orderId: orderController.completedOrder[index].id,
-                              date: Formatter.formatDate(orderController.completedOrder[index].date),
-                              status: orderController.completedOrder[index].status,
-                              totalPrice: orderController.completedOrder[index].totalPrice
-                          );
-                        },
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: CustomSize.defaultSpace
                       ),
-                    ),
-                  )
-                ],
+                      child: Obx(
+                            () => ListView.separated(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(0),
+                          physics: const NeverScrollableScrollPhysics(),
+                          separatorBuilder: (_, __) => SizedBox(
+                              height: CustomSize.spaceBetweenItems / 2
+                          ),
+                          itemCount: orderController.completedOrder.length,
+                          itemBuilder: (context, index) {
+                            return OrderHistoryItem(
+                                orderId: orderController.completedOrder[index].id,
+                                date: Formatter.formatDate(orderController.completedOrder[index].date),
+                                status: orderController.completedOrder[index].status,
+                                totalPrice: orderController.completedOrder[index].totalPrice
+                            );
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),

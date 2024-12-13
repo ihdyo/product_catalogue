@@ -4,7 +4,7 @@ import 'package:product_catalogue/utils/constant/strings.dart';
 import 'package:product_catalogue/utils/popup/fullScreenLoading.dart';
 
 import '../../../../data/repository/user/userRepository.dart';
-import '../../../../navigation/navigationMenu.dart';
+import '../../../navigation/screen/navigationMenu.dart';
 import '../../../../utils/helper/networkManager.dart';
 import '../../../../utils/popup/loading.dart';
 import '../user/userController.dart';

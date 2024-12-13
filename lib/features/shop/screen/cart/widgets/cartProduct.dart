@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:product_catalogue/features/shop/data/order_status/orderStatusInvoiceData.dart';
 
 import '../../../../../common/styles/shadow.dart';
 import '../../../../../utils/constant/images.dart';
@@ -12,7 +11,6 @@ import '../../../../../utils/helper/helper.dart';
 import '../../../controller/cart/cartController.dart';
 import '../../../controller/home/productController.dart';
 import '../../../controller/wishlist/wishlistController.dart';
-import '../../../model/cartModel.dart';
 import '../../product_detail/productDetail.dart';
 
 class CartProductItem extends StatelessWidget {
@@ -46,6 +44,10 @@ class CartProductItem extends StatelessWidget {
       bool isChecked = cartController.cartProduct
           .firstWhere((element) => element.productId == productId)
           .isSelected;
+      int stock = productController.products
+          .firstWhere((product) => product.id == productId)
+          .stock;
+      bool isAvailable = quantity <= stock - 1;
 
       return GestureDetector(
         onTap: () {
@@ -148,122 +150,141 @@ class CartProductItem extends StatelessWidget {
                                             : Colors.red[500],
                                       ),
                                     ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: dark
-                                            ? Colors.grey[800]
-                                            : Colors.grey[200],
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: CustomSize.xs,
-                                          horizontal: CustomSize.xs,
+                                    Row(
+                                      children: [
+                                        Visibility(
+                                          visible: !isAvailable,
+                                          child: Icon(
+                                            IconsaxPlusBold.danger,
+                                            color: dark ? Colors.orange[400] : Colors.orange[500],
+                                            size: 16,
+                                          ),
                                         ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: quantity <= 1
-                                                  ? () {
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (_) => AlertDialog(
-                                                    insetPadding: EdgeInsets.all(
-                                                        CustomSize.defaultSpace
-                                                    ),
-                                                    contentPadding: EdgeInsets.all(
-                                                        CustomSize.defaultSpace
-                                                    ),
-                                                    title: Row(
-                                                      children: [
-                                                        Icon(
-                                                            IconsaxPlusLinear.trash
+                                        const SizedBox(width: CustomSize.sm),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: dark
+                                                ? Colors.grey[800]
+                                                : Colors.grey[200],
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: CustomSize.xs,
+                                              horizontal: CustomSize.xs,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: quantity <= 1
+                                                      ? () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (_) => AlertDialog(
+                                                        insetPadding: EdgeInsets.all(
+                                                            CustomSize.defaultSpace
                                                         ),
-                                                        SizedBox(
-                                                            width: CustomSize.defaultSpace / 2
+                                                        contentPadding: EdgeInsets.all(
+                                                            CustomSize.defaultSpace
                                                         ),
-                                                        Text(
-                                                            Strings.removeFromCart
+                                                        title: Row(
+                                                          children: [
+                                                            Icon(
+                                                                IconsaxPlusLinear.trash
+                                                            ),
+                                                            SizedBox(
+                                                                width: CustomSize.defaultSpace / 2
+                                                            ),
+                                                            Text(
+                                                                Strings.removeFromCart
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
-                                                    content: Text(Strings.removeFromCartPrompt),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () => Navigator.of(Get.context!).pop(),
-                                                        child: Text(
-                                                            Strings.cancel,
-                                                            style: Theme.of(Get.context!).textTheme.titleMedium!.copyWith(
-                                                              fontWeight: FontWeight.w400,
-                                                              color: dark ? Colors.grey[400] : Colors.grey[600],
-                                                            )
-                                                        ),
-                                                      ),
-                                                      Spacer(),
-                                                      Container(
-                                                        padding: const EdgeInsets.symmetric(
-                                                            horizontal: CustomSize.defaultSpace / 2,
-                                                            vertical: 0
-                                                        ),
-                                                        decoration: BoxDecoration(
-                                                          color: dark ? Colors.orange[400] : Colors.orange[500],
-                                                          borderRadius: BorderRadius.circular(
-                                                              CustomSize.defaultSpace
+                                                        content: Text(Strings.removeFromCartPrompt),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () => Navigator.of(Get.context!).pop(),
+                                                            child: Text(
+                                                                Strings.cancel,
+                                                                style: Theme.of(Get.context!).textTheme.titleMedium!.copyWith(
+                                                                  fontWeight: FontWeight.w400,
+                                                                  color: dark ? Colors.grey[400] : Colors.grey[600],
+                                                                )
+                                                            ),
                                                           ),
-                                                        ),
-                                                        child: TextButton(
-                                                          onPressed: () {
-                                                            cartController.removeFromCart(productId);
-                                                            Navigator.of(context).pop();
-                                                          },
-                                                          child: Text(
-                                                              Strings.remove,
-                                                              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                                                                color: dark ? Colors.black : Colors.white,
-                                                              )
+                                                          Spacer(),
+                                                          Container(
+                                                            padding: const EdgeInsets.symmetric(
+                                                                horizontal: CustomSize.defaultSpace / 2,
+                                                                vertical: 0
+                                                            ),
+                                                            decoration: BoxDecoration(
+                                                              color: dark ? Colors.orange[400] : Colors.orange[500],
+                                                              borderRadius: BorderRadius.circular(
+                                                                  CustomSize.defaultSpace
+                                                              ),
+                                                            ),
+                                                            child: TextButton(
+                                                              onPressed: () {
+                                                                cartController.removeFromCart(productId);
+                                                                Navigator.of(context).pop();
+                                                              },
+                                                              child: Text(
+                                                                  Strings.remove,
+                                                                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                                                    color: dark ? Colors.black : Colors.white,
+                                                                  )
+                                                              ),
+                                                            ),
                                                           ),
-                                                        ),
+                                                        ],
                                                       ),
-                                                    ],
+                                                    );
+                                                  }
+                                                      : () {
+                                                    cartController.updateQuantity(productId, quantity - 1);
+                                                  },
+                                                  child: Icon(
+                                                    quantity == 1
+                                                        ? IconsaxPlusLinear.trash
+                                                        : IconsaxPlusLinear.minus,
+                                                    color: dark
+                                                        ? Colors.grey[400]
+                                                        : Colors.grey[600],
                                                   ),
-                                                );
-                                              }
-                                                  : () {
-                                                cartController.updateQuantity(productId, quantity - 1);
-                                              },
-                                              child: Icon(
-                                                quantity == 1
-                                                    ? IconsaxPlusLinear.trash
-                                                    : IconsaxPlusLinear.minus,
-                                                color: dark
-                                                    ? Colors.grey[400]
-                                                    : Colors.grey[600],
-                                              ),
+                                                ),
+                                                const SizedBox(width: CustomSize.md),
+                                                Text(
+                                                  quantity.toString(),
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                                                        color: dark ? Colors.white : Colors.black,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: CustomSize.md),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    if (isAvailable) {
+                                                      cartController.updateQuantity(productId, quantity + 1);
+                                                    }
+                                                  },
+                                                  child: Icon(
+                                                    IconsaxPlusLinear.add,
+                                                    color: !isAvailable
+                                                        ? dark
+                                                            ? Colors.grey[400]!.withOpacity(0.3)
+                                                            : Colors.grey[600]!.withOpacity(0.3)
+                                                        : dark
+                                                            ? Colors.grey[400]
+                                                            : Colors.grey[600],
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            const SizedBox(width: CustomSize.md),
-                                            Text(
-                                              quantity.toString(),
-                                              style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                                                    color: dark ? Colors.white : Colors.black,
-                                              ),
-                                            ),
-                                            const SizedBox(width: CustomSize.md),
-                                            GestureDetector(
-                                              onTap: () {
-                                                cartController.updateQuantity(productId, quantity + 1);
-                                              },
-                                              child: Icon(
-                                                IconsaxPlusLinear.add,
-                                                color: dark
-                                                    ? Colors.grey[400]
-                                                    : Colors.grey[600],
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ],
                                 ),

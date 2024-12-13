@@ -3,6 +3,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/features/shop/controller/temporary/temporaryController.dart';
 
+import '../../../features/shop/controller/home/productController.dart';
 import '../../../utils/constant/size.dart';
 import '../../../utils/helper/helper.dart';
 
@@ -20,6 +21,7 @@ class TemporaryCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productController = ProductController.instance;
     final temporaryController = TemporaryController.instance;
     final dark = Helper.isDarkMode(context);
 
@@ -38,6 +40,7 @@ class TemporaryCounter extends StatelessWidget {
         ),
         child: Obx(() {
           final quantity = temporaryController.getProductQuantityById(id);
+          int stock = productController.products.firstWhere((product) => product.id == id).stock;
 
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,12 +68,16 @@ class TemporaryCounter extends StatelessWidget {
                 visualDensity: VisualDensity.compact,
                 icon: Icon(
                   IconsaxPlusLinear.add,
-                  color: dark ? Colors.grey[400] : Colors.grey[600],
+                  color: dark
+                      ? Colors.grey[400]!.withOpacity(quantity >= stock ? 0.3 : 1)
+                      : Colors.grey[600]!.withOpacity(quantity >= stock ? 0.3 : 1),
                 ),
-                onPressed: () {
-                  final newQuantity = quantity + 1;
-                  temporaryController.editProduct(id, newQuantity);
-                },
+                onPressed: quantity >= stock
+                    ? null
+                    : () {
+                        final newQuantity = quantity + 1;
+                        temporaryController.editProduct(id, newQuantity);
+                      },
               ),
             ],
           );

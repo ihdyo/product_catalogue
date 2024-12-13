@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:product_catalogue/data/repository/product/productRepository.dart';
 
+import '../../../../utils/constant/strings.dart';
+import '../../../../utils/popup/loading.dart';
 import '../../model/productModel.dart';
 import '../wishlist/wishlistController.dart';
 
@@ -79,6 +81,23 @@ class ProductController extends GetxController {
   Future<void> updateProduct(ProductModel product) async {
     try {
       await productRepository.updateProduct(product);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<void> updateProductStock(String productId, int newQuantity) async {
+    try {
+      final existingProduct = await productRepository.fetchProductById(productId);
+      final currentQuantity = existingProduct.stock;
+      final updatedQuantity = currentQuantity - newQuantity;
+
+      if (updatedQuantity < 0) {
+        throw Loading.errorSnackBar(title: Strings.error, message: Strings.overStockMessage);
+      }
+
+      Map<String, dynamic> data = {Strings.fieldStock: updatedQuantity};
+      await productRepository.updateSingleField(productId, data);
     } catch (e) {
       throw Exception(e.toString());
     }

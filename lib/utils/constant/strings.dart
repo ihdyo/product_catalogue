@@ -112,6 +112,7 @@ class Strings {
   static const String logout = 'Logout';
   static const String stock = 'Stock';
   static const String reviews = 'Reviews';
+  static const String note = 'Notes';
 
   static const String paid = 'paid';
   static const String packing = 'packing';
@@ -129,6 +130,7 @@ class Strings {
   static const String fieldId = 'id';
   static const String fieldCategoryId = 'categoryId';
   static const String fieldProductId = 'productId';
+  static const String fieldOrderedAt = 'orderedAt';
   static const String fieldName = 'name';
   static const String fieldDescription = 'description';
   static const String fieldPhrase = 'phrase';

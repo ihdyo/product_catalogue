@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../../../common/shimmer/listRecentShimmer.dart';
 import '../../../../../common/styles/shadow.dart';
-import '../../../../../common/styles/shimmer.dart';
 import '../../../../../utils/constant/images.dart';
 import '../../../../../utils/constant/size.dart';
 import '../../../controller/home/productController.dart';
@@ -21,7 +20,7 @@ class RecentlyViewed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productController = ProductController.instance;
-    final recentController = Get.find<RecentController>();
+    Get.find<RecentController>();
 
     return SizedBox(
       height: CustomSize.imageCarouselHeight,

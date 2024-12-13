@@ -3,14 +3,13 @@ import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/features/shop/controller/home/productController.dart';
 import 'package:product_catalogue/features/shop/controller/temporary/temporaryController.dart';
-import 'package:product_catalogue/utils/popup/loading.dart';
 
-import '../../../features/shop/controller/cart/cartController.dart';
-import '../../../features/shop/model/cartModel.dart';
-import '../../../navigation/controller/navigationController.dart';
-import '../../../utils/constant/size.dart';
-import '../../../utils/constant/strings.dart';
-import '../../../utils/helper/helper.dart';
+import '../../../shop/controller/cart/cartController.dart';
+import '../../../shop/model/cartModel.dart';
+import '../../controller/navigationController.dart';
+import '../../../../utils/constant/size.dart';
+import '../../../../utils/constant/strings.dart';
+import '../../../../utils/helper/helper.dart';
 
 class AddToCartFAB extends StatelessWidget {
   const AddToCartFAB({
@@ -44,11 +43,10 @@ class AddToCartFAB extends StatelessWidget {
                     CartModel(
                       productId: element.productId,
                       quantity: element.quantity,
-                      isSelected: false,
+                      isSelected: true,
                     ),
                   )
                 },
-                print('GEDEBUG: ${temporaryController.collectedProducts.toList()}'),
                 temporaryController.clearProducts(),
               },
               backgroundColor: !isAvailable ? (dark ? Colors.grey[400] : Colors.grey[500]) : (dark ? Colors.blue[400] : Colors.blue[500]),

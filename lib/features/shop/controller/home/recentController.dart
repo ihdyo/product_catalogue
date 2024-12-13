@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../../utils/constant/strings.dart';
+import '../../../../utils/constant/value.dart';
 
 class RecentController extends GetxController {
   var recentItems = <String>[].obs;
@@ -20,7 +21,7 @@ class RecentController extends GetxController {
     recentItems.remove(itemId);
     recentItems.insert(0, itemId);
 
-    if (recentItems.length > 5) {
+    if (recentItems.length > Values.recentItemShowCount) {
       recentItems.removeLast();
     }
 

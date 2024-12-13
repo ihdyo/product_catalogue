@@ -7,7 +7,7 @@ import '../../controller/order/orderController.dart';
 final controller = OrderController.instance;
 
 List<Map<String, String>> get invoiceData {
-  final int totalItems = controller.productsByOrder.length;
+  final int totalItems = controller.productsByOrder.fold<int>(0, (previousValue, element) => previousValue + element.quantity);
   final double totalPrice = Calculator.totalItemPrice(
     controller.productsByOrder,
     controller.orders,

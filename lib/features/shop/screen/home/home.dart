@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/common/widgets/shop/productCategory.dart';
 import 'package:product_catalogue/common/widgets/shop/productItem.dart';
 import 'package:product_catalogue/common/widgets/title.dart';
@@ -15,7 +14,6 @@ import 'package:product_catalogue/features/shop/screen/home/widgets/homeSearchBa
 import '../../../../common/shimmer/gridProductShimmer.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
-import '../../../../utils/helper/helper.dart';
 import '../../controller/home/productController.dart';
 import '../../controller/home/recentController.dart';
 
@@ -31,6 +29,7 @@ class HomePage extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (recentController.recentItems.isNotEmpty) {
         productController.fetchProductsByIds(recentController.recentItems);
+        productController.fetchProducts();
       }
     });
 

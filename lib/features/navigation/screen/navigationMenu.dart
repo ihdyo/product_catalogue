@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:product_catalogue/common/widgets/shop/addToCartFAB.dart';
-import 'package:product_catalogue/features/shop/controller/home/productController.dart';
+import 'package:product_catalogue/features/navigation/screen/widgets/addToCartFAB.dart';
 import 'package:product_catalogue/utils/constant/size.dart';
 
-import '../common/styles/shadow.dart';
-import '../features/shop/controller/order/orderController.dart';
-import '../features/shop/controller/temporary/temporaryController.dart';
-import '../utils/constant/strings.dart';
-import '../utils/helper/helper.dart';
-import 'controller/navigationController.dart';
+import '../../../common/styles/shadow.dart';
+import '../../shop/controller/order/orderController.dart';
+import '../../shop/controller/temporary/temporaryController.dart';
+import '../../../utils/constant/strings.dart';
+import '../../../utils/helper/helper.dart';
+import '../controller/navigationController.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -18,8 +17,7 @@ class NavigationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final orderController = Get.find<OrderController>();
-    final temporaryController = Get.find<TemporaryController>();
-    final productController = ProductController.instance;
+    Get.find<TemporaryController>();
     final controller = Get.put(NavigationController());
     final dark = Helper.isDarkMode(context);
     final int selectedIndex = Get.arguments ?? 0;

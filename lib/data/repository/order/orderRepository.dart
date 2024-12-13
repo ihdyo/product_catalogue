@@ -4,7 +4,6 @@ import 'package:product_catalogue/features/shop/model/orderModel.dart';
 import 'package:product_catalogue/features/shop/model/orderedProductModel.dart';
 import 'package:product_catalogue/utils/constant/strings.dart';
 
-import '../../../features/shop/model/productModel.dart';
 import '../authentication/authenticationRepository.dart';
 
 class OrderRepository extends GetxController {
@@ -35,7 +34,6 @@ class OrderRepository extends GetxController {
       throw Exception(Strings.error);
     }
   }
-
 
   Future<OrderModel> fetchOrderById(String orderId) async {
     try {
@@ -70,6 +68,21 @@ class OrderRepository extends GetxController {
         return snapshot.docs.map((doc) => OrderedProductModel.fromSnapshot(doc)).toList();
       }
       return List.empty();
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: e.plugin);
+    } catch (e) {
+      throw Exception(Strings.error);
+    }
+  }
+
+  Future<void> createOrder(OrderModel order) async {
+    try {
+      await _firestore
+          .collection(Strings.collectionUsers)
+          .doc(authRepository.authUser?.uid)
+          .collection(Strings.collectionOrder)
+          .doc(order.id)
+          .set(order.toJson());
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, message: e.message, plugin: e.plugin);
     } catch (e) {
@@ -122,4 +135,20 @@ class OrderRepository extends GetxController {
     }
   }
 
+  Future<void> addProductToOrder(String orderId, OrderedProductModel product) async {
+    try {
+      await _firestore
+          .collection(Strings.collectionUsers)
+          .doc(authRepository.authUser?.uid)
+          .collection(Strings.collectionOrder)
+          .doc(orderId)
+          .collection(Strings.collectionProducts)
+          .doc(product.productId)
+          .set(product.toJson());
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: e.plugin);
+    } catch (e) {
+      throw Exception(Strings.error);
+    }
+  }
 }

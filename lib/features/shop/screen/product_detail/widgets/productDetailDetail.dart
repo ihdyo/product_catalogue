@@ -11,8 +11,6 @@ import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/helper/helper.dart';
 import '../../../controller/home/categoryController.dart';
 import '../../../controller/home/productController.dart';
-import '../../../controller/temporary/temporaryController.dart';
-import '../../../model/orderedProductModel.dart';
 import '../../category_detail/categoryDetail.dart';
 
 class ProductDetail extends StatelessWidget {
@@ -27,7 +25,6 @@ class ProductDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final productController = ProductController.instance;
     final categoryController = Get.put(CategoryController());
-    final temporaryController = TemporaryController.instance;
     final dark = Helper.isDarkMode(context);
 
     categoryController.fetchCategoryById(productController.productById.value.categoryId);

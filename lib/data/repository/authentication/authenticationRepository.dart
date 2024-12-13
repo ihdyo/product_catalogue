@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../features/personalization/controller/user/userController.dart';
 import '../../../features/personalization/model/userModel.dart';
-import '../../../navigation/navigationMenu.dart';
+import '../../../features/navigation/screen/navigationMenu.dart';
 import '../../../utils/constant/strings.dart';
 import '../../../utils/popup/loading.dart';
 
