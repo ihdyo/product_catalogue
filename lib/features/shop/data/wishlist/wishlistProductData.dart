@@ -10,7 +10,6 @@ final List<ProductItem> wishlistProductList = [
     name: Strings.placeholder,
     price: 10000,
     quantity: 0,
-    isWishlist: true,
   ),
   ProductItem(
     id: '1',
@@ -18,6 +17,5 @@ final List<ProductItem> wishlistProductList = [
     name: Strings.placeholder,
     price: 50000,
     quantity: 0,
-    isWishlist: true,
   ),
 ];

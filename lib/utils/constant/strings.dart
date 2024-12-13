@@ -49,6 +49,8 @@ class Strings {
   static const String cancelOrder = 'Cancel Order';
   static const String cancelOrderPrompt = 'Are you sure you want to cancel this order?';
   static const String cancelOrderMessages = 'Your order has been cancelled.';
+  static const String addToWishlistMessages = 'Product has been set to favorites.';
+  static const String removeFromWishlistMessages = 'Product has been removed from favorites.';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';

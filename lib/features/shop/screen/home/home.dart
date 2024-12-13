@@ -13,7 +13,6 @@ import 'package:product_catalogue/features/shop/screen/home/widgets/homeRecent.d
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeSearchBar.dart';
 
 import '../../../../common/shimmer/gridProductShimmer.dart';
-import '../../../../common/styles/shimmer.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/helper.dart';

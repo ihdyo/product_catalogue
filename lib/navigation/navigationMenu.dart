@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/utils/constant/size.dart';
 
 import '../common/styles/shadow.dart';
+import '../features/shop/controller/order/orderController.dart';
 import '../utils/constant/strings.dart';
 import '../utils/helper/helper.dart';
 import 'controller/navigationController.dart';
@@ -12,6 +14,7 @@ class NavigationMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orderController = Get.find<OrderController>();
     final controller = Get.put(NavigationController());
     final dark = Helper.isDarkMode(context);
     final int selectedIndex = Get.arguments ?? 0;
@@ -51,7 +54,7 @@ class NavigationMenu extends StatelessWidget {
                 ),
                 NavigationDestination(
                   icon: Obx(
-                          () => controller.currentIndex.value == 1
+                    () => controller.currentIndex.value == 1
                           ? Icon(
                         IconsaxPlusBold.heart,
                         color: dark ? Colors.blue[400] : Colors.blue[500],
@@ -64,16 +67,50 @@ class NavigationMenu extends StatelessWidget {
                   label: Strings.wishlist,
                 ),
                 NavigationDestination(
-                  icon: Obx(
-                          () => controller.currentIndex.value == 2
-                          ? Icon(
-                        IconsaxPlusBold.profile,
-                        color: dark ? Colors.blue[400] : Colors.blue[500],
-                      )
-                          : Icon(
-                        IconsaxPlusLinear.profile,
-                        color: dark ? Colors.blue[400] : Colors.blue[500],
-                      )
+                  icon: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Obx(
+                        () => controller.currentIndex.value == 2
+                              ? Icon(
+                            IconsaxPlusBold.profile,
+                            color: dark ? Colors.blue[400] : Colors.blue[500],
+                          )
+                              : Icon(
+                            IconsaxPlusLinear.profile,
+                            color: dark ? Colors.blue[400] : Colors.blue[500],
+                          )
+                      ),
+                      Positioned(
+                        right: -16,
+                        top: -8,
+                        child: Obx(
+                              () => orderController.ongoingOrder.isNotEmpty
+                              ? Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: CustomSize.xs,
+                              vertical: CustomSize.xs / 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: dark ? Colors.red[400] : Colors.red[500],
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: CustomSize.sm,
+                              minHeight: CustomSize.xs,
+                            ),
+                            child: Text(
+                              orderController.ongoingOrder.length.toString(),
+                              style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                              : const SizedBox(),
+                        ),
+                      ),
+                    ],
                   ),
                   label: Strings.profile,
                 ),

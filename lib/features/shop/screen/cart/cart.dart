@@ -18,7 +18,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CartController());
+    final controller = Get.find<CartController>();
     final dark = Helper.isDarkMode(context);
 
     return Scaffold(

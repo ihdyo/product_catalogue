@@ -156,13 +156,20 @@ class ProductDetailPage extends StatelessWidget {
                             ],
                           ),
                           child:
-                          GestureDetector(
-                            onTap: () {},
-                            child: Icon(
-                                IconsaxPlusLinear.heart,
-                                color: dark ? Colors.red[400] : Colors.red[500]
-                            ),
-                          )
+                          Obx(() {
+                            bool isWishlist = productController.isProductInWishlist(id);
+                            return GestureDetector(
+                              onTap: () {
+                                isWishlist
+                                    ? productController.removeProductFromWishlist(id)
+                                    : productController.addProductToWishlist(id);
+                              },
+                              child: Icon(
+                                isWishlist ? IconsaxPlusBold.heart : IconsaxPlusLinear.heart,
+                                color: dark ? Colors.red[400] : Colors.red[500],
+                              ),
+                            );
+                          }),
                       ),
                     ],
                   ),

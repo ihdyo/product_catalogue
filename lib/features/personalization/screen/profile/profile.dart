@@ -16,7 +16,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final orderController = Get.put(OrderController());
+    final orderController = Get.find<OrderController>();
 
     return Scaffold(
       body: SingleChildScrollView(

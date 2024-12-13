@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
+import '../../../features/shop/controller/home/productController.dart';
 import '../../../features/shop/screen/product_detail/productDetail.dart';
 import '../../../utils/constant/images.dart';
 import '../../../utils/constant/size.dart';
@@ -16,17 +18,16 @@ class ProductItem extends StatelessWidget {
     required this.name,
     required this.price,
     this.quantity = 0,
-    this.isWishlist = false,
   });
 
   final String id, image, name;
   final double price;
   final int quantity;
-  final bool isWishlist;
 
   @override
   Widget build(BuildContext context) {
     final dark = Helper.isDarkMode(context);
+    final productController = ProductController.instance;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,16 +79,23 @@ class ProductItem extends StatelessWidget {
                     color: dark ? Colors.grey[900] : Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: IconButton(
-                    visualDensity: VisualDensity.compact,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    icon: Icon(
-                        isWishlist ? IconsaxPlusBold.heart : IconsaxPlusLinear.heart
-                    ),
-                    color: dark ? Colors.red[400] : Colors.red[500],
-                    onPressed: () {},
-                  ),
+                  child: Obx(() {
+                    bool isWishlist = productController.isProductInWishlist(id);
+                    return IconButton(
+                      visualDensity: VisualDensity.compact,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      icon: Icon(
+                          isWishlist ? IconsaxPlusBold.heart : IconsaxPlusLinear.heart
+                      ),
+                      color: dark ? Colors.red[400] : Colors.red[500],
+                      onPressed: () {
+                        isWishlist
+                            ? productController.removeProductFromWishlist(id)
+                            : productController.addProductToWishlist(id);
+                      },
+                    );
+                  }),
                 ),
               ),
               Align(
@@ -110,7 +118,7 @@ class ProductItem extends StatelessWidget {
                         visualDensity: VisualDensity.compact,
                         icon: Icon(
                           IconsaxPlusLinear.minus,
-                          color: dark ? Colors.grey[400] : Colors.grey[600]!.withOpacity(quantity <= 0 ? 0 : 1),
+                          color: dark ? Colors.grey[400]!.withOpacity(quantity <= 0 ? 0 : 1) : Colors.grey[600]!.withOpacity(quantity <= 0 ? 0 : 1),
                         ),
                         onPressed: quantity <= 0 ? null : () {},
                       ),

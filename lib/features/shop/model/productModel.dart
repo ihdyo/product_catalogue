@@ -10,7 +10,7 @@ class ProductModel {
   final String description;
   final List<String> images;
   final double price;
-  final int stock;
+  int stock;
   final double star;
   final int reviewer;
 
@@ -50,7 +50,7 @@ class ProductModel {
       Strings.fieldImages: images,
       Strings.fieldPrice: price,
       Strings.fieldStock: stock,
-      Strings.fieldRating: rating
+      Strings.fieldRating: rating,
     };
   }
 

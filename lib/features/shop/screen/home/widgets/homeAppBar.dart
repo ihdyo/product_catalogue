@@ -7,6 +7,7 @@ import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';
 import '../../../../../utils/helper/helper.dart';
 import '../../../../personalization/controller/user/userController.dart';
+import '../../../controller/cart/cartController.dart';
 import '../../cart/cart.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -19,6 +20,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartController = Get.find<CartController>();
     final controller = Get.put(UserController());
     final dark = Helper.isDarkMode(context);
 
@@ -68,9 +70,43 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               );
             },
-            icon: Icon(
-                IconsaxPlusLinear.shopping_cart
-            ),
+            icon: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                const Icon(
+                  IconsaxPlusLinear.shopping_cart,
+                ),
+                Positioned(
+                  right: -16,
+                  top: -8,
+                  child: Obx(
+                        () => cartController.cart.isNotEmpty
+                        ? Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: CustomSize.xs,
+                        vertical: CustomSize.xs / 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: dark ? Colors.red[400] : Colors.red[500],
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      constraints: const BoxConstraints(
+                        minWidth: CustomSize.sm,
+                        minHeight: CustomSize.xs,
+                      ),
+                      child: Text(
+                        cartController.cart.length.toString(),
+                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                        : const SizedBox(),
+                  ),
+                ),
+              ]
+            )
           ),
         )
       ],

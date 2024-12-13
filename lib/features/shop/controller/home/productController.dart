@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:product_catalogue/data/repository/product/productRepository.dart';
 
 import '../../model/productModel.dart';
+import '../wishlist/wishlistController.dart';
 
 class ProductController extends GetxController {
   static ProductController get instance => Get.find();
@@ -12,6 +13,7 @@ class ProductController extends GetxController {
   Rx<ProductModel> productById = ProductModel.empty().obs;
   final RxList<ProductModel> productsByCategory = <ProductModel>[].obs;
   final productRepository = Get.put(ProductRepository());
+  final wishlistController = Get.put(WishlistController());
 
   @override
   void onInit() {
@@ -80,6 +82,20 @@ class ProductController extends GetxController {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  bool isProductInWishlist(String productId) {
+    return wishlistController.wishlist.any((product) => product.id == productId);
+  }
+
+
+
+  void addProductToWishlist(String productId) {
+    wishlistController.addProductToWishlist(productId);
+  }
+
+  void removeProductFromWishlist(String productId) {
+    wishlistController.removeProductFromWishlist(productId);
   }
 
   void clearProductById() {

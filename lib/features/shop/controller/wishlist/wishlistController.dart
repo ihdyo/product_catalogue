@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:product_catalogue/data/repository/wishlist/wishlistRepository.dart';
 
 import '../../../../data/repository/product/productRepository.dart';
+import '../../../../utils/constant/strings.dart';
+import '../../../../utils/popup/loading.dart';
 import '../../model/productModel.dart';
 
 class WishlistController extends GetxController {
@@ -35,4 +37,23 @@ class WishlistController extends GetxController {
     }
   }
 
+Future<void> addProductToWishlist(String productId) async {
+  try {
+    isLoading.value = true;
+    await wishlistRepository.addToWishlist(productId);
+    final product = await productRepository.fetchProductById(productId);
+    wishlist.add(product);
+
+    Loading.customToast(message: Strings.addToWishlistMessages);
+  } catch (e) {
+    // Handle error
+  } finally {
+    isLoading.value = false;
+  }
+}
+
+  void removeProductFromWishlist(String productId) {
+    wishlist.removeWhere((product) => product.id == productId);
+    Loading.customToast(message: Strings.removeFromWishlistMessages);
+  }
 }

@@ -15,7 +15,7 @@ class WishlistPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wishlistController = Get.put(WishlistController());
+    final wishlistController = WishlistController.instance;
     final dark = Helper.isDarkMode(context);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -73,7 +73,6 @@ class WishlistPage extends StatelessWidget {
                         image: wishlistController.wishlist[index].images.first,
                         name: wishlistController.wishlist[index].name,
                         price: wishlistController.wishlist[index].price,
-                        isWishlist: true,
                       ),
                     ),
                   );
