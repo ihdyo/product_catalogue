@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:product_catalogue/data/repository/order/orderRepository.dart';
 import 'package:product_catalogue/data/repository/product/productRepository.dart';
 import 'package:product_catalogue/features/shop/model/orderedProductModel.dart';
-import 'package:product_catalogue/features/shop/model/orderedProductModel.dart';
 import '../../../../utils/constant/enum.dart';
 import '../../model/orderModel.dart';
 import '../../model/productModel.dart';

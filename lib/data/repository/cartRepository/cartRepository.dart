@@ -34,21 +34,73 @@ class CartRepository extends GetxController {
     }
   }
 
-  Future<void> addToCart(String productId, int quantity) async {
+  Future<CartModel> fetchCartById(String productId) async {
     try {
       final docRef = _firestore
           .collection(Strings.collectionUsers)
           .doc(authRepository.authUser?.uid)
           .collection(Strings.collectionCart)
           .doc(productId);
+      final snapshot = await docRef.get();
+      if (snapshot.exists) {
+        return CartModel.fromSnapshot(snapshot);
+      }
+      return CartModel.empty();
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: '');
+    } catch (e) {
+      throw Exception(Strings.error);
+    }
+  }
 
-      await docRef.set({Strings.fieldQuantity: quantity});
+  Future<void> addToCart(CartModel cart) async {
+    try {
+      final docRef = _firestore
+          .collection(Strings.collectionUsers)
+          .doc(authRepository.authUser?.uid)
+          .collection(Strings.collectionCart)
+          .doc(cart.productId);
+      await docRef.set(cart.toJson());
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
-  Future<void> editCartQuantity(String productId, int quantity) async {
+  Future<void> updateSingleField(String productId, Map<String, dynamic> data) async {
+    try {
+      await _firestore
+          .collection(Strings.collectionUsers)
+          .doc(authRepository.authUser?.uid)
+          .collection(Strings.collectionCart)
+          .doc(productId)
+          .update(data);
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: '');
+    } on FormatException catch (_) {
+      throw FormatException();
+    } catch (e) {
+      throw Exception(Strings.error);
+    }
+  }
+
+  Future<void> updateIsSelected(String productId, bool isSelected) async {
+    try {
+      await _firestore
+          .collection(Strings.collectionUsers)
+          .doc(authRepository.authUser?.uid)
+          .collection(Strings.collectionCart)
+          .doc(productId)
+          .update({Strings.fieldIsSelected: isSelected});
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: '');
+    } on FormatException catch (_) {
+      throw FormatException();
+    } catch (e) {
+      throw Exception(Strings.error);
+    }
+  }
+
+  Future<void> updateQuantity(String productId, int quantity) async {
     try {
       await _firestore
           .collection(Strings.collectionUsers)
@@ -56,8 +108,12 @@ class CartRepository extends GetxController {
           .collection(Strings.collectionCart)
           .doc(productId)
           .update({Strings.fieldQuantity: quantity});
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: '');
+    } on FormatException catch (_) {
+      throw FormatException();
     } catch (e) {
-      throw Exception(e.toString());
+      throw Exception(Strings.error);
     }
   }
 

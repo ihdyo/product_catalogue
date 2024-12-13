@@ -35,7 +35,7 @@ class CartPage extends StatelessWidget {
                 hasBackButton: true,
               ),
               Obx(() {
-                final selectedCount = controller.cart
+                final selectedCount = controller.cartProduct
                     .where((cartItem) => cartItem.isSelected)
                     .length;
 
@@ -49,7 +49,7 @@ class CartPage extends StatelessWidget {
                           bottom: CustomSize.defaultSpace / 2
                       ),
                       child: Text(
-                        Strings.itemSelected(selectedCount),
+                        Strings.productSelected(selectedCount),
                       ),
                     ),
                   ),
@@ -57,7 +57,7 @@ class CartPage extends StatelessWidget {
               }),
               Obx(
                 () => controller.isLoading.value
-                    ? CommonListShimmer()
+                    ? Center(child: CircularProgressIndicator())
                     : ListView.separated(
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(0),
@@ -65,9 +65,9 @@ class CartPage extends StatelessWidget {
                   separatorBuilder: (_, __) => SizedBox(
                       height: CustomSize.spaceBetweenItems / 2
                   ),
-                  itemCount: controller.cart.length,
+                  itemCount: controller.cartProduct.length,
                   itemBuilder: (context, index) {
-                    final cartItem = controller.cart[index];
+                    final cartItem = controller.cartProduct[index];
                     final product = controller.cartProducts[cartItem.productId];
 
                     if (product == null) {
@@ -75,11 +75,10 @@ class CartPage extends StatelessWidget {
                     }
 
                     return CartProductItem(
+                        productId: cartItem.productId,
                         image: product.images.first,
                         name: product.name,
                         price: product.price,
-                        quantity: cartItem.quantity,
-                        isChecked: cartItem.isSelected
                     );
                   },
                 ),
@@ -99,7 +98,7 @@ class CartPage extends StatelessWidget {
           children: [
             Obx(
               () => Visibility(
-                visible: controller.cart.isNotEmpty,
+                visible: controller.cartProduct.isNotEmpty,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -117,7 +116,7 @@ class CartPage extends StatelessWidget {
                       } else {
                         final total = Calculator.selectedWishlistPrice(
                           controller.cartProducts.values.toList(),
-                          controller.cart,
+                          controller.cartProduct,
                         );
 
                         return Text(

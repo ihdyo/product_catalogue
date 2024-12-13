@@ -77,10 +77,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   IconsaxPlusLinear.shopping_cart,
                 ),
                 Positioned(
-                  right: -16,
+                  right: -12,
                   top: -8,
                   child: Obx(
-                        () => cartController.cart.isNotEmpty
+                        () => cartController.cartProduct.isNotEmpty
                         ? Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: CustomSize.xs,
@@ -95,7 +95,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                         minHeight: CustomSize.xs,
                       ),
                       child: Text(
-                        cartController.cart.length.toString(),
+                        cartController.cartProduct.length.toString(),
                         style: Theme.of(context).textTheme.labelSmall!.copyWith(
                           color: Colors.white,
                         ),

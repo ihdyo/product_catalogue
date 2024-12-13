@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/common/widgets/shop/addToCartFAB.dart';
+import 'package:product_catalogue/features/shop/controller/home/productController.dart';
 import 'package:product_catalogue/utils/constant/size.dart';
 
 import '../common/styles/shadow.dart';
 import '../features/shop/controller/order/orderController.dart';
+import '../features/shop/controller/temporary/temporaryController.dart';
 import '../utils/constant/strings.dart';
 import '../utils/helper/helper.dart';
 import 'controller/navigationController.dart';
@@ -15,6 +18,8 @@ class NavigationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final orderController = Get.find<OrderController>();
+    final temporaryController = Get.find<TemporaryController>();
+    final productController = ProductController.instance;
     final controller = Get.put(NavigationController());
     final dark = Helper.isDarkMode(context);
     final int selectedIndex = Get.arguments ?? 0;
@@ -23,6 +28,7 @@ class NavigationMenu extends StatelessWidget {
 
     return Scaffold(
         body: Obx(() => controller.screens[controller.currentIndex.value]),
+        floatingActionButton: AddToCartFAB(),
         bottomNavigationBar: Obx(() => Container(
           decoration: BoxDecoration(
             boxShadow: [
@@ -85,7 +91,7 @@ class NavigationMenu extends StatelessWidget {
                         right: -16,
                         top: -8,
                         child: Obx(
-                              () => orderController.ongoingOrder.isNotEmpty
+                          () => orderController.ongoingOrder.isNotEmpty
                               ? Container(
                             padding: EdgeInsets.symmetric(
                               horizontal: CustomSize.xs,

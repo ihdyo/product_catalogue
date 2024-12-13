@@ -24,6 +24,8 @@ class Strings {
   static const String back = 'Back';
   static const String ok = 'Ok';
   static const String cancel = 'Cancel';
+  static const String remove = 'Remove';
+  static const String productRemoved = 'Product Removed';
   static const String accountCreated = 'Account Created';
   static const String logoutPrompt = 'Are you sure you want to logout?';
   static const String logoutMessage = 'You have been logged out.';
@@ -50,7 +52,13 @@ class Strings {
   static const String cancelOrderPrompt = 'Are you sure you want to cancel this order?';
   static const String cancelOrderMessages = 'Your order has been cancelled.';
   static const String addToWishlistMessages = 'Product has been set to favorites.';
+  static const String addToCart = 'Add to Cart';
+  static const String addToCartMessage = 'Product has been added to your cart.';
+  static const String removeFromCart = 'Remove from Cart';
+  static const String removeFromCartPrompt = 'Are you sure you want to remove this product from your cart?';
+  static const String removeFromCartMessage = 'Product has been removed from your cart.';
   static const String removeFromWishlistMessages = 'Product has been removed from favorites.';
+  static const String overStockMessage = 'Your request is over the stock limit.';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';
@@ -156,5 +164,5 @@ class Strings {
   static const String isLogin = 'isLogin';
 
   static String totalItem(int n) => 'Total ($n ${n == 1 ? 'item' : 'items'})';
-  static String itemSelected(int n) => '$n ${n == 1 ? 'item' : 'items'} selected';
+  static String productSelected(int n) => '$n ${n == 1 ? 'product' : 'products'} selected';
 }

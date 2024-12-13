@@ -16,24 +16,12 @@ class WishlistPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final wishlistController = WishlistController.instance;
-    final dark = Helper.isDarkMode(context);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       wishlistController.fetchWishlists();
     });
 
     return Scaffold(
-      floatingActionButton: Visibility(
-        visible: true,
-        child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: dark ? Colors.blue[400] : Colors.blue[500],
-          child: Icon(
-            IconsaxPlusLinear.coin_1,
-            color: dark ? Colors.black : Colors.white,
-          ),
-        ),
-      ),
       body: CustomScrollView(
         slivers: [
           SliverPadding(

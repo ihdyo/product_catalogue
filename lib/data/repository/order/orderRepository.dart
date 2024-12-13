@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:product_catalogue/features/shop/model/orderModel.dart';
 import 'package:product_catalogue/features/shop/model/orderedProductModel.dart';
-import 'package:product_catalogue/features/shop/model/orderedProductModel.dart';
 import 'package:product_catalogue/utils/constant/strings.dart';
 
 import '../../../features/shop/model/productModel.dart';

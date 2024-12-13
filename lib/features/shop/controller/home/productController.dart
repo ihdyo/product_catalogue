@@ -88,8 +88,6 @@ class ProductController extends GetxController {
     return wishlistController.wishlist.any((product) => product.id == productId);
   }
 
-
-
   void addProductToWishlist(String productId) {
     wishlistController.addProductToWishlist(productId);
   }

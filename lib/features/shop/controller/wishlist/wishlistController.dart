@@ -54,6 +54,8 @@ Future<void> addProductToWishlist(String productId) async {
 
   void removeProductFromWishlist(String productId) {
     wishlist.removeWhere((product) => product.id == productId);
+    wishlistRepository.removeFromWishlist(productId);
+
     Loading.customToast(message: Strings.removeFromWishlistMessages);
   }
 }

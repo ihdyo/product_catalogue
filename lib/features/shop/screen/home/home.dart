@@ -25,9 +25,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categoryController = Get.put(CategoryController());
-    final productController = Get.put(ProductController());
+    final productController = Get.find<ProductController>();
     final recentController = Get.put(RecentController());
-    final dark = Helper.isDarkMode(context);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (recentController.recentItems.isNotEmpty) {
@@ -37,17 +36,6 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: HomeAppBar(),
-      floatingActionButton: Visibility(
-        visible: true,
-        child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: dark ? Colors.blue[400] : Colors.blue[500],
-          child: Icon(
-            IconsaxPlusLinear.coin_1,
-            color: dark ? Colors.black : Colors.white,
-          ),
-        ),
-      ),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverToBoxAdapter(

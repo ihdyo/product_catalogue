@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/common/widgets/shop/temporaryCounter.dart';
 
 import '../../../features/shop/controller/home/productController.dart';
 import '../../../features/shop/screen/product_detail/productDetail.dart';
@@ -17,17 +18,15 @@ class ProductItem extends StatelessWidget {
     required this.image,
     required this.name,
     required this.price,
-    this.quantity = 0,
   });
 
   final String id, image, name;
   final double price;
-  final int quantity;
 
   @override
   Widget build(BuildContext context) {
-    final dark = Helper.isDarkMode(context);
     final productController = ProductController.instance;
+    final dark = Helper.isDarkMode(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,46 +97,11 @@ class ProductItem extends StatelessWidget {
                   }),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  margin: const EdgeInsets.only(
-                      bottom: CustomSize.defaultSpace / 4,
-                      left: CustomSize.defaultSpace / 4,
-                      right: CustomSize.defaultSpace / 4
-                  ),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: dark ? Colors.grey[900] : Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        visualDensity: VisualDensity.compact,
-                        icon: Icon(
-                          IconsaxPlusLinear.minus,
-                          color: dark ? Colors.grey[400]!.withOpacity(quantity <= 0 ? 0 : 1) : Colors.grey[600]!.withOpacity(quantity <= 0 ? 0 : 1),
-                        ),
-                        onPressed: quantity <= 0 ? null : () {},
-                      ),
-                      Text(
-                        quantity.toString(),
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      IconButton(
-                        visualDensity: VisualDensity.compact,
-                        icon: Icon(
-                          IconsaxPlusLinear.add,
-                          color: dark ? Colors.grey[400] : Colors.grey[600],
-                        ),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              TemporaryCounter(
+                id: id,
+                width: double.infinity,
+                lightColor: Colors.white,
+              )
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:product_catalogue/common/styles/shimmer.dart';
 import 'package:product_catalogue/features/shop/controller/product_detail/productDetailController.dart';
+import 'package:product_catalogue/features/shop/controller/temporary/temporaryController.dart';
 import 'package:product_catalogue/features/shop/screen/cart/cart.dart';
 import 'package:product_catalogue/features/shop/screen/product_detail/widgets/productDetailDetail.dart';
 import 'package:product_catalogue/utils/constant/images.dart';
@@ -28,6 +29,7 @@ class ProductDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final recentController = Get.find<RecentController>();
     final productController = ProductController.instance;
+    final temporaryController = TemporaryController.instance;
     final imageController = Get.put(ProductDetailController());
     final dark = Helper.isDarkMode(context);
 
@@ -181,43 +183,47 @@ class ProductDetailPage extends StatelessWidget {
                 vertical: CustomSize.defaultSpace / 2,
                 horizontal: CustomSize.defaultSpace
             ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {},
+            child: Obx(() {
+              final isAvailable = productController.productById.value.stock >= temporaryController.getProductQuantityById(id);
+
+              return Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: !isAvailable ? null : () {
+                        // TODO Buy
+                      },
                       child: Text(
-                          Strings.buyButton,
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: dark ? Colors.black : Colors.white
-                          )
-                      )
-                  ),
-                ),
-                const SizedBox(
-                    width: CustomSize.defaultSpace / 2
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(Get.context!).push(
-                      MaterialPageRoute(
-                        builder: (context) => CartPage(),
+                        Strings.buyButton,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: dark ? Colors.black : Colors.white
+                        ),
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: dark ? Colors.blue[900]!.withOpacity(0.5) : Colors.blue[50],
-                      elevation: 0,
-                      side: BorderSide.none,
-                      shadowColor: Colors.transparent
+                    ),
                   ),
-                  child: Icon(
-                      IconsaxPlusLinear.shopping_cart,
-                      color: dark ? Colors.blue[400] : Colors.blue[500]
+                  const SizedBox(
+                      width: CustomSize.defaultSpace / 2
                   ),
-                )
-              ],
-            ),
+                  ElevatedButton(
+                    onPressed: !isAvailable ? null : () {
+                      // TODO Buy
+                    },
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(CustomSize.defaultSpace * 0.6),
+                        backgroundColor: dark ? Colors.blue[900]!.withOpacity(0.5) : Colors.blue[50],
+                        elevation: 0,
+                        side: BorderSide.none,
+                        shadowColor: Colors.transparent,
+                        disabledIconColor: dark ? Colors.grey[400] : Colors.grey[500],
+                        iconColor: dark ? Colors.blue[400] : Colors.blue[500]
+                    ),
+                    child: Icon(
+                        IconsaxPlusLinear.shopping_cart
+                    ),
+                  )
+                ],
+              );
+            }),
           ),
         ),
       ),
