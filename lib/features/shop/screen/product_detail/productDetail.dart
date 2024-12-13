@@ -40,13 +40,14 @@ class ProductDetailPage extends StatelessWidget {
       canPop: true,
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) {
-          productController.clearProductById();
           productController.fetchProductsByIds(recentController.recentItems);
         }
       },
-      child: Scaffold(
-        body: Obx(
-            () => Stack(
+      child: Obx(
+          () => productController.isLoading.value ?
+          const Center(child: CircularProgressIndicator())
+          : Scaffold(
+          body: Stack(
               children: [
                 SingleChildScrollView(
                   child: Column(
@@ -63,27 +64,27 @@ class ProductDetailPage extends StatelessWidget {
                                 children: [
                                   for (var image in productController.productById.value.images)
                                     Image.network(
-                                      image,
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                      loadingBuilder: (context, child, loadingProgress) {
-                                        if (loadingProgress == null) {
-                                          return child;
-                                        } else {
-                                          return const CustomShimmer(
+                                        image,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                        loadingBuilder: (context, child, loadingProgress) {
+                                          if (loadingProgress == null) {
+                                            return child;
+                                          } else {
+                                            return const CustomShimmer(
+                                                width: double.infinity,
+                                                height: double.infinity
+                                            );
+                                          }
+                                        },
+                                        errorBuilder: (context, error, stackTrace) {
+                                          return Image.asset(
+                                              Images.placeholder,
                                               width: double.infinity,
-                                              height: double.infinity
+                                              height: double.infinity,
+                                              fit: BoxFit.cover
                                           );
                                         }
-                                      },
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return Image.asset(
-                                          Images.placeholder,
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          fit: BoxFit.cover
-                                        );
-                                      }
                                     ),
                                 ],
                               ),
@@ -168,48 +169,48 @@ class ProductDetailPage extends StatelessWidget {
                 )
               ]
           ),
-        ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: CustomSize.defaultSpace / 2,
-              horizontal: CustomSize.defaultSpace
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                        Strings.buyButton,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: dark ? Colors.black : Colors.white
-                        )
-                    )
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.symmetric(
+                vertical: CustomSize.defaultSpace / 2,
+                horizontal: CustomSize.defaultSpace
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text(
+                          Strings.buyButton,
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: dark ? Colors.black : Colors.white
+                          )
+                      )
+                  ),
                 ),
-              ),
-              const SizedBox(
-                  width: CustomSize.defaultSpace / 2
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(Get.context!).push(
-                    MaterialPageRoute(
-                      builder: (context) => CartPage(),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: dark ? Colors.blue[900]!.withOpacity(0.5) : Colors.blue[50],
-                    elevation: 0,
-                    side: BorderSide.none,
-                    shadowColor: Colors.transparent
+                const SizedBox(
+                    width: CustomSize.defaultSpace / 2
                 ),
-                child: Icon(
-                    IconsaxPlusLinear.shopping_cart,
-                    color: dark ? Colors.blue[400] : Colors.blue[500]
-                ),
-              )
-            ],
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(Get.context!).push(
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: dark ? Colors.blue[900]!.withOpacity(0.5) : Colors.blue[50],
+                      elevation: 0,
+                      side: BorderSide.none,
+                      shadowColor: Colors.transparent
+                  ),
+                  child: Icon(
+                      IconsaxPlusLinear.shopping_cart,
+                      color: dark ? Colors.blue[400] : Colors.blue[500]
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

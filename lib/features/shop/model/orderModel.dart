@@ -5,23 +5,21 @@ import '../../../utils/constant/strings.dart';
 
 class OrderModel {
   final String id;
-  final String address;
-  final DateTime date;
-  final String recipient;
-  final String phone;
-  final double shippingPrice;
-  final double totalPrice;
-  final OrderStatus status;
-  final String paymentMethod;
-  final String paymentId;
-  final String note;
+  String address;
+  DateTime date;
+  String recipient;
+  double shippingPrice;
+  double totalPrice;
+  OrderStatus status;
+  String paymentMethod;
+  String paymentId;
+  String note;
 
   OrderModel({
     required this.id,
     required this.address,
     required this.date,
     required this.recipient,
-    required this.phone,
     required this.shippingPrice,
     required this.totalPrice,
     required this.status,
@@ -36,7 +34,6 @@ class OrderModel {
         address: '',
         date: DateTime.now(),
         recipient: '',
-        phone: '',
         shippingPrice: 0,
         totalPrice: 0,
         status: OrderStatus.processing,
@@ -51,7 +48,6 @@ class OrderModel {
       Strings.fieldAddress: address,
       Strings.fieldDate: date,
       Strings.fieldRecipient: recipient,
-      Strings.fieldPhone: phone,
       Strings.fieldShippingPrice: shippingPrice,
       Strings.fieldTotalPrice: totalPrice,
       Strings.fieldStatus: status,
@@ -71,7 +67,6 @@ class OrderModel {
           address: data[Strings.fieldAddress] ?? '',
           date: (data[Strings.fieldDate] as Timestamp).toDate(),
           recipient: data[Strings.fieldRecipient] ?? '',
-          phone: data[Strings.fieldPhone] ?? '',
           shippingPrice: (data[Strings.fieldShippingPrice] ?? 0).toDouble(),
           totalPrice: (data[Strings.fieldTotalPrice] ?? 0).toDouble(),
           status: OrderStatusExtension.fromString(data[Strings.fieldStatus] ?? ''),

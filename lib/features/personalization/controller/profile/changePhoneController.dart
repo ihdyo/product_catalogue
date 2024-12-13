@@ -17,16 +17,6 @@ class ChangePhoneController extends GetxController {
   final userRepository = Get.put(UserRepository());
   GlobalKey<FormState> changePhoneFormKey = GlobalKey<FormState>();
 
-  @override
-  void onInit() {
-    super.onInit();
-    fetchPhone();
-  }
-
-  Future<void> fetchPhone() async {
-    phone.text = userController.user.value.phoneNumber;
-  }
-
   Future<void> changePhone() async {
     try {
       FullScreenLoading.openLoadingDialog();

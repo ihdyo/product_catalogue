@@ -19,6 +19,8 @@ class Strings {
   static const String error = 'Error!';
   static const String success = 'Success!';
   static const String proceed = 'Proceed';
+  static const String change = 'Change';
+  static const String save = 'Save';
   static const String back = 'Back';
   static const String ok = 'Ok';
   static const String cancel = 'Cancel';
@@ -31,10 +33,14 @@ class Strings {
   static const String sendVerification = 'Send Verification';
   static const String verificationSent = 'Verification link has been sent to your email.';
   static const String emailSendingError = 'Failed to send email. Please try again.';
+  static const String recipient = 'Recipient';
+  static const String changeRecipient = 'Change Recipient';
+  static const String changeRecipientPrompt = 'Enter your new recipient to update.';
+  static const String changeRecipientMessages = 'Recipient has been updated.';
   static const String changeName = 'Change Name';
   static const String changeNamePrompt = 'Enter your new name to update.';
   static const String changeNameMessages = 'Your name has been updated.';
-  static const String changePhone = 'Update Phone Number';
+  static const String changePhone = 'Change Phone Number';
   static const String changePhonePrompt = 'Enter your new phone number to update.';
   static const String changePhoneMessages = 'Your phone number has been updated.';
   static const String changeAddress = 'Change Address';
@@ -51,7 +57,6 @@ class Strings {
   static const String onboardingTitle3 = 'Fast & Reliable Delivery';
   static const String onboardingBody3 = 'Track your orders in real-time and enjoy doorstep delivery, no matter where you are.';
   static const String skip = 'Skip';
-
   static const String loginTitle = 'Login to Your Account';
   static const String loginBody = 'Didn’t have any account? ';
   static const String registerTitle = 'Create an Account';
@@ -66,27 +71,18 @@ class Strings {
   static const String agreements = 'By processing, you agree to our';
   static const String termsOfService = 'Terms of Service';
   static const String privacyPolicy = 'Privacy Policy';
-
   static const String email = 'Email';
   static const String password = 'Password';
   static const String confirmPassword = 'Confirm Password';
   static const String name = 'Name';
   static const String address = 'Address';
   static const String phoneNumber = 'Phone Number';
-
   static const String home = 'Home';
   static const String wishlist = 'Favorite';
   static const String profile = 'Profile';
   static const String settings = 'Settings';
   static const String cart = 'Cart';
   static const String orderStatus = 'Order Status';
-
-  static const String paid = 'paid';
-  static const String packing = 'packing';
-  static const String shipping = 'shipping';
-  static const String delivered = 'delivered';
-  static const String processing = 'processing';
-
   static const String welcome = 'Welcome,';
   static const String search = 'Search';
   static const String recent = 'Recent';
@@ -106,6 +102,12 @@ class Strings {
   static const String logout = 'Logout';
   static const String stock = 'Stock';
   static const String reviews = 'Reviews';
+
+  static const String paid = 'paid';
+  static const String packing = 'packing';
+  static const String shipping = 'shipping';
+  static const String delivered = 'delivered';
+  static const String processing = 'processing';
 
   static const String collectionUsers = 'users';
   static const String collectionProducts = 'products';

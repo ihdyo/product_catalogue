@@ -28,14 +28,10 @@ class CategoryDetail extends StatelessWidget {
       controller.fetchProductsByCategory(categoryId);
     });
 
-    return PopScope(
-      canPop: true,
-      onPopInvokedWithResult: (didPop, result) async {
-        if (didPop) {
-          controller.clearProductById();
-        }
-      },
-      child: Scaffold(
+    return Obx(
+      () => controller.isLoading.value
+        ? const Center(child: CircularProgressIndicator())
+        : Scaffold(
         body: CustomScrollView(
           slivers: [
             SliverPadding(
@@ -69,7 +65,7 @@ class CategoryDetail extends StatelessWidget {
               ),
             ),
             Obx(
-            () => SliverPadding(
+                  () => SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: CustomSize.defaultSpace),
                 sliver: SliverGrid(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -100,6 +100,14 @@ class OrderController extends GetxController {
     }
   }
 
+  Future<void> updateOrder(OrderModel order) async {
+    try {
+      await orderRepository.updateOrder(order);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<void> deleteOrderById(String orderId) async {
     try {
       await orderRepository.removeOrder(orderId);

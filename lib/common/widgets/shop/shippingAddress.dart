@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:product_catalogue/common/widgets/shop/changeInfoMenu.dart';
 import 'package:product_catalogue/utils/formatter/formatter.dart';
 
 import '../../../utils/constant/enum.dart';
@@ -72,11 +73,11 @@ class ShippingAddress extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleLarge
                         ),
                         Text(
-                            address,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: dark ? Colors.grey[400] : Colors.grey[600]
-                            )
-                        )
+                          address,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: dark ? Colors.grey[400] : Colors.grey[600],
+                          ),
+                        ),
                       ]
                   ),
                 ],
@@ -110,15 +111,11 @@ class ShippingAddress extends StatelessWidget {
                       padding: const EdgeInsets.all(
                           CustomSize.sm
                       ),
-                      child: Icon(
-                          IconsaxPlusLinear.edit,
-                          size: 20,
-                          color: dark ? Colors.grey[300] : Colors.grey[700]
-                      ),
+                      child: ChangeInfoMenu(),
                     ),
                   ),
                 ],
-              )
+              ),
             ]
         ),
       ),

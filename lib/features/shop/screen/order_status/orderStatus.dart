@@ -43,7 +43,9 @@ class OrderStatusPage extends StatelessWidget {
         }
       },
       child: Obx(
-        () => Scaffold(
+        () => orderController.isLoading.value ?
+          const Center(child: CircularProgressIndicator())
+          : Scaffold(
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -158,19 +160,17 @@ class OrderStatusPage extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      CustomTitle(
-                          title: Strings.orderDetail
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: CustomSize.defaultSpace
-                        ),
+                      CustomTitle(title: Strings.orderDetail),
+                      orderController.isLoading.value
+                          ? const Center(child: CircularProgressIndicator())
+                          : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: CustomSize.defaultSpace),
                         child: ListView.separated(
                           shrinkWrap: true,
                           padding: const EdgeInsets.all(0),
                           physics: const NeverScrollableScrollPhysics(),
                           separatorBuilder: (_, __) => SizedBox(
-                              height: CustomSize.spaceBetweenItems / 2
+                            height: CustomSize.spaceBetweenItems / 2,
                           ),
                           itemCount: orderController.productsByProductId.length,
                           itemBuilder: (context, index) {
@@ -183,7 +183,7 @@ class OrderStatusPage extends StatelessWidget {
                             );
                           },
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Visibility(

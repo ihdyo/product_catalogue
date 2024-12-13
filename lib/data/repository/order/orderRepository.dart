@@ -78,6 +78,36 @@ class OrderRepository extends GetxController {
     }
   }
 
+  Future<void> updateOrder(OrderModel order) async {
+    try {
+      await _firestore
+          .collection(Strings.collectionUsers)
+          .doc(authRepository.authUser?.uid)
+          .collection(Strings.collectionOrder)
+          .doc(order.id)
+          .update(order.toJson());
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: e.plugin);
+    } catch (e) {
+      throw Exception(Strings.error);
+    }
+  }
+
+  Future<void> updateSingleField(String orderId, Map<String, dynamic> data) async {
+    try {
+      await _firestore
+          .collection(Strings.collectionUsers)
+          .doc(authRepository.authUser?.uid)
+          .collection(Strings.collectionOrder)
+          .doc(orderId)
+          .update(data);
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: e.plugin);
+    } catch (e) {
+      throw Exception(Strings.error);
+    }
+  }
+
   Future<void> removeOrder(String orderId) async {
     try {
       await _firestore

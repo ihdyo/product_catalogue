@@ -17,16 +17,6 @@ class ChangeNameController extends GetxController {
   final userRepository = Get.put(UserRepository());
   GlobalKey<FormState> changeNameFormKey = GlobalKey<FormState>();
 
-  @override
-  void onInit() {
-    super.onInit();
-    fetchName();
-  }
-
-  Future<void> fetchName() async {
-    name.text = userController.user.value.name;
-  }
-
   Future<void> changeName() async {
     try {
       FullScreenLoading.openLoadingDialog();

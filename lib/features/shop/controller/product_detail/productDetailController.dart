@@ -1,10 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:product_catalogue/features/authentication/data/onboarding/onboardingPageData.dart';
-import 'package:product_catalogue/features/authentication/screen/login/login.dart';
-
-import '../../../../utils/constant/strings.dart';
 
 class ProductDetailController extends GetxController {
   static ProductDetailController get instance => Get.find();
