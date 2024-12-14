@@ -65,6 +65,10 @@ class Strings {
   static const String emptyCartBody = 'Your cart is currently empty. Start shopping now.';
   static const String notFound = 'Not Found';
   static const String notFoundMessage = 'No results found. Please try searching with different keywords.';
+  static const String paymentSuccess = 'Payment Success';
+  static const String paymentSuccessMessage = 'Your payment has been processed successfully.';
+  static const String paymentFailed = 'Payment Failed';
+  static const String paymentFailedMessage = 'Your payment has failed. Please try again.';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';

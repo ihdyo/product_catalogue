@@ -134,6 +134,33 @@ class OrderController extends GetxController {
     }
   }
 
+  Future<void> updatePaymentId(String orderId, String paymentId) async {
+    try {
+      final data = {Strings.fieldPaymentId: paymentId};
+      await orderRepository.updateSingleField(orderId, data);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<void> updatePaymentMethod(String orderId, String paymentMethod) async {
+    try {
+      final data = {Strings.fieldPaymentMethod: paymentMethod};
+      await orderRepository.updateSingleField(orderId, data);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<void> updateStatus(String orderId, OrderStatus status) async {
+    try {
+      final data = {Strings.fieldStatus: status.name};
+      await orderRepository.updateSingleField(orderId, data);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<void> updateNote(String orderId, String note) async {
     try {
       final data = {Strings.fieldNote: note};

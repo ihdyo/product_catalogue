@@ -11,7 +11,6 @@ import 'package:product_catalogue/features/shop/screen/home/widgets/homeAppBar.d
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeRecent.dart';
 import 'package:product_catalogue/features/shop/screen/home/widgets/homeSearchBar.dart';
 
-import '../../../../binding/generalBinding.dart';
 import '../../../../common/shimmer/gridProductShimmer.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';

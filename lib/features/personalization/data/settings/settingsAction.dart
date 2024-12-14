@@ -51,7 +51,8 @@ final List<SettingItem> settingsActionList = [
     onTap: () {
       showDialog(
         context: Get.context!,
-        builder: (_) => AlertDialog(
+        builder: (context) => AlertDialog(
+          backgroundColor: dark ? Colors.grey[900] : Colors.white,
           insetPadding: EdgeInsets.all(
               CustomSize.defaultSpace
           ),
@@ -74,16 +75,15 @@ final List<SettingItem> settingsActionList = [
           content: Text(Strings.logoutPrompt),
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(Get.context!).pop(),
+              onPressed: () => Navigator.of(context).pop(),
               child: Text(
                   Strings.cancel,
-                  style: Theme.of(Get.context!).textTheme.titleMedium!.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontWeight: FontWeight.w400,
                     color: dark ? Colors.grey[400] : Colors.grey[600],
                   )
               ),
             ),
-            Spacer(),
             Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: CustomSize.defaultSpace / 2,
@@ -105,7 +105,7 @@ final List<SettingItem> settingsActionList = [
                 },
                 child: Text(
                     Strings.logout,
-                    style: Theme.of(Get.context!).textTheme.titleMedium!.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: dark ? Colors.black : Colors.white,
                     )
                 ),

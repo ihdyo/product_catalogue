@@ -188,8 +188,6 @@ class CartPage extends StatelessWidget {
                                   .quantity,
                             )).toList();
 
-                            // TODO: Payment
-
                             await orderController.createOrder(
                                 OrderModel(
                                     id: orderId,
@@ -200,9 +198,9 @@ class CartPage extends StatelessWidget {
                                     shippingPrice: Values.estimatedShippingPrice,
                                     totalPrice: grandTotal,
                                     status: OrderStatus.processing,
-                                    paymentMethod: 'paymentMethod',
-                                    paymentId: 'paymentId',
-                                    note: 'note'
+                                    paymentMethod: '',
+                                    paymentId: '',
+                                    note: ''
                                 )
                             );
 

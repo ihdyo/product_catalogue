@@ -18,6 +18,12 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # of the product and file versions while build-number is used as the build suffix.
 version: 1.0.0+1
 
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/logo/cart.png
+  remove_alpha_ios: true
+
 flutter_native_splash:
   color: "#FFFFFF"
   image: assets/logo/cart.png
@@ -52,7 +58,7 @@ dependencies:
   intl: ^0.20.1
   logger: ^2.5.0
   url_launcher: ^6.3.1
-  flutter_native_splash: ^2.4.0
+  flutter_native_splash: ^2.4.2
   smooth_page_indicator: ^1.1.0
   connectivity_plus: ^6.1.0
 
@@ -60,6 +66,7 @@ dependencies:
   flutter_svg: ^1.1.0
   lottie: ^3.1.0
   shimmer: ^3.0.0
+  flutter_launcher_icons: ^0.13.1
 
   get: ^4.6.5
   get_storage: ^2.1.1

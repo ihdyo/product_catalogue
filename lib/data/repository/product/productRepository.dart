@@ -87,7 +87,7 @@ class ProductRepository extends GetxController {
 
   Future<List<ProductModel>> fetchProductsByPrefix(String prefix) async {
     try {
-      final endString = prefix + '\uf8ff';
+      final endString = '$prefix\uf8ff';
       final snapshot = await _firestore
           .collection(Strings.collectionProducts)
           .where(Strings.fieldName, isGreaterThanOrEqualTo: prefix)

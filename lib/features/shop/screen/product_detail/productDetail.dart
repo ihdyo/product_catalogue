@@ -212,8 +212,6 @@ class ProductDetailPage extends StatelessWidget {
                         ) + Values.estimatedShippingPrice;
                         String orderId = IDBuilder.orderId(recipient, address);
 
-                        // TODO: Payment
-
                         await orderController.createOrder(
                             OrderModel(
                                 id: orderId,
@@ -224,9 +222,9 @@ class ProductDetailPage extends StatelessWidget {
                                 shippingPrice: Values.estimatedShippingPrice,
                                 totalPrice: grandTotal,
                                 status: OrderStatus.processing,
-                                paymentMethod: 'paymentMethod',
-                                paymentId: 'paymentId',
-                                note: 'note'
+                                paymentMethod: '',
+                                paymentId: '',
+                                note: ''
                             )
                         );
 
