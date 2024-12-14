@@ -11,9 +11,9 @@ class GeneralBinding extends Bindings {
   void dependencies() {
     Get.put(NetworkManager());
 
-    Get.put(ProductController());
-    Get.put(OrderController());
-    Get.put(CartController());
-    Get.put(TemporaryController());
+    Get.lazyPut<ProductController>(() => ProductController());
+    Get.lazyPut<OrderController>(() => OrderController());
+    Get.lazyPut<CartController>(() => CartController());
+    Get.lazyPut<TemporaryController>(() => TemporaryController());
   }
 }

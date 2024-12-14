@@ -176,6 +176,7 @@ class OrderController extends GetxController {
 
   void clearOrderById() {
     orderById.value = OrderModel.empty();
+    note.text = '';
   }
 
   void clearProductsByOrder() {

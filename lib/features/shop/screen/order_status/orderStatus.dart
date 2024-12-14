@@ -6,7 +6,6 @@ import 'package:product_catalogue/features/shop/controller/home/productControlle
 import 'package:product_catalogue/features/shop/data/order_status/orderStatusInvoiceData.dart';
 import 'package:product_catalogue/features/shop/screen/order_status/widgets/orderStatusIndicator.dart';
 
-import '../../../../common/styles/shadow.dart';
 import '../../../../common/widgets/shop/invoiceDetail.dart';
 import '../../../../common/widgets/shop/orderStatusIcon.dart';
 import '../../../../common/widgets/shop/orderStatusProduct.dart';
@@ -225,6 +224,10 @@ class OrderStatusPage extends StatelessWidget {
                       height: CustomSize.spaceBetweenSections
                   ),
                   Obx(() {
+                    if (orderController.orderById.value.note.isNotEmpty) {
+                      orderController.note.text = orderController.orderById.value.note;
+                    }
+
                     if (orderController.orderById.value.status == OrderStatus.processing) {
                       return Padding(
                           padding: const EdgeInsets.symmetric(

@@ -59,6 +59,12 @@ class Strings {
   static const String removeFromCartMessage = 'Product has been removed from your cart.';
   static const String removeFromWishlistMessages = 'Product has been removed from favorites.';
   static const String overStockMessage = 'Your request is over the stock limit.';
+  static const String emptyWishlist = 'Empty Favorite';
+  static const String emptyWishlistBody = 'Your favorites is currently empty. Start adding products to your favorites now.';
+  static const String emptyCart = 'Empty Cart';
+  static const String emptyCartBody = 'Your cart is currently empty. Start shopping now.';
+  static const String notFound = 'Not Found';
+  static const String notFoundMessage = 'No results found. Please try searching with different keywords.';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';
@@ -167,4 +173,5 @@ class Strings {
 
   static String totalItem(int n) => 'Total ($n ${n == 1 ? 'item' : 'items'})';
   static String productSelected(int n) => '$n ${n == 1 ? 'product' : 'products'} selected';
+  static String searchResult(int n) => '$n ${n == 1 ? 'result' : 'results'} found';
 }

@@ -84,4 +84,25 @@ class ProductRepository extends GetxController {
       throw Exception(Strings.error);
     }
   }
+
+  Future<List<ProductModel>> fetchProductsByPrefix(String prefix) async {
+    try {
+      final endString = prefix + '\uf8ff';
+      final snapshot = await _firestore
+          .collection(Strings.collectionProducts)
+          .where(Strings.fieldName, isGreaterThanOrEqualTo: prefix)
+          .where(Strings.fieldName, isLessThan: endString)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        return snapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+      }
+      return List.empty();
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, message: e.message, plugin: e.plugin);
+    } catch (e) {
+      throw Exception(Strings.error);
+    }
+  }
+
 }

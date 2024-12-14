@@ -5,6 +5,8 @@ class Images {
 
   static const String placeholder = 'assets/images/placeholder.webp';
   static const String placeholderUser = 'assets/images/groceries.webp';
+  static const String placeholderEmptyWishlist = 'assets/images/shop.webp';
+  static const String placeholderEmptyCart = 'assets/images/cart.webp';
 
   static const String placeholderCarousel1 = 'assets/images/box-hand.webp';
   static const String placeholderCarousel2 = 'assets/images/credit-card.webp';
