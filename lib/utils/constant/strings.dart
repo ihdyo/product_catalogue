@@ -69,6 +69,7 @@ class Strings {
   static const String paymentSuccessMessage = 'Your payment has been processed successfully.';
   static const String paymentFailed = 'Payment Failed';
   static const String paymentFailedMessage = 'Your payment has failed. Please try again.';
+  static const String orderCancelMessage = 'Your order has been cancelled.';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';

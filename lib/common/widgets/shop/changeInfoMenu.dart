@@ -71,11 +71,11 @@ class ChangeInfoMenu extends StatelessWidget {
                                         children: [
                                           TextFormField(
                                             controller: orderChangeRecipientController.recipient,
-                                            validator: (value) => Validator.validateEmptyText(Strings.recent, value),
+                                            validator: (value) => Validator.validateEmptyText(Strings.recipient, value),
                                             keyboardType: TextInputType.text,
                                             decoration: const InputDecoration(
                                               border: UnderlineInputBorder(),
-                                              labelText: Strings.recent,
+                                              labelText: Strings.recipient,
                                             ),
                                           ),
                                           const SizedBox(height: CustomSize.spaceBetweenItems),
