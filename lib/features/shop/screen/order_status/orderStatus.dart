@@ -218,8 +218,10 @@ class OrderStatusPage extends StatelessWidget {
 
                       if (orderController.orderById.value.status == OrderStatus.processing) {
                         return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: CustomSize.defaultSpace
+                            padding: const EdgeInsets.only(
+                                top: CustomSize.defaultSpace,
+                                left: CustomSize.defaultSpace,
+                                right: CustomSize.defaultSpace
                             ),
                             child: TextField(
                               controller: orderController.note,
