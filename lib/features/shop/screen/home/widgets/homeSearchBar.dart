@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:product_catalogue/features/shop/screen/search.dart';
+import 'package:product_catalogue/features/shop/screen/search/search.dart';
 
 import '../../../../../utils/constant/size.dart';
 import '../../../../../utils/constant/strings.dart';

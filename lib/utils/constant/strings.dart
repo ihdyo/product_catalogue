@@ -18,6 +18,7 @@ class Strings {
   static const String loading = 'Loading...';
   static const String error = 'Error!';
   static const String success = 'Success!';
+  static const String failed = 'Failed!';
   static const String proceed = 'Proceed';
   static const String change = 'Change';
   static const String save = 'Save';
@@ -70,6 +71,11 @@ class Strings {
   static const String paymentFailed = 'Payment Failed';
   static const String paymentFailedMessage = 'Your payment has failed. Please try again.';
   static const String orderCancelMessage = 'Your order has been cancelled.';
+  static const String emptyStock = 'Empty Stock';
+  static const String paymentPending = 'Payment Pending';
+  static const String paymentPendingMessage = 'Your payment is currently being processed. Please wait a few minutes and check your email for updates.';
+  static const String paymentCancelled = 'Payment Canceled';
+  static const String paymentCancelledMessage = 'Your payment has been canceled.';
 
   static const String onboardingTitle1 = 'Discover the Best Deals';
   static const String onboardingBody1 = 'Explore a wide variety of products tailored to your needs. Shop conveniently from your home.';

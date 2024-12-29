@@ -7,23 +7,19 @@ import 'package:product_catalogue/utils/firebase_options.dart';
 
 import 'app.dart';
 import 'data/repository/authentication/authenticationRepository.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
 
 Future<void> main() async {
-
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-  await GetStorage.init();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  FlutterNativeSplash.preserve(
-      widgetsBinding: widgetsBinding
-  );
+  await Future.wait([
+    dot_env.dotenv.load(fileName: ".env"),
+    GetStorage.init(),
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+        .then((value) => Get.put(AuthenticationRepository())),
+  ]);
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform).then(
-      (FirebaseApp value) => Get.put(AuthenticationRepository()),
-  );
-
-  runApp(
-      const App()
-  );
+  runApp(const App());
 }

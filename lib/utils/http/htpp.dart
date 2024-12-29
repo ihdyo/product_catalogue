@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
 
 class Http {
-  static const String _baseUrl = 'https://api.example.com';
+  static final String _baseUrl = dot_env.dotenv.env['BASE_URL'] ?? '';
 
   static Future<Map<String, dynamic>> get(String endpoint) async {
     final response = await http.get(Uri.parse('$_baseUrl/$endpoint'));

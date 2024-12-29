@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:product_catalogue/data/repository/cartRepository/cartRepository.dart';
+import 'package:product_catalogue/data/repository/cart/cartRepository.dart';
 import 'package:product_catalogue/data/repository/product/productRepository.dart';
 import 'package:product_catalogue/features/shop/model/cartModel.dart';
 import '../../../../utils/constant/strings.dart';

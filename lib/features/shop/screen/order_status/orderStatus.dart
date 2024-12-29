@@ -5,6 +5,8 @@ import 'package:product_catalogue/common/widgets/title.dart';
 import 'package:product_catalogue/features/shop/controller/home/productController.dart';
 import 'package:product_catalogue/features/shop/data/order_status/orderStatusInvoiceData.dart';
 import 'package:product_catalogue/features/shop/screen/order_status/widgets/orderStatusIndicator.dart';
+import 'package:midtrans_sdk/midtrans_sdk.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
 
 import '../../../../common/widgets/shop/invoiceDetail.dart';
 import '../../../../common/widgets/shop/orderStatusIcon.dart';
@@ -14,6 +16,7 @@ import '../../../../utils/constant/enum.dart';
 import '../../../../utils/constant/size.dart';
 import '../../../../utils/constant/strings.dart';
 import '../../../../utils/helper/helper.dart';
+import '../../../../utils/http/transactionCall.dart';
 import '../../../../utils/popup/loading.dart';
 import '../../controller/order/orderController.dart';
 
@@ -33,6 +36,8 @@ class OrderStatusPage extends StatefulWidget {
 
 class _OrderStatusPageState extends State<OrderStatusPage> {
   late TextEditingController noteController;
+  late final MidtransSDK? _midtrans;
+  final orderController = OrderController.instance;
 
   @override
   void initState() {
@@ -43,18 +48,118 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
       orderController.fetchProductsByOrderId(widget.orderId);
       orderController.fetchOrderById(widget.orderId);
     });
+    _initSDK();
+  }
+
+  String? _transactionToken;
+  bool _isPaymentPending = false;
+
+  void _initSDK() async {
+    _midtrans = await MidtransSDK.init(
+      config: MidtransConfig(
+        clientKey: dot_env.dotenv.env['MIDTRANS_CLIENT_KEY'] ?? "",
+        merchantBaseUrl: "",
+        colorTheme: ColorTheme(
+          colorPrimary: Colors.blue,
+          colorPrimaryDark: Colors.blue,
+          colorSecondary: Colors.blue,
+        ),
+      ),
+    );
+
+    _midtrans?.setUIKitCustomSetting(
+      skipCustomerDetailsPages: true,
+    );
+
+    // Callback to handle the transaction result
+    _midtrans!.setTransactionFinishedCallback((result) async {
+      try {
+        // Fetch transaction status from Midtrans after payment
+        final statusResponse = await TransactionCall.getTransactionStatus(widget.orderId);
+
+        // Handle 'settlement' (successful payment)
+        if (statusResponse['transaction_status'] == 'settlement') {
+          await orderController.updateStatus(widget.orderId, OrderStatus.packing);
+          await orderController.fetchOrderById(widget.orderId);
+
+          setState(() {
+            _transactionToken = null;
+            _isPaymentPending = false;
+          });
+
+          Loading.successSnackBar(
+            title: Strings.success,
+            message: Strings.paymentSuccessMessage,
+          );
+
+        } else if (statusResponse['transaction_status'] == 'pending') {
+          _transactionToken = result.transactionId;
+          _isPaymentPending = true;
+
+          Loading.warningSnackBar(
+            title: Strings.paymentPending,
+            message: Strings.paymentPendingMessage,
+          );
+
+        } else {
+          _transactionToken = null;
+          _isPaymentPending = false;
+
+          if (statusResponse['transaction_status'] == 'expire') {
+            Loading.errorSnackBar(
+              title: Strings.failed,
+              message: 'Payment expired.',
+            );
+          } else if (statusResponse['transaction_status'] == 'deny') {
+            Loading.errorSnackBar(
+              title: Strings.failed,
+              message: 'Payment denied.',
+            );
+          } else if (statusResponse['transaction_status'] == 'failure') {
+            Loading.errorSnackBar(
+              title: Strings.failed,
+              message: 'Payment failed.',
+            );
+          } else {
+            Loading.errorSnackBar(
+              title: Strings.failed,
+              message: 'Unknown payment status.',
+            );
+          }
+        }
+      } catch (e) {
+        Loading.errorSnackBar(
+          title: Strings.failed,
+          message: 'Failed to fetch transaction status.',
+        );
+      }
+
+      setState(() {});
+    });
+
+    // Start payment flow if transaction token exists
+    if (_transactionToken != null) {
+      _midtrans.startPaymentUiFlow(token: _transactionToken!);
+    }
+  }
+
+  void startPayment({required String transactionToken}) {
+    _transactionToken = transactionToken;
+    _isPaymentPending = true;
+    _midtrans?.startPaymentUiFlow(token: transactionToken);
+    setState(() {});
   }
 
   @override
   void dispose() {
     noteController.dispose();
+    _midtrans?.removeTransactionFinishedCallback();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final productController = Get.find<ProductController>();
-    final orderController = OrderController.instance;
     final dark = Helper.isDarkMode(context);
 
     return PopScope(
@@ -322,8 +427,9 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
           ),
         ),
         bottomNavigationBar: Obx(
-          () => Visibility(
-            visible: orderController.orderById.value.status == OrderStatus.processing && orderController.isLoading.value == false,
+              () => Visibility(
+            visible: orderController.orderById.value.status == OrderStatus.processing &&
+                orderController.isLoading.value == false,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                   vertical: CustomSize.defaultSpace / 2,
@@ -331,34 +437,33 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: !_isPaymentPending
+                      ? () async {
+                          final transactionData = {
+                            "order_id": widget.orderId,
+                            "gross_amount": orderController.orderById.value.totalPrice
+                          };
 
-                    // TODO MIDTRANS LOGIC HERE
+                          try {
+                            final response = await TransactionCall.createTransaction(transactionData);
 
-                    bool isPaymentSuccess = true ; // TODO payment logic
-                    String paymentId = ''; // TODO payment response
-                    String paymentMethod = ''; // TODO payment response
+                            _transactionToken = response['token'];
+                            _isPaymentPending = true;
+                            setState(() {});
 
-                    if (isPaymentSuccess) {
-                      orderController.updateNote(widget.orderId, noteController.text);
-                      orderController.updatePaymentId(widget.orderId, paymentId);
-                      orderController.updatePaymentMethod(widget.orderId,paymentMethod);
-                      orderController.updateStatus(widget.orderId, OrderStatus.packing);
+                            // Start payment flow without catch block here
+                            _midtrans?.startPaymentUiFlow(token: response['token']);
 
-                      Get.back();
-                      orderController.fetchOrders();
-
-                      Loading.successSnackBar(
-                          title: Strings.paymentSuccess,
-                          message: Strings.paymentSuccessMessage
-                      );
-                    } else {
-                      Loading.errorSnackBar(
-                          title: Strings.paymentFailed,
-                          message: Strings.paymentFailedMessage
-                      );
-                    }
-                  },
+                          } catch (e) {
+                            Loading.errorSnackBar(
+                              title: Strings.paymentFailed,
+                              message: 'Error: $e',
+                            );
+                            _isPaymentPending = false;
+                            setState(() {});
+                          }
+                        }
+                      : null,
                   child: Text(Strings.payButton),
                 ),
               ),

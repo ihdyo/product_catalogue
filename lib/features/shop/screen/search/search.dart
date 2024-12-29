@@ -3,9 +3,9 @@ import 'package:product_catalogue/common/widgets/title.dart';
 import 'package:product_catalogue/features/navigation/screen/widgets/addToCartFAB.dart';
 import 'package:product_catalogue/features/shop/model/productModel.dart';
 
-import '../../../common/widgets/shop/productItem.dart';
-import '../../../utils/constant/size.dart';
-import '../../../utils/constant/strings.dart';
+import '../../../../common/widgets/shop/productItem.dart';
+import '../../../../utils/constant/size.dart';
+import '../../../../utils/constant/strings.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({

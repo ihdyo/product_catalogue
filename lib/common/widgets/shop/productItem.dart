@@ -7,6 +7,7 @@ import '../../../features/shop/controller/home/productController.dart';
 import '../../../features/shop/screen/product_detail/productDetail.dart';
 import '../../../utils/constant/images.dart';
 import '../../../utils/constant/size.dart';
+import '../../../utils/constant/strings.dart';
 import '../../../utils/formatter/formatter.dart';
 import '../../../utils/helper/helper.dart';
 import '../../styles/shadow.dart';
@@ -51,22 +52,36 @@ class ProductItem extends StatelessWidget {
                       ShadowStyle().shadowMedium()
                     ],
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.network(
-                      image,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: double.infinity,
-                      errorBuilder: (_, __, ___) {
-                        return Image.asset(
-                          Images.placeholder,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network(
+                          image,
                           fit: BoxFit.cover,
                           width: double.infinity,
                           height: double.infinity,
-                        );
-                      },
-                    ),
+                          errorBuilder: (_, __, ___) {
+                            return Image.asset(
+                              Images.placeholder,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: double.infinity,
+                            );
+                          },
+                        ),
+                      ),
+                      if (productController.products.firstWhere((product) => product.id == id).stock == 0) Container(
+                        decoration: BoxDecoration(
+                          color: dark ? Colors.black.withOpacity(0.5) : Colors.white.withOpacity(0.5),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            Strings.emptyStock
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
